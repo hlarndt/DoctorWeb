@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="d12rnams4f6a7nDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>d12rnams4f6a7nDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Visoes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +71,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="d12rnams4f6a7nDataSet.xsc">
+      <DependentUpon>d12rnams4f6a7nDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="d12rnams4f6a7nDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>d12rnams4f6a7nDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="d12rnams4f6a7nDataSet.xss">
+      <DependentUpon>d12rnams4f6a7nDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

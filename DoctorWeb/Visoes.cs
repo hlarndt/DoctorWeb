@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Web.Script.Serialization;
 
 namespace DoctorWeb
 {
@@ -85,6 +86,20 @@ namespace DoctorWeb
                 MessageBox.Show("Por favor, selecione algum arquivo\ne depois selecione a planilha ativa.");
                 return;
             }
+            JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+            List<string> ls = new List<string>();
+
+            foreach (DataGridViewColumn coluna in dataGridView1.Columns)
+            {
+                ls.Add(coluna.HeaderText);                
+            }
+
+            dynamic resultado = serializer.Serialize(ls);
+
+            layoutTableAdapter1.Insert(comboBox1.Text.Replace("$",""),resultado);
+            d12rnams4f6a7nDataSet1.AcceptChanges();
+
         }
 
         private void populaplanilha()
@@ -123,5 +138,6 @@ namespace DoctorWeb
         {
             Redimensiona();
         }
+
     }
 }

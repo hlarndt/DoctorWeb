@@ -34,7 +34,10 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.layoutTableAdapter1 = new DoctorWeb.d12rnams4f6a7nDataSetTableAdapters.layoutTableAdapter();
+            this.d12rnams4f6a7nDataSet1 = new DoctorWeb.d12rnams4f6a7nDataSet();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.d12rnams4f6a7nDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -49,6 +52,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(13, 68);
             this.dataGridView1.Name = "dataGridView1";
@@ -84,6 +89,15 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // layoutTableAdapter1
+            // 
+            this.layoutTableAdapter1.ClearBeforeFill = true;
+            // 
+            // d12rnams4f6a7nDataSet1
+            // 
+            this.d12rnams4f6a7nDataSet1.DataSetName = "d12rnams4f6a7nDataSet";
+            this.d12rnams4f6a7nDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // Visoes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -98,9 +112,9 @@
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "Visoes";
             this.Text = "DoctorWeb - Visões Configurador";
-            this.Activated += new System.EventHandler(this.Visoes_Activated);
             this.SizeChanged += new System.EventHandler(this.Visoes_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.d12rnams4f6a7nDataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,6 +128,8 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
+        private d12rnams4f6a7nDataSetTableAdapters.layoutTableAdapter layoutTableAdapter1;
+        private d12rnams4f6a7nDataSet d12rnams4f6a7nDataSet1;
     }
 }
 

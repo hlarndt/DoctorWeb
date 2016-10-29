@@ -97,7 +97,7 @@ namespace DoctorWeb
 
             dynamic resultado = serializer.Serialize(ls);
 
-            layoutTableAdapter1.Insert(comboBox1.Text.Replace("$",""),resultado);
+            layoutTableAdapter1.Insert("{"+comboBox1.Text.Replace("$","")+"}",resultado);
             d12rnams4f6a7nDataSet1.AcceptChanges();
 
         }
@@ -127,16 +127,14 @@ namespace DoctorWeb
 
         private void Redimensiona()
         {
-            dataGridView1.Width = Visoes.ActiveForm.Width - 50;
-            dataGridView1.Height = Visoes.ActiveForm.Height - 160;
-            comboBox1.Width = Visoes.ActiveForm.Width - 250;
-            button2.Left = Visoes.ActiveForm.Width - 133;
-            button2.Top = Visoes.ActiveForm.Height - 85;
-        }
-
-        private void Visoes_Activated(object sender, EventArgs e)
-        {
-            Redimensiona();
+            if (Visoes.ActiveForm.WindowState==FormWindowState.Maximized||Visoes.ActiveForm.WindowState==FormWindowState.Normal)
+            {
+                dataGridView1.Width = Visoes.ActiveForm.Width - 50;
+                dataGridView1.Height = Visoes.ActiveForm.Height - 160;
+                comboBox1.Width = Visoes.ActiveForm.Width - 250;
+                button2.Left = Visoes.ActiveForm.Width - 133;
+                button2.Top = Visoes.ActiveForm.Height - 85;
+            }
         }
 
     }

@@ -16,7 +16,7 @@ namespace DoctorWeb
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Visoes());
+            Application.Run(new Senha());
         }
     }
 }

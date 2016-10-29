@@ -32,6 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>DoctorWeb.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>People-Doctor-Male-icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,6 +61,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>d12rnams4f6a7nDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Senha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Senha.Designer.cs">
+      <DependentUpon>Senha.cs</DependentUpon>
+    </Compile>
     <Compile Include="Visoes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +75,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Senha.resx">
+      <DependentUpon>Senha.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Visoes.resx">
       <DependentUpon>Visoes.cs</DependentUpon>
     </EmbeddedResource>
@@ -74,6 +89,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="d12rnams4f6a7nDataSet.xsc">
       <DependentUpon>d12rnams4f6a7nDataSet.xsd</DependentUpon>
@@ -98,6 +114,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\264e30439c42387c1e3c48d2d038429d.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="People-Doctor-Male-icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -114,6 +114,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Visoes";
             this.Text = "DoctorWeb - Visões Configurador";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Visoes_FormClosed);
             this.SizeChanged += new System.EventHandler(this.Visoes_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d12rnams4f6a7nDataSet1)).EndInit();

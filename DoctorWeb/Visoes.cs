@@ -137,5 +137,9 @@ namespace DoctorWeb
             }
         }
 
+        private void Visoes_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

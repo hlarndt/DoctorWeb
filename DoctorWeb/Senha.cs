@@ -49,6 +49,7 @@ namespace DoctorWeb
                 MessageBox.Show("Senha não confere.");
                 textBox2.Text = "";
                 textBox2.Focus();
+                return;
             }
             if (achouusuario==true&&achousenha==true)
             {
@@ -56,6 +57,11 @@ namespace DoctorWeb
                 Visoes Visoes = new Visoes();
                 Visoes.Show();
             }
+        }
+
+        private void Senha_Activated(object sender, EventArgs e)
+        {
+            textBox1.Focus();
         }
     }
 }

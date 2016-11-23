@@ -81,24 +81,66 @@ namespace DoctorWeb
 
         private void button2_Click(object sender, EventArgs e)
         {
+            var table = layoutTableAdapter1.GetData();
+            listBox1.Items.Clear();
+
             if (ExcelSelector.FileName.Length==0 || comboBox1.Text.Length == 0)
             {
                 MessageBox.Show("Por favor, selecione algum arquivo\ne depois selecione a planilha ativa.");
                 return;
             }
+
             JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
 
             List<string> ls = new List<string>();
 
             foreach (DataGridViewColumn coluna in dataGridView1.Columns)
             {
-                ls.Add(coluna.HeaderText);                
+                ls.Add(coluna.HeaderText);
+                listBox1.Items.Add(coluna.HeaderText);
             }
+
+            
 
             dynamic resultado = serializer.Serialize(ls);
 
-            layoutTableAdapter1.Insert("{"+comboBox1.Text.Replace("$","")+"}",resultado);
-            d12rnams4f6a7nDataSet1.AcceptChanges();
+            var achoutabela = false;
+            var achouarquivo = false;
+            var id = 0;
+            // Print column 0 of each returned row.
+            foreach (DataRow linha in table)
+            {
+                if (linha[1].ToString() == "{" + comboBox1.Text.Replace("$", "") + "}" )
+                {
+                    id = Convert.ToInt32(linha[0].ToString());
+                    achoutabela = true;
+                }
+                if (linha[3].ToString() == ExcelSelector.FileName.ToString())
+                {
+                    id = Convert.ToInt32(linha[0].ToString());
+                    achouarquivo = true;
+                }
+            }
+
+            if (achouarquivo == true && achoutabela == true)
+            {
+                DialogResult Opcao = MessageBox.Show("Planiha já existe.Deseja regravar?", "ATENÇÃO", MessageBoxButtons.YesNo);
+                if (Opcao == DialogResult.No)
+                {
+                    return;
+                }
+                else
+                {
+                    layoutTableAdapter1.UpdateQuery("{" + comboBox1.Text.Replace("$", "") + "}", resultado, ExcelSelector.FileName.ToString(),id);
+                    d12rnams4f6a7nDataSet1.AcceptChanges();
+                    return;
+                }
+            }
+            else
+            {
+                layoutTableAdapter1.Insert("{" + comboBox1.Text.Replace("$", "") + "}", resultado, ExcelSelector.FileName.ToString());
+                d12rnams4f6a7nDataSet1.AcceptChanges();
+            }
 
         }
 
@@ -127,13 +169,23 @@ namespace DoctorWeb
 
         private void Redimensiona()
         {
-            if (Visoes.ActiveForm.WindowState==FormWindowState.Maximized||Visoes.ActiveForm.WindowState==FormWindowState.Normal)
+            try
             {
-                dataGridView1.Width = Visoes.ActiveForm.Width - 50;
-                dataGridView1.Height = Visoes.ActiveForm.Height - 160;
-                comboBox1.Width = Visoes.ActiveForm.Width - 250;
-                button2.Left = Visoes.ActiveForm.Width - 133;
-                button2.Top = Visoes.ActiveForm.Height - 85;
+                if (Visoes.ActiveForm.WindowState == FormWindowState.Maximized || Visoes.ActiveForm.WindowState == FormWindowState.Normal)
+                {
+                    if (dataGridView1.Visible == true)
+                    {
+                        dataGridView1.Width = Visoes.ActiveForm.Width - 50;
+                        dataGridView1.Height = Visoes.ActiveForm.Height - 160;
+                        comboBox1.Width = Visoes.ActiveForm.Width - 250;
+                        button2.Left = Visoes.ActiveForm.Width - 133;
+                        button2.Top = Visoes.ActiveForm.Height - 85;
+                    }
+                }
+            }
+            catch
+            {
+
             }
         }
 

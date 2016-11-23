@@ -37,6 +37,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.layoutTableAdapter1 = new DoctorWeb.d12rnams4f6a7nDataSetTableAdapters.layoutTableAdapter();
             this.d12rnams4f6a7nDataSet1 = new DoctorWeb.d12rnams4f6a7nDataSet();
+            this.tabelaTableAdapter1 = new DoctorWeb.d12rnams4f6a7nDataSetTableAdapters.tabelaTableAdapter();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d12rnams4f6a7nDataSet1)).BeginInit();
             this.SuspendLayout();
@@ -99,12 +101,26 @@
             this.d12rnams4f6a7nDataSet1.DataSetName = "d12rnams4f6a7nDataSet";
             this.d12rnams4f6a7nDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // tabelaTableAdapter1
+            // 
+            this.tabelaTableAdapter1.ClearBeforeFill = true;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(541, 16);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(147, 420);
+            this.listBox1.TabIndex = 5;
+            this.listBox1.Visible = false;
+            // 
             // Visoes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(544, 444);
+            this.ClientSize = new System.Drawing.Size(552, 444);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
@@ -133,6 +149,8 @@
         private System.Windows.Forms.Button button2;
         private d12rnams4f6a7nDataSetTableAdapters.layoutTableAdapter layoutTableAdapter1;
         private d12rnams4f6a7nDataSet d12rnams4f6a7nDataSet1;
+        private d12rnams4f6a7nDataSetTableAdapters.tabelaTableAdapter tabelaTableAdapter1;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

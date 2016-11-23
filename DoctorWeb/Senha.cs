@@ -39,14 +39,14 @@ namespace DoctorWeb
             }
             if (achouusuario==false)
             {
-                MessageBox.Show("Usuario não existente.");
+                MessageBox.Show("Usuario não existente.","ERRO");
                 textBox1.Text = "";
                 textBox1.Focus();
                 return;
             }
             if (achousenha == false)
             {
-                MessageBox.Show("Senha não confere.");
+                MessageBox.Show("Senha não confere.", "ERRO");
                 textBox2.Text = "";
                 textBox2.Focus();
                 return;

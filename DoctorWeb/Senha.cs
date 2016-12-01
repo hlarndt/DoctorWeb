@@ -53,9 +53,15 @@ namespace DoctorWeb
             }
             if (achouusuario==true&&achousenha==true)
             {
-                Senha.ActiveForm.Hide();
-                Visoes Visoes = new Visoes();
-                Visoes.Show();
+                try
+                {
+                    Senha.ActiveForm.Hide();
+                    Visoes Visoes = new Visoes();
+                    Visoes.Show();
+                }
+                catch
+                {
+                }
             }
         }
 

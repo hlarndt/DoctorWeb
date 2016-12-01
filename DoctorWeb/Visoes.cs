@@ -14,6 +14,27 @@ namespace DoctorWeb
 {
     public partial class Visoes : Form
     {
+        public bool achoutabela;
+        public bool achouarquivo;
+        public int id;
+        public dynamic resultado;
+        [Serializable]
+        public class estrutura
+        {
+            public string nome;
+            public string campo;
+            public int tamanho;
+            public int chave;
+
+            public estrutura(string a, string b, int c, int d)
+            {
+                nome = a;
+                campo = b;
+                tamanho = c;
+                chave = d;
+            }
+
+        }
         public Visoes()
         {
             InitializeComponent();
@@ -81,65 +102,105 @@ namespace DoctorWeb
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var table = layoutTableAdapter1.GetData();
-            listBox1.Items.Clear();
-
-            if (ExcelSelector.FileName.Length==0 || comboBox1.Text.Length == 0)
+            if (button2.Text=="Gerar Dados")
             {
-                MessageBox.Show("Por favor, selecione algum arquivo\ne depois selecione a planilha ativa.");
-                return;
-            }
+                achouarquivo = false;
+                achoutabela = false;
+                id = 0;
+                var table = layoutTableAdapter1.GetData();
 
-            JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                this.dataGridView2.Columns.Clear();
+                this.dataGridView2.Rows.Clear();
+                this.dataGridView2.Columns.Add("Campo", "Campo");
+                DataGridViewComboBoxColumn tipos = new DataGridViewComboBoxColumn();
+                var tiposlst = new List<string>() { "Caracter", "Data", "Hora", "Moeda", "Numero" };
+                tipos.DataSource = tiposlst;
+                tipos.HeaderText = "Tipo";
+                tipos.DataPropertyName = "Tipo";
+                this.dataGridView2.Columns.Add(tipos);
+                this.dataGridView2.Columns.Add("Tamanho", "Tamanho");
+                this.dataGridView2.Columns.Add("Chave", "Chave");
 
-            List<string> ls = new List<string>();
-
-            foreach (DataGridViewColumn coluna in dataGridView1.Columns)
-            {
-                ls.Add(coluna.HeaderText);
-                listBox1.Items.Add(coluna.HeaderText);
-            }
-
-            
-
-            dynamic resultado = serializer.Serialize(ls);
-
-            var achoutabela = false;
-            var achouarquivo = false;
-            var id = 0;
-            // Print column 0 of each returned row.
-            foreach (DataRow linha in table)
-            {
-                if (linha[1].ToString() == "{" + comboBox1.Text.Replace("$", "") + "}" )
+                if (ExcelSelector.FileName.Length == 0 || comboBox1.Text.Length == 0)
                 {
-                    id = Convert.ToInt32(linha[0].ToString());
-                    achoutabela = true;
-                }
-                if (linha[3].ToString() == ExcelSelector.FileName.ToString())
-                {
-                    id = Convert.ToInt32(linha[0].ToString());
-                    achouarquivo = true;
-                }
-            }
-
-            if (achouarquivo == true && achoutabela == true)
-            {
-                DialogResult Opcao = MessageBox.Show("Planiha já existe.Deseja regravar?", "ATENÇÃO", MessageBoxButtons.YesNo);
-                if (Opcao == DialogResult.No)
-                {
+                    MessageBox.Show("Por favor, selecione algum arquivo\ne depois selecione a planilha ativa.");
                     return;
+                }
+
+                foreach (DataGridViewColumn coluna in dataGridView1.Columns)
+                {
+                    this.dataGridView2.Rows.Add(coluna.HeaderText, "Caracter", 100, 0);
+                }
+
+                // Print column 0 of each returned row.
+                foreach (DataRow linha in table)
+                {
+                    if (linha[1].ToString() == "{" + comboBox1.Text.Replace("$", "") + "}")
+                    {
+                        id = Convert.ToInt32(linha[0].ToString());
+                        achoutabela = true;
+                    }
+                    if (linha[3].ToString() == ExcelSelector.FileName.ToString())
+                    {
+                        id = Convert.ToInt32(linha[0].ToString());
+                        achouarquivo = true;
+                    }
+
+                }
+
+                button2.Text = "Salvar Dados";
+                dataGridView1.Visible = false;
+                dataGridView2.Visible = true;
+                comboBox1.Visible = false;
+                button1.Visible = false;
+
+            }
+
+            else
+            {
+
+                button2.Text = "Gerar Dados";
+                dataGridView1.Visible = true;
+                dataGridView2.Visible = false;
+                comboBox1.Visible = true;
+                button1.Visible = true;
+
+                JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+                List<estrutura> ls = new List<estrutura>();
+
+                for (int i = 0; i < dataGridView2.Rows.Count; i++)
+                {
+                    estrutura estrut = new estrutura(dataGridView2.Rows[i].Cells[0].EditedFormattedValue.ToString(),
+                        dataGridView2.Rows[i].Cells[1].EditedFormattedValue.ToString(), 
+                        Convert.ToInt32(dataGridView2.Rows[i].Cells[2].EditedFormattedValue.ToString()),
+                        Convert.ToInt32(dataGridView2.Rows[i].Cells[3].EditedFormattedValue.ToString()));
+                    ls.Add(estrut);
+                }
+
+                resultado = serializer.Serialize(ls);
+
+
+                if (achouarquivo == true && achoutabela == true)
+                {
+                    DialogResult Opcao = MessageBox.Show("Planiha já existe.Deseja regravar?", "ATENÇÃO", MessageBoxButtons.YesNo);
+                    if (Opcao == DialogResult.No)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        layoutTableAdapter1.UpdateQuery("{" + comboBox1.Text.Replace("$", "") + "}", resultado, ExcelSelector.FileName.ToString(), id);
+                        d12rnams4f6a7nDataSet1.AcceptChanges();
+                        return;
+                    }
                 }
                 else
                 {
-                    layoutTableAdapter1.UpdateQuery("{" + comboBox1.Text.Replace("$", "") + "}", resultado, ExcelSelector.FileName.ToString(),id);
+                    layoutTableAdapter1.Insert("{" + comboBox1.Text.Replace("$", "") + "}", resultado, ExcelSelector.FileName.ToString());
                     d12rnams4f6a7nDataSet1.AcceptChanges();
-                    return;
                 }
-            }
-            else
-            {
-                layoutTableAdapter1.Insert("{" + comboBox1.Text.Replace("$", "") + "}", resultado, ExcelSelector.FileName.ToString());
-                d12rnams4f6a7nDataSet1.AcceptChanges();
+
             }
 
         }
@@ -173,14 +234,13 @@ namespace DoctorWeb
             {
                 if (Visoes.ActiveForm.WindowState == FormWindowState.Maximized || Visoes.ActiveForm.WindowState == FormWindowState.Normal)
                 {
-                    if (dataGridView1.Visible == true)
-                    {
-                        dataGridView1.Width = Visoes.ActiveForm.Width - 50;
-                        dataGridView1.Height = Visoes.ActiveForm.Height - 160;
-                        comboBox1.Width = Visoes.ActiveForm.Width - 250;
-                        button2.Left = Visoes.ActiveForm.Width - 133;
-                        button2.Top = Visoes.ActiveForm.Height - 85;
-                    }
+                    dataGridView1.Width = Visoes.ActiveForm.Width - 50;
+                    dataGridView1.Height = Visoes.ActiveForm.Height - 160;
+                    dataGridView2.Width = Visoes.ActiveForm.Width - 50;
+                    dataGridView2.Height = Visoes.ActiveForm.Height - 160;
+                    comboBox1.Width = Visoes.ActiveForm.Width - 250;
+                    button2.Left = Visoes.ActiveForm.Width - 133;
+                    button2.Top = Visoes.ActiveForm.Height - 85;
                 }
             }
             catch
@@ -192,6 +252,19 @@ namespace DoctorWeb
         private void Visoes_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void dataGridView2_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (e.ColumnIndex==2 || e.ColumnIndex==3)
+            {
+                var numero = 0;
+                if (int.TryParse(e.FormattedValue.ToString(), out numero)==false)
+                {
+                    MessageBox.Show("Valor não é numérico", "ATENÇÃO!");
+                    e.Cancel = true;
+                }
+            }
         }
     }
 }

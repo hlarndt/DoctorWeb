@@ -190,14 +190,14 @@ namespace DoctorWeb
                     }
                     else
                     {
-                        layoutTableAdapter1.UpdateQuery("{" + comboBox1.Text.Replace("$", "") + "}", resultado, ExcelSelector.FileName.ToString(), id);
+                        layoutTableAdapter1.UpdateQuery(comboBox1.Text.Replace("$", ""), resultado, ExcelSelector.FileName.ToString(), id);
                         d12rnams4f6a7nDataSet1.AcceptChanges();
                         return;
                     }
                 }
                 else
                 {
-                    layoutTableAdapter1.Insert("{" + comboBox1.Text.Replace("$", "") + "}", resultado, ExcelSelector.FileName.ToString());
+                    layoutTableAdapter1.Insert(comboBox1.Text.Replace("$", ""), resultado, ExcelSelector.FileName.ToString());
                     d12rnams4f6a7nDataSet1.AcceptChanges();
                 }
 

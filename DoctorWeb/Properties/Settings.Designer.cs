@@ -32,5 +32,16 @@ namespace DoctorWeb.Properties {
                 return ((string)(this["DoctorMed"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("User Id=postgres;Password=p;Host=localhost;Database=DoctorWeb;Persist Security In" +
+            "fo=True")]
+        public string DoctorWebConnectionString {
+            get {
+                return ((string)(this["DoctorWebConnectionString"]));
+            }
+        }
     }
 }

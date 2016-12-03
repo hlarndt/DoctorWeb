@@ -1781,7 +1781,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"d12rnams4f6a7n\".\"public\".\"tabela\" WHERE ((\"id\" = ?) AND ((? = 1 AND " +
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"public\".\"tabela\" WHERE ((\"id\" = ?) AND ((? = 1 AND " +
                 "\"table\" IS NULL) OR (\"table\" = ?)) AND ((? = 1 AND \"chave_json\" IS NULL) OR (\"ch" +
                 "ave_json\" = ?)) AND ((? = 1 AND \"dados\" IS NULL) OR (\"dados\" = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
@@ -1794,7 +1794,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_dados", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dados", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO \"d12rnams4f6a7n\".\"public\".\"tabela\" (\"table\", \"chave_json\", \"dados\") V" +
+            this._adapter.InsertCommand.CommandText = "INSERT INTO \"public\".\"tabela\" (\"table\", \"chave_json\", \"dados\") V" +
                 "ALUES (?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("table", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "table", global::System.Data.DataRowVersion.Current, false, null));
@@ -1802,7 +1802,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("dados", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dados", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""d12rnams4f6a7n"".""public"".""tabela"" SET ""table"" = ?, ""chave_json"" = ?, ""dados"" = ? WHERE ((""id"" = ?) AND ((? = 1 AND ""table"" IS NULL) OR (""table"" = ?)) AND ((? = 1 AND ""chave_json"" IS NULL) OR (""chave_json"" = ?)) AND ((? = 1 AND ""dados"" IS NULL) OR (""dados"" = ?)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE ""public"".""tabela"" SET ""table"" = ?, ""chave_json"" = ?, ""dados"" = ? WHERE ((""id"" = ?) AND ((? = 1 AND ""table"" IS NULL) OR (""table"" = ?)) AND ((? = 1 AND ""chave_json"" IS NULL) OR (""chave_json"" = ?)) AND ((? = 1 AND ""dados"" IS NULL) OR (""dados"" = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("table", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "table", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("chave_json", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "chave_json", global::System.Data.DataRowVersion.Current, false, null));
@@ -2157,7 +2157,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"d12rnams4f6a7n\".\"public\".\"usuario\" WHERE ((\"id\" = ?) AND ((? = 1 AND" +
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"public\".\"usuario\" WHERE ((\"id\" = ?) AND ((? = 1 AND" +
                 " \"usuario\" IS NULL) OR (\"usuario\" = ?)) AND ((? = 1 AND \"senha\" IS NULL) OR (\"se" +
                 "nha\" = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
@@ -2168,14 +2168,14 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_senha", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "senha", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO \"d12rnams4f6a7n\".\"public\".\"usuario\" (\"usuario\", \"senha\") VALUES (?, ?" +
+            this._adapter.InsertCommand.CommandText = "INSERT INTO \"public\".\"usuario\" (\"usuario\", \"senha\") VALUES (?, ?" +
                 ")";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("usuario", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "usuario", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("senha", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "senha", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE \"d12rnams4f6a7n\".\"public\".\"usuario\" SET \"usuario\" = ?, \"senha\" = ? WHERE (" +
+            this._adapter.UpdateCommand.CommandText = "UPDATE \"public\".\"usuario\" SET \"usuario\" = ?, \"senha\" = ? WHERE (" +
                 "(\"id\" = ?) AND ((? = 1 AND \"usuario\" IS NULL) OR (\"usuario\" = ?)) AND ((? = 1 AN" +
                 "D \"senha\" IS NULL) OR (\"senha\" = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
@@ -2504,7 +2504,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"d12rnams4f6a7n\".\"public\".\"layout\" WHERE ((\"id\" = ?) AND ((? = 1 AND " +
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"public\".\"layout\" WHERE ((\"id\" = ?) AND ((? = 1 AND " +
                 "\"tabela\" IS NULL) OR (\"tabela\" = ?)) AND ((? = 1 AND \"dados\" IS NULL) OR (\"dados" +
                 "\" = ?)) AND ((? = 1 AND \"arquivo\" IS NULL) OR (\"arquivo\" = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
@@ -2517,7 +2517,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_arquivo", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "arquivo", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO \"d12rnams4f6a7n\".\"public\".\"layout\" (\"tabela\", \"dados\", \"arquivo\") VAL" +
+            this._adapter.InsertCommand.CommandText = "INSERT INTO \"public\".\"layout\" (\"tabela\", \"dados\", \"arquivo\") VAL" +
                 "UES (?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("tabela", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tabela", global::System.Data.DataRowVersion.Current, false, null));
@@ -2525,7 +2525,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("arquivo", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "arquivo", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""d12rnams4f6a7n"".""public"".""layout"" SET ""tabela"" = ?, ""dados"" = ?, ""arquivo"" = ? WHERE ((""id"" = ?) AND ((? = 1 AND ""tabela"" IS NULL) OR (""tabela"" = ?)) AND ((? = 1 AND ""dados"" IS NULL) OR (""dados"" = ?)) AND ((? = 1 AND ""arquivo"" IS NULL) OR (""arquivo"" = ?)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE ""public"".""layout"" SET ""tabela"" = ?, ""dados"" = ?, ""arquivo"" = ? WHERE ((""id"" = ?) AND ((? = 1 AND ""tabela"" IS NULL) OR (""tabela"" = ?)) AND ((? = 1 AND ""dados"" IS NULL) OR (""dados"" = ?)) AND ((? = 1 AND ""arquivo"" IS NULL) OR (""arquivo"" = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("tabela", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tabela", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("dados", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dados", global::System.Data.DataRowVersion.Current, false, null));
@@ -2556,7 +2556,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "DELETE FROM \"d12rnams4f6a7n\".\"public\".\"layout\" WHERE ((\"id\" = ?))";
+            this._commandCollection[1].CommandText = "DELETE FROM \"public\".\"layout\" WHERE ((\"id\" = ?))";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("id", global::System.Data.Odbc.OdbcType.Int, 19, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "id", global::System.Data.DataRowVersion.Original, false, null));
             this._commandCollection[2] = new global::System.Data.Odbc.OdbcCommand();

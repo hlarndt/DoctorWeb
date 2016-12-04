@@ -36,12 +36,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.layoutTableAdapter1 = new DoctorWeb.d12rnams4f6a7nDataSetTableAdapters.layoutTableAdapter();
-            this.d12rnams4f6a7nDataSet1 = new DoctorWeb.d12rnams4f6a7nDataSet();
-            this.tabelaTableAdapter1 = new DoctorWeb.d12rnams4f6a7nDataSetTableAdapters.tabelaTableAdapter();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.d12rnams4f6a7nDataSet1 = new DoctorWeb.d12rnams4f6a7nDataSet();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d12rnams4f6a7nDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.d12rnams4f6a7nDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -97,15 +96,6 @@
             // 
             this.layoutTableAdapter1.ClearBeforeFill = true;
             // 
-            // d12rnams4f6a7nDataSet1
-            // 
-            this.d12rnams4f6a7nDataSet1.DataSetName = "d12rnams4f6a7nDataSet";
-            this.d12rnams4f6a7nDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tabelaTableAdapter1
-            // 
-            this.tabelaTableAdapter1.ClearBeforeFill = true;
-            // 
             // dataGridView2
             // 
             this.dataGridView2.AllowUserToAddRows = false;
@@ -117,6 +107,12 @@
             this.dataGridView2.TabIndex = 5;
             this.dataGridView2.Visible = false;
             this.dataGridView2.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView2_CellValidating);
+            // 
+            // d12rnams4f6a7nDataSet1
+            // 
+            this.d12rnams4f6a7nDataSet1.DataSetName = "d12rnams4f6a7nDataSet";
+            this.d12rnams4f6a7nDataSet1.EnforceConstraints = false;
+            this.d12rnams4f6a7nDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // Visoes
             // 
@@ -137,8 +133,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Visoes_FormClosed);
             this.SizeChanged += new System.EventHandler(this.Visoes_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d12rnams4f6a7nDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.d12rnams4f6a7nDataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,9 +149,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
         private d12rnams4f6a7nDataSetTableAdapters.layoutTableAdapter layoutTableAdapter1;
-        private d12rnams4f6a7nDataSet d12rnams4f6a7nDataSet1;
-        private d12rnams4f6a7nDataSetTableAdapters.tabelaTableAdapter tabelaTableAdapter1;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private d12rnams4f6a7nDataSet d12rnams4f6a7nDataSet1;
     }
 }
 

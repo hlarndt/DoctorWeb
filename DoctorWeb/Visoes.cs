@@ -107,7 +107,6 @@ namespace DoctorWeb
                 achouarquivo = false;
                 achoutabela = false;
                 id = 0;
-                var table = layoutTableAdapter1.GetData();
 
                 this.dataGridView2.Columns.Clear();
                 this.dataGridView2.Rows.Clear();
@@ -132,10 +131,11 @@ namespace DoctorWeb
                     this.dataGridView2.Rows.Add(coluna.HeaderText, "Caracter", 100, 0);
                 }
 
+                var table = layoutTableAdapter1.GetData();
                 // Print column 0 of each returned row.
                 foreach (DataRow linha in table)
                 {
-                    if (linha[1].ToString() == "{" + comboBox1.Text.Replace("$", "") + "}")
+                    if (linha[1].ToString() == comboBox1.Text.Replace("$", ""))
                     {
                         id = Convert.ToInt32(linha[0].ToString());
                         achoutabela = true;
@@ -179,6 +179,7 @@ namespace DoctorWeb
                 }
 
                 resultado = serializer.Serialize(ls);
+                var table = layoutTableAdapter1.GetData();
 
 
                 if (achouarquivo == true && achoutabela == true)
@@ -197,7 +198,7 @@ namespace DoctorWeb
                 }
                 else
                 {
-                    layoutTableAdapter1.Insert(comboBox1.Text.Replace("$", ""), resultado, ExcelSelector.FileName.ToString());
+                    layoutTableAdapter1.InsertQuery(comboBox1.Text.Replace("$", ""), resultado, ExcelSelector.FileName.ToString());
                     d12rnams4f6a7nDataSet1.AcceptChanges();
                 }
 

@@ -99,8 +99,8 @@
     </None>
     <None Include="d12rnams4f6a7nDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>d12rnams4f6a7nDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>d12rnams4f6a7nDataSet.Designer.cs</LastGenOutput>
     </None>
     <None Include="d12rnams4f6a7nDataSet.xss">
       <DependentUpon>d12rnams4f6a7nDataSet.xsd</DependentUpon>

@@ -250,7 +250,7 @@ namespace DoctorWeb {
             this.DataSetName = "d12rnams4f6a7nDataSet";
             this.Prefix = "";
             this.Namespace = "http://tempuri.org/d12rnams4f6a7nDataSet.xsd";
-            this.EnforceConstraints = true;
+            this.EnforceConstraints = false;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tabletabela = new tabelaDataTable();
             base.Tables.Add(this.tabletabela);
@@ -459,7 +459,7 @@ namespace DoctorWeb {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public tabelaRow AddtabelaRow(string table, string chave_json, string dados) {
+            public tabelaRow AddtabelaRow(string table, string chave_json, object dados) {
                 tabelaRow rowtabelaRow = ((tabelaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -510,18 +510,16 @@ namespace DoctorWeb {
                 base.Columns.Add(this.columntable);
                 this.columnchave_json = new global::System.Data.DataColumn("chave_json", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnchave_json);
-                this.columndados = new global::System.Data.DataColumn("dados", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columndados = new global::System.Data.DataColumn("dados", typeof(object), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndados);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AutoIncrement = true;
-                this.columnid.AutoIncrementSeed = -1;
-                this.columnid.AutoIncrementStep = -1;
+                this.columnid.AutoIncrementSeed = 1;
                 this.columnid.AllowDBNull = false;
                 this.columnid.Unique = true;
                 this.columntable.MaxLength = 100;
                 this.columnchave_json.MaxLength = 127;
-                this.columndados.MaxLength = 127;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1056,7 +1054,7 @@ namespace DoctorWeb {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public layoutRow AddlayoutRow(string tabela, string dados, string arquivo) {
+            public layoutRow AddlayoutRow(string tabela, object dados, string arquivo) {
                 layoutRow rowlayoutRow = ((layoutRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1105,7 +1103,7 @@ namespace DoctorWeb {
                 base.Columns.Add(this.columnid);
                 this.columntabela = new global::System.Data.DataColumn("tabela", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntabela);
-                this.columndados = new global::System.Data.DataColumn("dados", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columndados = new global::System.Data.DataColumn("dados", typeof(object), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndados);
                 this.columnarquivo = new global::System.Data.DataColumn("arquivo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnarquivo);
@@ -1117,7 +1115,6 @@ namespace DoctorWeb {
                 this.columnid.AllowDBNull = false;
                 this.columnid.Unique = true;
                 this.columntabela.MaxLength = 127;
-                this.columndados.MaxLength = 127;
                 this.columnarquivo.MaxLength = 100;
             }
             
@@ -1304,10 +1301,10 @@ namespace DoctorWeb {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string dados {
+            public object dados {
                 get {
                     try {
-                        return ((string)(this[this.tabletabela.dadosColumn]));
+                        return ((object)(this[this.tabletabela.dadosColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'dados\' in table \'tabela\' is DBNull.", e);
@@ -1480,10 +1477,10 @@ namespace DoctorWeb {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string dados {
+            public object dados {
                 get {
                     try {
-                        return ((string)(this[this.tablelayout.dadosColumn]));
+                        return ((object)(this[this.tablelayout.dadosColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'dados\' in table \'layout\' is DBNull.", e);
@@ -1781,7 +1778,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"public\".\"tabela\" WHERE ((\"id\" = ?) AND ((? = 1 AND " +
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"d12rnams4f6a7n\".\"public\".\"tabela\" WHERE ((\"id\" = ?) AND ((? = 1 AND " +
                 "\"table\" IS NULL) OR (\"table\" = ?)) AND ((? = 1 AND \"chave_json\" IS NULL) OR (\"ch" +
                 "ave_json\" = ?)) AND ((? = 1 AND \"dados\" IS NULL) OR (\"dados\" = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
@@ -1794,7 +1791,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_dados", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dados", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO \"public\".\"tabela\" (\"table\", \"chave_json\", \"dados\") V" +
+            this._adapter.InsertCommand.CommandText = "INSERT INTO \"d12rnams4f6a7n\".\"public\".\"tabela\" (\"table\", \"chave_json\", \"dados\") V" +
                 "ALUES (?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("table", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "table", global::System.Data.DataRowVersion.Current, false, null));
@@ -1802,7 +1799,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("dados", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dados", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""public"".""tabela"" SET ""table"" = ?, ""chave_json"" = ?, ""dados"" = ? WHERE ((""id"" = ?) AND ((? = 1 AND ""table"" IS NULL) OR (""table"" = ?)) AND ((? = 1 AND ""chave_json"" IS NULL) OR (""chave_json"" = ?)) AND ((? = 1 AND ""dados"" IS NULL) OR (""dados"" = ?)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE ""d12rnams4f6a7n"".""public"".""tabela"" SET ""table"" = ?, ""chave_json"" = ?, ""dados"" = ? WHERE ((""id"" = ?) AND ((? = 1 AND ""table"" IS NULL) OR (""table"" = ?)) AND ((? = 1 AND ""chave_json"" IS NULL) OR (""chave_json"" = ?)) AND ((? = 1 AND ""dados"" IS NULL) OR (""dados"" = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("table", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "table", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("chave_json", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "chave_json", global::System.Data.DataRowVersion.Current, false, null));
@@ -2157,7 +2154,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"public\".\"usuario\" WHERE ((\"id\" = ?) AND ((? = 1 AND" +
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"d12rnams4f6a7n\".\"public\".\"usuario\" WHERE ((\"id\" = ?) AND ((? = 1 AND" +
                 " \"usuario\" IS NULL) OR (\"usuario\" = ?)) AND ((? = 1 AND \"senha\" IS NULL) OR (\"se" +
                 "nha\" = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
@@ -2168,14 +2165,14 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_senha", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "senha", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO \"public\".\"usuario\" (\"usuario\", \"senha\") VALUES (?, ?" +
+            this._adapter.InsertCommand.CommandText = "INSERT INTO \"d12rnams4f6a7n\".\"public\".\"usuario\" (\"usuario\", \"senha\") VALUES (?, ?" +
                 ")";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("usuario", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "usuario", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("senha", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "senha", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE \"public\".\"usuario\" SET \"usuario\" = ?, \"senha\" = ? WHERE (" +
+            this._adapter.UpdateCommand.CommandText = "UPDATE \"d12rnams4f6a7n\".\"public\".\"usuario\" SET \"usuario\" = ?, \"senha\" = ? WHERE (" +
                 "(\"id\" = ?) AND ((? = 1 AND \"usuario\" IS NULL) OR (\"usuario\" = ?)) AND ((? = 1 AN" +
                 "D \"senha\" IS NULL) OR (\"senha\" = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
@@ -2504,7 +2501,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"public\".\"layout\" WHERE ((\"id\" = ?) AND ((? = 1 AND " +
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"d12rnams4f6a7n\".\"public\".\"layout\" WHERE ((\"id\" = ?) AND ((? = 1 AND " +
                 "\"tabela\" IS NULL) OR (\"tabela\" = ?)) AND ((? = 1 AND \"dados\" IS NULL) OR (\"dados" +
                 "\" = ?)) AND ((? = 1 AND \"arquivo\" IS NULL) OR (\"arquivo\" = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
@@ -2517,7 +2514,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_arquivo", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "arquivo", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO \"public\".\"layout\" (\"tabela\", \"dados\", \"arquivo\") VAL" +
+            this._adapter.InsertCommand.CommandText = "INSERT INTO \"d12rnams4f6a7n\".\"public\".\"layout\" (\"tabela\", \"dados\", \"arquivo\") VAL" +
                 "UES (?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("tabela", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tabela", global::System.Data.DataRowVersion.Current, false, null));
@@ -2525,7 +2522,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("arquivo", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "arquivo", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""public"".""layout"" SET ""tabela"" = ?, ""dados"" = ?, ""arquivo"" = ? WHERE ((""id"" = ?) AND ((? = 1 AND ""tabela"" IS NULL) OR (""tabela"" = ?)) AND ((? = 1 AND ""dados"" IS NULL) OR (""dados"" = ?)) AND ((? = 1 AND ""arquivo"" IS NULL) OR (""arquivo"" = ?)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE ""d12rnams4f6a7n"".""public"".""layout"" SET ""tabela"" = ?, ""dados"" = ?, ""arquivo"" = ? WHERE ((""id"" = ?) AND ((? = 1 AND ""tabela"" IS NULL) OR (""tabela"" = ?)) AND ((? = 1 AND ""dados"" IS NULL) OR (""dados"" = ?)) AND ((? = 1 AND ""arquivo"" IS NULL) OR (""arquivo"" = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("tabela", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tabela", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("dados", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dados", global::System.Data.DataRowVersion.Current, false, null));
@@ -2549,25 +2546,32 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[3];
+            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[4];
             this._commandCollection[0] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT \"id\", \"tabela\", \"dados\", \"arquivo\" FROM \"public\".\"layout\"";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "DELETE FROM \"public\".\"layout\" WHERE ((\"id\" = ?))";
+            this._commandCollection[1].CommandText = "DELETE FROM \"d12rnams4f6a7n\".\"public\".\"layout\" WHERE ((\"id\" = ?))";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("id", global::System.Data.Odbc.OdbcType.Int, 19, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "id", global::System.Data.DataRowVersion.Original, false, null));
             this._commandCollection[2] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "UPDATE       \"public\".layout\r\nSET                tabela = ?, dados = ?, arquivo =" +
-                " ?\r\nWHERE        (id = ?)";
+            this._commandCollection[2].CommandText = "INSERT INTO \"public\".\"layout\" (\"tabela\", \"dados\", \"arquivo\") VALUES (?, ?, ?)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("tabela", global::System.Data.Odbc.OdbcType.NVarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tabela", global::System.Data.DataRowVersion.Current, false, null));
             this._commandCollection[2].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("dados", global::System.Data.Odbc.OdbcType.NVarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dados", global::System.Data.DataRowVersion.Current, false, null));
-            this._commandCollection[2].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("arquivo", global::System.Data.Odbc.OdbcType.NVarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "arquivo", global::System.Data.DataRowVersion.Current, false, null));
-            this._commandCollection[2].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_id", global::System.Data.Odbc.OdbcType.Int, 19, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "id", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("arquivo", global::System.Data.Odbc.OdbcType.NVarChar, 500, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "arquivo", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[3] = new global::System.Data.Odbc.OdbcCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "UPDATE       \"public\".layout\r\nSET                tabela = ?, dados = ?, arquivo =" +
+                " ?\r\nWHERE        (id = ?)";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("tabela", global::System.Data.Odbc.OdbcType.NVarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "tabela", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("dados", global::System.Data.Odbc.OdbcType.NVarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dados", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("arquivo", global::System.Data.Odbc.OdbcType.NVarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "arquivo", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_id", global::System.Data.Odbc.OdbcType.Int, 19, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "id", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2793,9 +2797,50 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(string tabela, string dados, string arquivo) {
+            global::System.Data.Odbc.OdbcCommand command = this.CommandCollection[2];
+            if ((tabela == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(tabela));
+            }
+            if ((dados == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(dados));
+            }
+            if ((arquivo == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(arquivo));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
         public virtual int UpdateQuery(string tabela, string dados, string arquivo, int Original_id) {
-            global::System.Data.Odbc.OdbcCommand command = this.CommandCollection[2];
+            global::System.Data.Odbc.OdbcCommand command = this.CommandCollection[3];
             if ((tabela == null)) {
                 command.Parameters[0].Value = global::System.DBNull.Value;
             }

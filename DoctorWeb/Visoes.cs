@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Web.Script.Serialization;
+using System.Data.Odbc;
+using System.Data.SqlClient;
 
 namespace DoctorWeb
 {
@@ -169,6 +171,7 @@ namespace DoctorWeb
 
                 List<estrutura> ls = new List<estrutura>();
 
+                var Campos = "";
                 for (int i = 0; i < dataGridView2.Rows.Count; i++)
                 {
                     estrutura estrut = new estrutura(dataGridView2.Rows[i].Cells[0].EditedFormattedValue.ToString(),
@@ -176,32 +179,89 @@ namespace DoctorWeb
                         Convert.ToInt32(dataGridView2.Rows[i].Cells[2].EditedFormattedValue.ToString()),
                         Convert.ToInt32(dataGridView2.Rows[i].Cells[3].EditedFormattedValue.ToString()));
                     ls.Add(estrut);
+                    Campos = Campos + '"' + dataGridView2.Rows[i].Cells[0].EditedFormattedValue.ToString() + '"';
+                    var Tipo = "";
+                    switch (dataGridView2.Rows[i].Cells[1].EditedFormattedValue.ToString())
+                    {
+                        case "Caracter":
+                            Tipo = " char(" + Convert.ToInt32(dataGridView2.Rows[i].Cells[2].EditedFormattedValue.ToString()) + ")";
+                            break;
+                        case "Data":
+                            Tipo = " datetime";
+                            break;
+                        case "Hora":
+                            Tipo = " datetime";
+                            break;
+                        case "Moeda":
+                            Tipo = " money";
+                            break;
+                        case "Numero":
+                            Tipo = " bigint";
+                            break;
+                    }
+                    Campos = Campos + Tipo;
+                    if (i < dataGridView2.Rows.Count - 1)
+                    {
+                        Campos = Campos + ",";
+                    }
                 }
 
                 resultado = serializer.Serialize(ls);
                 var table = layoutTableAdapter1.GetData();
-
+                var grava = false;
 
                 if (achouarquivo == true && achoutabela == true)
                 {
                     DialogResult Opcao = MessageBox.Show("Planiha já existe.Deseja regravar?", "ATENÇÃO", MessageBoxButtons.YesNo);
                     if (Opcao == DialogResult.No)
                     {
-                        return;
+                        grava = false;
                     }
                     else
                     {
                         layoutTableAdapter1.UpdateQuery(comboBox1.Text.Replace("$", ""), resultado, ExcelSelector.FileName.ToString(), id);
                         d12rnams4f6a7nDataSet1.AcceptChanges();
-                        return;
+                        grava = true;
                     }
                 }
                 else
                 {
                     layoutTableAdapter1.InsertQuery(comboBox1.Text.Replace("$", ""), resultado, ExcelSelector.FileName.ToString());
                     d12rnams4f6a7nDataSet1.AcceptChanges();
+                    grava = true;
                 }
 
+                if (grava==true)
+                {
+                    string connectionString = DoctorWeb.Properties.Settings.Default.DoctorMed;
+                    using (OdbcConnection con = new OdbcConnection(connectionString))
+                    {
+                        try
+                        {
+                            con.Open();
+                            using (OdbcCommand command = new OdbcCommand("Drop Table " + comboBox1.Text.Replace("$", ""), con))
+                            {
+                                command.ExecuteNonQuery();
+                            }
+                            using (OdbcCommand command = new OdbcCommand("Create Table " + comboBox1.Text.Replace("$", "") + "(" + Campos + ")", con))
+                            {
+                                command.ExecuteNonQuery();
+                            }
+                            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                            {
+                                using (OdbcCommand command = new OdbcCommand("Insert Into   " + comboBox1.Text.Replace("$", "") + " Values (" + Campos + ")", con))
+                                {
+                                    command.ExecuteNonQuery();
+                                }
+                            }
+                            con.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
             }
 
         }

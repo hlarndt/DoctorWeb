@@ -172,6 +172,7 @@ namespace DoctorWeb
                 List<estrutura> ls = new List<estrutura>();
 
                 var Campos = "";
+                string[] SQLTipo = new string[dataGridView2.Rows.Count];
                 for (int i = 0; i < dataGridView2.Rows.Count; i++)
                 {
                     estrutura estrut = new estrutura(dataGridView2.Rows[i].Cells[0].EditedFormattedValue.ToString(),
@@ -185,18 +186,23 @@ namespace DoctorWeb
                     {
                         case "Caracter":
                             Tipo = " char(" + Convert.ToInt32(dataGridView2.Rows[i].Cells[2].EditedFormattedValue.ToString()) + ")";
+                            SQLTipo[i] = "C";
                             break;
                         case "Data":
                             Tipo = " datetime";
+                            SQLTipo[i] = "C";
                             break;
                         case "Hora":
                             Tipo = " datetime";
+                            SQLTipo[i] = "C";
                             break;
                         case "Moeda":
                             Tipo = " money";
+                            SQLTipo[i] = "N";
                             break;
                         case "Numero":
                             Tipo = " bigint";
+                            SQLTipo[i] = "N";
                             break;
                     }
                     Campos = Campos + Tipo;
@@ -239,9 +245,15 @@ namespace DoctorWeb
                         try
                         {
                             con.Open();
-                            using (OdbcCommand command = new OdbcCommand("Drop Table " + comboBox1.Text.Replace("$", ""), con))
+                            try
                             {
-                                command.ExecuteNonQuery();
+                                using (OdbcCommand command = new OdbcCommand("Drop Table " + comboBox1.Text.Replace("$", ""), con))
+                                {
+                                    command.ExecuteNonQuery();
+                                }
+                            }
+                            catch
+                            {
                             }
                             using (OdbcCommand command = new OdbcCommand("Create Table " + comboBox1.Text.Replace("$", "") + "(" + Campos + ")", con))
                             {
@@ -249,7 +261,23 @@ namespace DoctorWeb
                             }
                             for (int i = 0; i < dataGridView1.Rows.Count; i++)
                             {
-                                using (OdbcCommand command = new OdbcCommand("Insert Into   " + comboBox1.Text.Replace("$", "") + " Values (" + Campos + ")", con))
+                                var Valores = "";
+                                for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                                {
+                                    if (SQLTipo[j]=="C")
+                                    {
+                                        Valores += "'" + dataGridView1.Rows[i].Cells[j].EditedFormattedValue.ToString() + "'";
+                                    }
+                                    else
+                                    {
+                                        Valores += dataGridView1.Rows[i].Cells[j].EditedFormattedValue.ToString();
+                                    }
+                                    if (j < dataGridView1.Columns.Count - 1)
+                                    {
+                                        Valores += ",";
+                                    }
+                                }
+                                using (OdbcCommand command = new OdbcCommand("Insert Into " + comboBox1.Text.Replace("$", "") + " Values (" + Valores + ")", con))
                                 {
                                     command.ExecuteNonQuery();
                                 }

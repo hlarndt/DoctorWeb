@@ -114,7 +114,7 @@ namespace DoctorWeb
                 this.dataGridView2.Rows.Clear();
                 this.dataGridView2.Columns.Add("Campo", "Campo");
                 DataGridViewComboBoxColumn tipos = new DataGridViewComboBoxColumn();
-                var tiposlst = new List<string>() { "Caracter", "Data", "Hora", "Moeda", "Numero" };
+                var tiposlst = new List<string>() { "Caracter", "Data", "Moeda", "Numero" };
                 tipos.DataSource = tiposlst;
                 tipos.HeaderText = "Tipo";
                 tipos.DataPropertyName = "Tipo";
@@ -189,12 +189,8 @@ namespace DoctorWeb
                             SQLTipo[i] = "C";
                             break;
                         case "Data":
-                            Tipo = " datetime";
-                            SQLTipo[i] = "C";
-                            break;
-                        case "Hora":
-                            Tipo = " datetime";
-                            SQLTipo[i] = "C";
+                            Tipo = " date";
+                            SQLTipo[i] = "D";
                             break;
                         case "Moeda":
                             Tipo = " money";
@@ -259,7 +255,7 @@ namespace DoctorWeb
                             {
                                 command.ExecuteNonQuery();
                             }
-                            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                            for (int i = 1; i < dataGridView1.Rows.Count; i++)
                             {
                                 var Valores = "";
                                 for (int j = 0; j < dataGridView1.Columns.Count; j++)
@@ -268,9 +264,26 @@ namespace DoctorWeb
                                     {
                                         Valores += "'" + dataGridView1.Rows[i].Cells[j].EditedFormattedValue.ToString() + "'";
                                     }
+                                    else if (SQLTipo[j]=="D")
+                                    {
+                                        if(dataGridView1.Rows[i].Cells[j].EditedFormattedValue.ToString().Trim().Length==0)
+                                            Valores += "'01/01/1901'";
+                                        else
+                                            Valores += "TO_DATE('" + dataGridView1.Rows[i].Cells[j].EditedFormattedValue.ToString() + "','MM/DD/YYYY')";
+                                    }
+                                    else if (SQLTipo[j]=="N")
+                                    {
+                                        if (dataGridView1.Rows[i].Cells[j].EditedFormattedValue.ToString().Trim().Length == 0)
+                                            Valores += "0";
+                                        else
+                                            Valores += dataGridView1.Rows[i].Cells[j].EditedFormattedValue.ToString();
+                                    }
                                     else
                                     {
-                                        Valores += dataGridView1.Rows[i].Cells[j].EditedFormattedValue.ToString();
+                                        if (dataGridView1.Rows[i].Cells[j].EditedFormattedValue.ToString().Trim().Length == 0)
+                                            Valores += "'00:00:00'";
+                                        else
+                                            Valores += "'" + dataGridView1.Rows[i].Cells[j].EditedFormattedValue.ToString() + "'" ;
                                     }
                                     if (j < dataGridView1.Columns.Count - 1)
                                     {
@@ -354,6 +367,11 @@ namespace DoctorWeb
                     e.Cancel = true;
                 }
             }
+        }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

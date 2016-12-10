@@ -25,6 +25,7 @@ namespace DoctorWeb
 
             var achouusuario = false;
             var achousenha = false;
+            var tipo = false;
             // Print column 0 of each returned row.
             foreach (DataRow linha in table)
             {
@@ -35,6 +36,10 @@ namespace DoctorWeb
                 if (linha[2].ToString() == textBox2.Text)
                 {
                     achousenha = true;
+                }
+                if (linha[3].ToString() == "A")
+                {
+                    tipo = true;
                 }
             }
             if (achouusuario==false)
@@ -50,6 +55,11 @@ namespace DoctorWeb
                 textBox2.Text = "";
                 textBox2.Focus();
                 return;
+            }
+            if (tipo == false)
+            {
+                MessageBox.Show("Usuário não permitido para acesso ao programa.", "ERRO");
+                Application.Exit();
             }
             if (achouusuario==true&&achousenha==true)
             {

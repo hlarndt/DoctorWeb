@@ -373,5 +373,11 @@ namespace DoctorWeb
         {
             Application.Exit();
         }
+
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Usuario Usuario = new Usuario();
+            Usuario.Show();
+        }
     }
 }

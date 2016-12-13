@@ -629,6 +629,8 @@ namespace DoctorWeb {
             
             private global::System.Data.DataColumn columnacessos;
             
+            private global::System.Data.DataColumn columnacessos1;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public usuarioDataTable() {
@@ -704,6 +706,14 @@ namespace DoctorWeb {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn acessos1Column {
+                get {
+                    return this.columnacessos1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -739,14 +749,15 @@ namespace DoctorWeb {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public usuarioRow AddusuarioRow(long id, string usuario, string senha, string tipo, object acessos) {
+            public usuarioRow AddusuarioRow(long id, string usuario, string senha, string tipo, object acessos, string acessos1) {
                 usuarioRow rowusuarioRow = ((usuarioRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id,
                         usuario,
                         senha,
                         tipo,
-                        acessos};
+                        acessos,
+                        acessos1};
                 rowusuarioRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowusuarioRow);
                 return rowusuarioRow;
@@ -781,6 +792,7 @@ namespace DoctorWeb {
                 this.columnsenha = base.Columns["senha"];
                 this.columntipo = base.Columns["tipo"];
                 this.columnacessos = base.Columns["acessos"];
+                this.columnacessos1 = base.Columns["acessos1"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -796,6 +808,8 @@ namespace DoctorWeb {
                 base.Columns.Add(this.columntipo);
                 this.columnacessos = new global::System.Data.DataColumn("acessos", typeof(object), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnacessos);
+                this.columnacessos1 = new global::System.Data.DataColumn("acessos1", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnacessos1);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AllowDBNull = false;
@@ -803,6 +817,7 @@ namespace DoctorWeb {
                 this.columnusuario.MaxLength = 30;
                 this.columnsenha.MaxLength = 15;
                 this.columntipo.MaxLength = 1;
+                this.columnacessos1.Caption = "acessos";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1130,6 +1145,22 @@ namespace DoctorWeb {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string acessos1 {
+                get {
+                    try {
+                        return ((string)(this[this.tableusuario.acessos1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'acessos1\' in table \'usuario\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableusuario.acessos1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsusuarioNull() {
                 return this.IsNull(this.tableusuario.usuarioColumn);
             }
@@ -1174,6 +1205,18 @@ namespace DoctorWeb {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetacessosNull() {
                 this[this.tableusuario.acessosColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isacessos1Null() {
+                return this.IsNull(this.tableusuario.acessos1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setacessos1Null() {
+                this[this.tableusuario.acessos1Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -1879,7 +1922,7 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("usuario", "usuario");
             tableMapping.ColumnMappings.Add("senha", "senha");
             tableMapping.ColumnMappings.Add("tipo", "tipo");
-            tableMapping.ColumnMappings.Add("acessos", "acessos");
+            tableMapping.ColumnMappings.Add("acessos", "acessos1");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Devart.Data.PostgreSql.PgSqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -2116,11 +2159,71 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::Devart.Data.PostgreSql.PgSqlCommand[1];
+            this._commandCollection = new global::Devart.Data.PostgreSql.PgSqlCommand[4];
             this._commandCollection[0] = new global::Devart.Data.PostgreSql.PgSqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id, usuario, senha, tipo, acessos FROM \"public\".usuario";
+            this._commandCollection[0].CommandText = "SELECT        id, usuario, senha, tipo, acessos\r\nFROM            usuario\r\nORDER B" +
+                "Y id";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::Devart.Data.PostgreSql.PgSqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "DELETE FROM usuario\r\nWHERE        (id = :Original_id)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            global::Devart.Data.PostgreSql.PgSqlParameter param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "Original_id";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.BigInt;
+            param.Size = 2147483647;
+            param.IsNullable = true;
+            param.SourceColumn = "id";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._commandCollection[1].Parameters.Add(param);
+            this._commandCollection[2] = new global::Devart.Data.PostgreSql.PgSqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "INSERT INTO usuario\r\n                         (usuario)\r\nVALUES        (\'\')";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3] = new global::Devart.Data.PostgreSql.PgSqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "UPDATE       usuario\r\nSET                usuario = :usuario, senha = :senha, tipo" +
+                " = :tipo, acessos = :acessos\r\nWHERE        (id = :Original_id)";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "usuario";
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.VarChar;
+            param.Size = 30;
+            param.IsNullable = true;
+            param.SourceColumn = "usuario";
+            this._commandCollection[3].Parameters.Add(param);
+            param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "senha";
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.VarChar;
+            param.Size = 15;
+            param.IsNullable = true;
+            param.SourceColumn = "senha";
+            this._commandCollection[3].Parameters.Add(param);
+            param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "tipo";
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.Char;
+            param.Size = 1;
+            param.IsNullable = true;
+            param.SourceColumn = "tipo";
+            this._commandCollection[3].Parameters.Add(param);
+            param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "acessos";
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.Text;
+            param.Size = 2147483647;
+            param.IsNullable = true;
+            param.SourceColumn = "acessos";
+            this._commandCollection[3].Parameters.Add(param);
+            param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "Original_id";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.BigInt;
+            param.Size = 2147483647;
+            param.IsNullable = true;
+            param.SourceColumn = "id";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._commandCollection[3].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2353,6 +2456,101 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(string usuario, string senha, string tipo, string acessos, long Original_id, string Original_usuario, string Original_senha, string Original_tipo, string Original_acessos) {
             return this.Update(Original_id, usuario, senha, tipo, acessos, Original_id, Original_usuario, Original_senha, Original_tipo, Original_acessos);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteQuery(long Original_id) {
+            global::Devart.Data.PostgreSql.PgSqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((long)(Original_id));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery() {
+            global::Devart.Data.PostgreSql.PgSqlCommand command = this.CommandCollection[2];
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateQuery(string usuario, string senha, string tipo, string acessos, long Original_id) {
+            global::Devart.Data.PostgreSql.PgSqlCommand command = this.CommandCollection[3];
+            if ((usuario == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(usuario));
+            }
+            if ((senha == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(senha));
+            }
+            if ((tipo == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(tipo));
+            }
+            if ((acessos == null)) {
+                throw new global::System.ArgumentNullException("acessos");
+            }
+            else {
+                command.Parameters[3].Value = ((string)(acessos));
+            }
+            command.Parameters[4].Value = ((long)(Original_id));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     

@@ -379,5 +379,11 @@ namespace DoctorWeb
             Usuario Usuario = new Usuario();
             Usuario.Show();
         }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            Designer Designer = new Designer();
+            Designer.Show();
+        }
     }
 }

@@ -337,9 +337,9 @@ namespace DoctorWeb
                 if (Visoes.ActiveForm.WindowState == FormWindowState.Maximized || Visoes.ActiveForm.WindowState == FormWindowState.Normal)
                 {
                     dataGridView1.Width = Visoes.ActiveForm.Width - 50;
-                    dataGridView1.Height = Visoes.ActiveForm.Height - 160;
+                    dataGridView1.Height = Visoes.ActiveForm.Height - 166;
                     dataGridView2.Width = Visoes.ActiveForm.Width - 50;
-                    dataGridView2.Height = Visoes.ActiveForm.Height - 160;
+                    dataGridView2.Height = Visoes.ActiveForm.Height - 120;
                     comboBox1.Width = Visoes.ActiveForm.Width - 250;
                     button2.Left = Visoes.ActiveForm.Width - 133;
                     button2.Top = Visoes.ActiveForm.Height - 85;
@@ -374,16 +374,16 @@ namespace DoctorWeb
             Application.Exit();
         }
 
-        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Usuario Usuario = new Usuario();
-            Usuario.Show();
-        }
-
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
             Designer Designer = new Designer();
             Designer.Show();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Usuario Usuario = new Usuario();
+            Usuario.Show();
         }
     }
 }

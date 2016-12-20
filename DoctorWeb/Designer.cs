@@ -15,9 +15,14 @@ namespace DoctorWeb
 {
     public partial class Designer : Form
     {
+        private System.Windows.Forms.Panel[] panArray;
+        private System.Windows.Forms.Label[] lblpsqArray;
+        private System.Windows.Forms.TextBox[] txtpsqArray;
         private System.Windows.Forms.Label[] lblArray;
         private System.Windows.Forms.TextBox[] txtArray;
         private System.Windows.Forms.Button[] btnArray;
+        private System.Windows.Forms.DataGrid[] dtvArray;
+        private System.Windows.Forms.GroupBox[] grbArray;
         public Designer()
         {
             InitializeComponent();
@@ -73,6 +78,17 @@ namespace DoctorWeb
         {
             switch (anyControl)
             {
+                case "pan": // anyControl = btn to Add Button
+                    {
+                        // assign number of controls 
+                        panArray = new System.Windows.Forms.Panel[cNumber + 1];
+                        for (int i = 0; i < cNumber + 1; i++)
+                        {
+                            // Initialize one variable
+                            panArray[i] = new System.Windows.Forms.Panel();
+                        }
+                        break;
+                    }
                 case "btn": // anyControl = btn to Add Button
                     {
                         // assign number of controls 
@@ -106,12 +122,56 @@ namespace DoctorWeb
                         }
                         break;
                     }
+                case "lblpsq": // anyControl = lbl to Add Label
+                    {
+                        // assign number of controls 
+                        lblpsqArray = new System.Windows.Forms.Label[cNumber + 1];
+                        for (int i = 0; i < cNumber + 1; i++)
+                        {
+                            // Initialize one variable
+                            lblpsqArray[i] = new System.Windows.Forms.Label();
+                        }
+                        break;
+                    }
+                case "txtpsq": // anyControl = txt to Add TextBox
+                    {
+                        // assign number of controls 
+                        txtpsqArray = new System.Windows.Forms.TextBox[cNumber + 1];
+                        for (int i = 0; i < cNumber + 1; i++)
+                        {
+                            // Initialize one variable
+                            txtpsqArray[i] = new System.Windows.Forms.TextBox();
+                        }
+                        break;
+                    }
+                case "dtv": // anyControl = txt to Add TextBox
+                    {
+                        // assign number of controls 
+                        dtvArray = new System.Windows.Forms.DataGrid[cNumber + 1];
+                        for (int i = 0; i < cNumber + 1; i++)
+                        {
+                            // Initialize one variable
+                            dtvArray[i] = new System.Windows.Forms.DataGrid();
+                        }
+                        break;
+                    }
+                case "grb": // anyControl = txt to Add TextBox
+                    {
+                        // assign number of controls 
+                        grbArray = new System.Windows.Forms.GroupBox[cNumber + 1];
+                        for (int i = 0; i < cNumber + 1; i++)
+                        {
+                            // Initialize one variable
+                            grbArray[i] = new System.Windows.Forms.GroupBox();
+                        }
+                        break;
+                    }
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var linha = 50;
+            var linha = 20;
             string connectionString = DoctorWeb.Properties.Settings.Default.DoctorMed;
             using (OdbcConnection con = new OdbcConnection(connectionString))
             {
@@ -124,25 +184,82 @@ namespace DoctorWeb
                         OdbcDataReader myReader = command.ExecuteReader();
                         try
                         {
+                            ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
+                            AddControls("dtv", 0);
+                            dtvArray[0].Left = 50;
+                            dtvArray[0].Top = linha;
+                            dtvArray[0].Width = 1250;
+                            dtvArray[0].Height = 300;
+                            linha = linha + 310;
+                            panel1.Controls.Add(dtvArray[0]);
+                            ControlMoverOrResizer.Init(dtvArray[0]);
+                            var linpsq = 20;
                             while (myReader.Read())
                             {
                                 var serializer = new JavaScriptSerializer();
                                 dynamic itens = serializer.Deserialize(myReader.GetString(0), typeof(object));
                                 Dictionary<int, string> items = new Dictionary<int, string>();
+                                var achou = false;
+                                var cntpsq = 0;
+                                foreach (Dictionary<string, object> item in itens)
+                                {
+                                    AddControls("lblpsq", cntpsq);
+                                    AddControls("txtpsq", cntpsq);
+                                    if (item["chave"].ToString() != "0")
+                                    {
+                                        if (achou == false)
+                                        {
+                                            AddControls("grb", 0);
+                                            grbArray[0].Left = 50;
+                                            grbArray[0].Top = linha;
+                                            grbArray[0].Width = 1250;
+                                            grbArray[0].BackColor = Color.FromArgb(255, 255, 192);
+                                            panel1.Controls.Add(grbArray[0]);
+                                            ControlMoverOrResizer.Init(grbArray[0]);
+                                            AddControls("pan", 0);
+                                            panArray[0].Left = 0;
+                                            panArray[0].Top = 0;
+                                            panArray[0].Width = 1250;
+                                            panArray[0].BackColor = Color.FromArgb(255, 255, 192);
+                                            grbArray[0].Controls.Add(panArray[0]);
+                                            ControlMoverOrResizer.Init(panArray[0],grbArray[0]);
+                                            achou = true;
+                                        }
+                                        lblpsqArray[cntpsq].Left = 10;
+                                        lblpsqArray[cntpsq].Top = linpsq;
+                                        lblpsqArray[cntpsq].Width = 70;
+                                        lblpsqArray[cntpsq].Text = item["nome"].ToString() + ":";
+                                        panArray[0].Controls.Add(lblpsqArray[cntpsq]);
+                                        ControlMoverOrResizer.Init(lblpsqArray[cntpsq]);
+                                        txtpsqArray[cntpsq].Left = 110;
+                                        txtpsqArray[cntpsq].Top = linpsq;
+                                        txtpsqArray[cntpsq].Width = 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6);
+                                        txtpsqArray[cntpsq].MaxLength = Convert.ToInt32(item["tamanho"].ToString());
+                                        panArray[0].Controls.Add(txtpsqArray[cntpsq]);
+                                        ControlMoverOrResizer.Init(txtpsqArray[cntpsq]);
+                                        linpsq = linpsq + 30;
+                                        grbArray[0].Height = linpsq;
+                                        panArray[0].Height = linpsq;
+                                        linha = linha + linpsq;
+                                        cntpsq = cntpsq + 1;
+                                    }
+                                }
+                                linha = linha + 10;
                                 AddControls("lbl", Enumerable.Count(itens)-1);
                                 AddControls("txt", Enumerable.Count(itens)-1);
                                 var pos = 0;
                                 foreach (Dictionary<string, object> item in itens)
                                 {
-                                    lblArray[pos].Left = 100;
+                                    lblArray[pos].Left = 50;
                                     lblArray[pos].Top = linha;
                                     lblArray[pos].Width = 70;
                                     lblArray[pos].Text = item["nome"].ToString()+":";
                                     panel1.Controls.Add(lblArray[pos]);
                                     ControlMoverOrResizer.Init(lblArray[pos]);
-                                    txtArray[pos].Left = 200;
+                                    txtArray[pos].Left = 150;
                                     txtArray[pos].Top = linha;
-                                    txtArray[pos].Width = 100;
+                                    txtArray[pos].MaxLength = Convert.ToInt32(item["tamanho"].ToString());
+                                    txtArray[pos].Width = 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6);
                                     panel1.Controls.Add(txtArray[pos]);
                                     ControlMoverOrResizer.Init(txtArray[pos]);
                                     linha = linha + 30;

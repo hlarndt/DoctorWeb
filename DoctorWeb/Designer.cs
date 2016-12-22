@@ -13,6 +13,33 @@ using System.Web.Script.Serialization;
 
 namespace DoctorWeb
 {
+    [Serializable]
+    public class controles
+    {
+        public string nome;
+        public int indice;
+        public int height;
+        public int width;
+        public int left;
+        public int top;
+        public Color backcolor;
+        public string text;
+        public int maxlength;
+
+        public controles(string a, int b, int c, int d, int e, int f, Color g, string h, int i)
+        {
+            nome = a;
+            indice = b;
+            height = c;
+            width = d;
+            left = e;
+            top = f;
+            backcolor = g;
+            text = h;
+            maxlength = i;
+        }
+
+    }
     public partial class Designer : Form
     {
         private System.Windows.Forms.Panel[] panArray;
@@ -23,6 +50,8 @@ namespace DoctorWeb
         private System.Windows.Forms.Button[] btnArray;
         private System.Windows.Forms.DataGrid[] dtvArray;
         private System.Windows.Forms.GroupBox[] grbArray;
+        public List<controles> controle = new List<controles>();
+
         public Designer()
         {
             InitializeComponent();
@@ -47,7 +76,7 @@ namespace DoctorWeb
                 try
                 {
                     var achou = false;
-                    using (OdbcCommand command = new OdbcCommand("SELECT tablename FROM pg_catalog.pg_tables where schemaname='public' and tablename not in ('layout','usuario') order by tablename", con))
+                    using (OdbcCommand command = new OdbcCommand("SELECT tablename FROM pg_catalog.pg_tables where schemaname='public' and tablename not in ('layout','usuario','controles') order by tablename", con))
                     {
                         OdbcDataReader myReader = command.ExecuteReader();
                         try
@@ -169,6 +198,104 @@ namespace DoctorWeb
             }
         }
 
+        private void montacontrole(string control,int indice,int top,int left,int width, int height,Color backcolor,int maxlength, string texto)
+        {
+            controles elemento = new controles(control, indice, height, width, left, top, backcolor, texto,maxlength);
+            controle.Add(elemento);
+            AddControls(control, indice);
+            switch (control)
+            {
+                case "pan": // anyControl = btn to Add Button
+                    {
+                        AddControls("pan", indice);
+                        panArray[indice].Left = left;
+                        panArray[indice].Top = top;
+                        panArray[indice].Width = width;
+                        panArray[indice].BackColor = backcolor;
+                        grbArray[indice].Controls.Add(panArray[indice]);
+                        ControlMoverOrResizer.Init(panArray[indice], grbArray[0]);
+                        break;
+                    }
+                case "btn": // anyControl = btn to Add Button
+                    {
+                        AddControls("btn", indice);
+                        btnArray[indice].Left = left;
+                        btnArray[indice].Top = top;
+                        btnArray[indice].Width = width;
+                        btnArray[indice].Height = height;
+                        btnArray[indice].Text = texto;
+                        panel1.Controls.Add(btnArray[indice]);
+                        ControlMoverOrResizer.Init(btnArray[indice]);
+                        break;
+                    }
+                case "lbl": // anyControl = lbl to Add Label
+                    {
+                        AddControls("lbl", indice);
+                        lblArray[indice].Left = left;
+                        lblArray[indice].Top = top;
+                        lblArray[indice].Width = width;
+                        lblArray[indice].Text = texto;
+                        panel1.Controls.Add(lblArray[indice]);
+                        ControlMoverOrResizer.Init(lblArray[indice]);
+                        break;
+                    }
+                case "txt": // anyControl = txt to Add TextBox
+                    {
+                        AddControls("txt", indice);
+                        txtArray[indice].Left = left;
+                        txtArray[indice].Top = top;
+                        txtArray[indice].MaxLength = maxlength;
+                        txtArray[indice].Width = width;
+                        panel1.Controls.Add(txtArray[indice]);
+                        ControlMoverOrResizer.Init(txtArray[indice]);
+                        break;
+                    }
+                case "lblpsq": // anyControl = lbl to Add Label
+                    {
+                        AddControls("lblpsq", indice);
+                        lblpsqArray[indice].Left = left;
+                        lblpsqArray[indice].Top = top;
+                        lblpsqArray[indice].Width = width;
+                        lblpsqArray[indice].Text = texto;
+                        panArray[0].Controls.Add(lblpsqArray[indice]);
+                        ControlMoverOrResizer.Init(lblpsqArray[indice]);
+                        break;
+                    }
+                case "txtpsq": // anyControl = txt to Add TextBox
+                    {
+                        AddControls("txtpsq", indice);
+                        txtpsqArray[indice].Left = left;
+                        txtpsqArray[indice].Top = top;
+                        txtpsqArray[indice].Width = width;
+                        txtpsqArray[indice].MaxLength = maxlength;
+                        panArray[0].Controls.Add(txtpsqArray[indice]);
+                        ControlMoverOrResizer.Init(txtpsqArray[indice]);
+                        break;
+                    }
+                case "dtv": // anyControl = txt to Add TextBox
+                    {
+                        dtvArray[indice].Left = left;
+                        dtvArray[indice].Top = top;
+                        dtvArray[indice].Width = width;
+                        dtvArray[indice].Height = height;
+                        panel1.Controls.Add(dtvArray[indice]);
+                        ControlMoverOrResizer.Init(dtvArray[indice]);
+                        break;
+                    }
+                case "grb": // anyControl = txt to Add TextBox
+                    {
+                        AddControls("grb", indice);
+                        grbArray[indice].Left = left;
+                        grbArray[indice].Top = top;
+                        grbArray[indice].Width = width;
+                        grbArray[indice].BackColor = backcolor;
+                        panel1.Controls.Add(grbArray[indice]);
+                        ControlMoverOrResizer.Init(grbArray[indice]);
+                        break;
+                    }
+            }
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             var linha = 20;
@@ -185,14 +312,8 @@ namespace DoctorWeb
                         try
                         {
                             ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
-                            AddControls("dtv", 0);
-                            dtvArray[0].Left = 50;
-                            dtvArray[0].Top = linha;
-                            dtvArray[0].Width = 1250;
-                            dtvArray[0].Height = 300;
+                            montacontrole("dtv", 0, linha, 50, 1250, 300, Color.Blue, 0, "" );
                             linha = linha + 310;
-                            panel1.Controls.Add(dtvArray[0]);
-                            ControlMoverOrResizer.Init(dtvArray[0]);
                             var linpsq = 20;
                             while (myReader.Read())
                             {
@@ -203,65 +324,35 @@ namespace DoctorWeb
                                 var cntpsq = 0;
                                 foreach (Dictionary<string, object> item in itens)
                                 {
-                                    AddControls("lblpsq", cntpsq);
-                                    AddControls("txtpsq", cntpsq);
                                     if (item["chave"].ToString() != "0")
                                     {
                                         if (achou == false)
                                         {
-                                            AddControls("grb", 0);
-                                            grbArray[0].Left = 50;
-                                            grbArray[0].Top = linha;
-                                            grbArray[0].Width = 1250;
-                                            grbArray[0].BackColor = Color.FromArgb(255, 255, 192);
-                                            panel1.Controls.Add(grbArray[0]);
-                                            ControlMoverOrResizer.Init(grbArray[0]);
-                                            AddControls("pan", 0);
-                                            panArray[0].Left = 0;
-                                            panArray[0].Top = 0;
-                                            panArray[0].Width = 1250;
-                                            panArray[0].BackColor = Color.FromArgb(255, 255, 192);
-                                            grbArray[0].Controls.Add(panArray[0]);
-                                            ControlMoverOrResizer.Init(panArray[0],grbArray[0]);
+                                            montacontrole("grb", 0, linha, 50, 1250, 0, Color.FromArgb(255, 255, 192), 0, "");
+                                            montacontrole("pan", 0, 0, 0, 1250, 0, Color.FromArgb(255, 255, 192), 0, "");
                                             achou = true;
                                         }
-                                        lblpsqArray[cntpsq].Left = 10;
-                                        lblpsqArray[cntpsq].Top = linpsq;
-                                        lblpsqArray[cntpsq].Width = 70;
-                                        lblpsqArray[cntpsq].Text = item["nome"].ToString() + ":";
-                                        panArray[0].Controls.Add(lblpsqArray[cntpsq]);
-                                        ControlMoverOrResizer.Init(lblpsqArray[cntpsq]);
-                                        txtpsqArray[cntpsq].Left = 110;
-                                        txtpsqArray[cntpsq].Top = linpsq;
-                                        txtpsqArray[cntpsq].Width = 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6);
-                                        txtpsqArray[cntpsq].MaxLength = Convert.ToInt32(item["tamanho"].ToString());
-                                        panArray[0].Controls.Add(txtpsqArray[cntpsq]);
-                                        ControlMoverOrResizer.Init(txtpsqArray[cntpsq]);
+                                        montacontrole("lblpsq", cntpsq, linpsq, 10, 70, 0, Color.Blue, 0, item["nome"].ToString() + ":");
+                                        montacontrole("txtpsq", cntpsq, linpsq, 110, 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6), 70, Color.Blue, Convert.ToInt32(item["tamanho"].ToString()), "");
                                         linpsq = linpsq + 30;
                                         grbArray[0].Height = linpsq;
                                         panArray[0].Height = linpsq;
-                                        linha = linha + linpsq;
                                         cntpsq = cntpsq + 1;
                                     }
                                 }
-                                linha = linha + 10;
-                                AddControls("lbl", Enumerable.Count(itens)-1);
-                                AddControls("txt", Enumerable.Count(itens)-1);
+                                if (linpsq > 20)
+                                {
+                                    linha = linha + linpsq + 10;
+                                }
+                                else
+                                {
+                                    linha = linha + 10;
+                                }
                                 var pos = 0;
                                 foreach (Dictionary<string, object> item in itens)
                                 {
-                                    lblArray[pos].Left = 50;
-                                    lblArray[pos].Top = linha;
-                                    lblArray[pos].Width = 70;
-                                    lblArray[pos].Text = item["nome"].ToString()+":";
-                                    panel1.Controls.Add(lblArray[pos]);
-                                    ControlMoverOrResizer.Init(lblArray[pos]);
-                                    txtArray[pos].Left = 150;
-                                    txtArray[pos].Top = linha;
-                                    txtArray[pos].MaxLength = Convert.ToInt32(item["tamanho"].ToString());
-                                    txtArray[pos].Width = 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6);
-                                    panel1.Controls.Add(txtArray[pos]);
-                                    ControlMoverOrResizer.Init(txtArray[pos]);
+                                    montacontrole("lbl", pos, linha, 50, 70, 0, Color.Blue, 0, item["nome"].ToString() + ":");
+                                    montacontrole("txt", pos, linha, 150, 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6), 0, Color.Blue, Convert.ToInt32(item["tamanho"].ToString()), "");
                                     linha = linha + 30;
                                     pos = pos + 1;
                                 }
@@ -278,31 +369,9 @@ namespace DoctorWeb
                 }
             }
 
-            AddControls("btn", 2);
-
-            btnArray[0].Left = 100;
-            btnArray[0].Top = linha;
-            btnArray[0].Width = 72;
-            btnArray[0].Height = 24;
-            btnArray[0].Text = "Incluir";
-            panel1.Controls.Add(btnArray[0]);
-            ControlMoverOrResizer.Init(btnArray[0]);
-
-            btnArray[1].Left = 200;
-            btnArray[1].Top = linha;
-            btnArray[1].Width = 72;
-            btnArray[1].Height = 24;
-            btnArray[1].Text = "Salvar";
-            panel1.Controls.Add(btnArray[1]);
-            ControlMoverOrResizer.Init(btnArray[1]);
-
-            btnArray[2].Left = 300;
-            btnArray[2].Top = linha;
-            btnArray[2].Width = 72;
-            btnArray[2].Height = 24;
-            btnArray[2].Text = "Sair";
-            panel1.Controls.Add(btnArray[2]);
-            ControlMoverOrResizer.Init(btnArray[2]);
+            montacontrole("btn", 0, linha, 100, 72, 24, Color.Blue, 0, "Incluir");
+            montacontrole("btn", 1, linha, 200, 72, 24, Color.Blue, 0, "Salvar");
+            montacontrole("btn", 2, linha, 300, 72, 24, Color.Blue, 0, "Sair");
 
         }
     }

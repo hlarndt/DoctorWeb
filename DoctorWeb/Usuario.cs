@@ -130,7 +130,7 @@ namespace DoctorWeb
                     con.Open();
                     try
                     {
-                        using (OdbcCommand command = new OdbcCommand("SELECT tablename FROM pg_catalog.pg_tables where schemaname='public' and tablename not in ('layout','usuario') order by tablename", con))
+                        using (OdbcCommand command = new OdbcCommand("SELECT tablename FROM pg_catalog.pg_tables where schemaname='public' and tablename not in ('layout','usuario','controles') order by tablename", con))
                         {
                             OdbcDataReader myReader = command.ExecuteReader();
                             try

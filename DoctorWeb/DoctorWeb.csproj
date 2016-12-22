@@ -77,9 +77,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>d12rnams4f6a7nDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Designer.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Designer.cs" />
     <Compile Include="Designer.Designer.cs">
       <DependentUpon>Designer.cs</DependentUpon>
     </Compile>

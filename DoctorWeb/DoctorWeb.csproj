@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="funcoesdb.cs" />
     <Compile Include="ControlMoverOrResizer.cs" />
     <Compile Include="d12rnams4f6a7nDataSet.cs">
       <DependentUpon>d12rnams4f6a7nDataSet.xsd</DependentUpon>

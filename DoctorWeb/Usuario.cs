@@ -109,115 +109,77 @@ namespace DoctorWeb
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            string connectionString = DoctorWeb.Properties.Settings.Default.DoctorMed;
-            using (OdbcConnection con = new OdbcConnection(connectionString))
+            try
             {
-                try
+                OdbcDataReader myReader = funcoesdb.executasql("SELECT tablename FROM pg_catalog.pg_tables where schemaname='public' and tablename not in ('layout','usuario','controles') order by tablename");
+                DataTable dt = new DataTable();
+                dt.Columns.Add(new DataColumn("Tabela", typeof(String)));
+                dt.Columns.Add(new DataColumn("Inc", typeof(bool)));
+                dt.Columns.Add(new DataColumn("Alt", typeof(bool)));
+                dt.Columns.Add(new DataColumn("Con", typeof(bool)));
+                dt.Columns.Add(new DataColumn("Rel", typeof(bool)));
+                dt.Columns.Add(new DataColumn("Gra", typeof(bool)));
+                dt.Columns.Add(new DataColumn("Inc1", typeof(bool)));
+                dt.Columns.Add(new DataColumn("Alt1", typeof(bool)));
+                dt.Columns.Add(new DataColumn("Con1", typeof(bool)));
+                dt.Columns.Add(new DataColumn("Rel1", typeof(bool)));
+                dt.Columns.Add(new DataColumn("Gra1", typeof(bool)));
+                while (myReader.Read())
                 {
-                    DataTable dt = new DataTable();
-                    dt.Columns.Add(new DataColumn("Tabela", typeof(String)));
-                    dt.Columns.Add(new DataColumn("Inc", typeof(bool)));
-                    dt.Columns.Add(new DataColumn("Alt", typeof(bool)));
-                    dt.Columns.Add(new DataColumn("Con", typeof(bool)));
-                    dt.Columns.Add(new DataColumn("Rel", typeof(bool)));
-                    dt.Columns.Add(new DataColumn("Gra", typeof(bool)));
-                    dt.Columns.Add(new DataColumn("Inc1", typeof(bool)));
-                    dt.Columns.Add(new DataColumn("Alt1", typeof(bool)));
-                    dt.Columns.Add(new DataColumn("Con1", typeof(bool)));
-                    dt.Columns.Add(new DataColumn("Rel1", typeof(bool)));
-                    dt.Columns.Add(new DataColumn("Gra1", typeof(bool)));
-                    con.Open();
-                    try
+                    dt.Rows.Add(myReader.GetString(0));
+                }
+                OdbcDataReader myReader1 = funcoesdb.executasql("SELECT acessos FROM usuario where id=" + textBox4.Text);
+                while (myReader1.Read())
+                {
+                    var serializer = new JavaScriptSerializer();
+                    dynamic itens = serializer.Deserialize(myReader1.GetString(0), typeof(object));
+                    Dictionary<int, string> items = new Dictionary<int, string>();
+                    foreach (DataRow row in dt.Rows)
                     {
-                        using (OdbcCommand command = new OdbcCommand("SELECT tablename FROM pg_catalog.pg_tables where schemaname='public' and tablename not in ('layout','usuario','controles') order by tablename", con))
+                        foreach (Dictionary<string, object> item in itens)
                         {
-                            OdbcDataReader myReader = command.ExecuteReader();
-                            try
+                            if (item["nome"].ToString() == row["Tabela"].ToString())
                             {
-                                while (myReader.Read())
-                                {
-                                    dt.Rows.Add(myReader.GetString(0));
-                                }
-                            }
-                            finally
-                            {
-                                myReader.Close();
+                                row["inc"] = item["inc"];
+                                row["alt"] = item["alt"];
+                                row["con"] = item["con"];
+                                row["rel"] = item["rel"];
+                                row["gra"] = item["gra"];
+                                row["inc1"] = item["inc1"];
+                                row["alt1"] = item["alt1"];
+                                row["con1"] = item["con1"];
+                                row["rel1"] = item["rel1"];
+                                row["gra1"] = item["gra1"];
                             }
                         }
                     }
-                    catch
-                    {
-                    }
-                    try
-                    {
-                        using (OdbcCommand command = new OdbcCommand("SELECT acessos FROM usuario where id="+textBox4.Text, con))
-                        {
-                            OdbcDataReader myReader1 = command.ExecuteReader();
-                            try
-                            {
-                                while (myReader1.Read())
-                                {
-                                    var serializer = new JavaScriptSerializer();
-                                    dynamic itens = serializer.Deserialize(myReader1.GetString(0),typeof(object));
-                                    Dictionary<int, string> items = new Dictionary<int, string>();
-                                    foreach (DataRow row in dt.Rows)
-                                    {
-                                        foreach(Dictionary<string, object> item in itens)
-                                        {
-                                            if(item["nome"].ToString()== row["Tabela"].ToString())
-                                            {
-                                                row["inc"] = item["inc"];
-                                                row["alt"] = item["alt"];
-                                                row["con"] = item["con"];
-                                                row["rel"] = item["rel"];
-                                                row["gra"] = item["gra"];
-                                                row["inc1"]= item["inc1"];
-                                                row["alt1"]= item["alt1"];
-                                                row["con1"]= item["con1"];
-                                                row["rel1"]= item["rel1"];
-                                                row["gra1"]= item["gra1"];
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            finally
-                            {
-                                myReader1.Close();
-                            }
-                        }
-                    }
-                    catch
-                    {
-                    }
-                    con.Close();
-                    dataGridView2.DataSource = dt;
-                    dataGridView2.Columns["Tabela"].ReadOnly = true;
-                    dataGridView2.Columns["Inc"].Width = 20;
-                    dataGridView2.Columns["Alt"].Width = 20;
-                    dataGridView2.Columns["Con"].Width = 20;
-                    dataGridView2.Columns["Rel"].Width = 20;
-                    dataGridView2.Columns["Gra"].Width = 20;
-                    dataGridView2.Columns["Inc"].HeaderText = "I";
-                    dataGridView2.Columns["Alt"].HeaderText = "A";
-                    dataGridView2.Columns["Con"].HeaderText = "C";
-                    dataGridView2.Columns["Rel"].HeaderText = "R";
-                    dataGridView2.Columns["Gra"].HeaderText = "G";
-                    dataGridView2.Columns["Inc1"].Width = 20;
-                    dataGridView2.Columns["Alt1"].Width = 20;
-                    dataGridView2.Columns["Con1"].Width = 20;
-                    dataGridView2.Columns["Rel1"].Width = 20;
-                    dataGridView2.Columns["Gra1"].Width = 20;
-                    dataGridView2.Columns["Inc1"].HeaderText = "I";
-                    dataGridView2.Columns["Alt1"].HeaderText = "A";
-                    dataGridView2.Columns["Con1"].HeaderText = "C";
-                    dataGridView2.Columns["Rel1"].HeaderText = "R";
-                    dataGridView2.Columns["Gra1"].HeaderText = "G";
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                dataGridView2.DataSource = dt;
+                dataGridView2.Columns["Tabela"].ReadOnly = true;
+                dataGridView2.Columns["Inc"].Width = 20;
+                dataGridView2.Columns["Alt"].Width = 20;
+                dataGridView2.Columns["Con"].Width = 20;
+                dataGridView2.Columns["Rel"].Width = 20;
+                dataGridView2.Columns["Gra"].Width = 20;
+                dataGridView2.Columns["Inc"].HeaderText = "I";
+                dataGridView2.Columns["Alt"].HeaderText = "A";
+                dataGridView2.Columns["Con"].HeaderText = "C";
+                dataGridView2.Columns["Rel"].HeaderText = "R";
+                dataGridView2.Columns["Gra"].HeaderText = "G";
+                dataGridView2.Columns["Inc1"].Width = 20;
+                dataGridView2.Columns["Alt1"].Width = 20;
+                dataGridView2.Columns["Con1"].Width = 20;
+                dataGridView2.Columns["Rel1"].Width = 20;
+                dataGridView2.Columns["Gra1"].Width = 20;
+                dataGridView2.Columns["Inc1"].HeaderText = "I";
+                dataGridView2.Columns["Alt1"].HeaderText = "A";
+                dataGridView2.Columns["Con1"].HeaderText = "C";
+                dataGridView2.Columns["Rel1"].HeaderText = "R";
+                dataGridView2.Columns["Gra1"].HeaderText = "G";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

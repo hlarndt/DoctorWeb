@@ -74,40 +74,17 @@ namespace DoctorWeb
 
         private void Designer_Load(object sender, EventArgs e)
         {
-
-            string connectionString = DoctorWeb.Properties.Settings.Default.DoctorMed;
-            using (OdbcConnection con = new OdbcConnection(connectionString))
+            OdbcDataReader myReader = funcoesdb.executasql("SELECT tablename FROM pg_catalog.pg_tables where schemaname='public' and tablename not in ('layout','usuario','controles') order by tablename");
+            var achou = false;
+            while (myReader.Read())
             {
-                con.Open();
-                try
+                comboBox1.Items.Add(myReader.GetString(0));
+                if (achou == false)
                 {
-                    var achou = false;
-                    using (OdbcCommand command = new OdbcCommand("SELECT tablename FROM pg_catalog.pg_tables where schemaname='public' and tablename not in ('layout','usuario','controles') order by tablename", con))
-                    {
-                        OdbcDataReader myReader = command.ExecuteReader();
-                        try
-                        {
-                            while (myReader.Read())
-                            {
-                                comboBox1.Items.Add(myReader.GetString(0));
-                                if (achou == false)
-                                {
-                                    achou = true;
-                                    comboBox1.Text = myReader.GetString(0);
-                                }
-                            }
-                        }
-                        finally
-                        {
-                            myReader.Close();
-                        }
-                    }
-                }
-                catch
-                {
+                    achou = true;
+                    comboBox1.Text = myReader.GetString(0);
                 }
             }
-            
         }
         private void AddControls(string anyControl, int cNumber)
         {
@@ -305,73 +282,52 @@ namespace DoctorWeb
         private void button3_Click(object sender, EventArgs e)
         {
             var linha = 20;
-            string connectionString = DoctorWeb.Properties.Settings.Default.DoctorMed;
-            using (OdbcConnection con = new OdbcConnection(connectionString))
+            OdbcDataReader myReader = funcoesdb.executasql("SELECT dados FROM layout where lower(trim(tabela))='" + comboBox1.Text + "'");
+            panel1.Controls.Clear();
+            ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
+            montacontrole("dtv", 0, linha, 50, 1250, 300, Color.Blue, 0, "" );
+            linha = linha + 310;
+            var linpsq = 20;
+            while (myReader.Read())
             {
-                panel1.Controls.Clear();
-                con.Open();
-                try
+                var serializer = new JavaScriptSerializer();
+                dynamic itens = serializer.Deserialize(myReader.GetString(0), typeof(object));
+                Dictionary<int, string> items = new Dictionary<int, string>();
+                var achou = false;
+                var cntpsq = 0;
+                foreach (Dictionary<string, object> item in itens)
                 {
-                    using (OdbcCommand command = new OdbcCommand("SELECT dados FROM layout where lower(trim(tabela))='"+comboBox1.Text+"'", con))
+                    if (item["chave"].ToString() != "0")
                     {
-                        OdbcDataReader myReader = command.ExecuteReader();
-                        try
+                        if (achou == false)
                         {
-                            ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
-                            montacontrole("dtv", 0, linha, 50, 1250, 300, Color.Blue, 0, "" );
-                            linha = linha + 310;
-                            var linpsq = 20;
-                            while (myReader.Read())
-                            {
-                                var serializer = new JavaScriptSerializer();
-                                dynamic itens = serializer.Deserialize(myReader.GetString(0), typeof(object));
-                                Dictionary<int, string> items = new Dictionary<int, string>();
-                                var achou = false;
-                                var cntpsq = 0;
-                                foreach (Dictionary<string, object> item in itens)
-                                {
-                                    if (item["chave"].ToString() != "0")
-                                    {
-                                        if (achou == false)
-                                        {
-                                            montacontrole("grb", 0, linha, 50, 1250, 0, Color.FromArgb(255, 255, 192), 0, "");
-                                            montacontrole("pan", 0, 0, 0, 1250, 0, Color.FromArgb(255, 255, 192), 0, "");
-                                            achou = true;
-                                        }
-                                        montacontrole("lblpsq", cntpsq, linpsq, 10, 70, 0, Color.Blue, 0, item["nome"].ToString() + ":");
-                                        montacontrole("txtpsq", cntpsq, linpsq, 110, 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6), 70, Color.Blue, Convert.ToInt32(item["tamanho"].ToString()), "");
-                                        linpsq = linpsq + 30;
-                                        grbArray[0].Height = linpsq;
-                                        panArray[0].Height = linpsq;
-                                        cntpsq = cntpsq + 1;
-                                    }
-                                }
-                                if (linpsq > 20)
-                                {
-                                    linha = linha + linpsq + 10;
-                                }
-                                else
-                                {
-                                    linha = linha + 10;
-                                }
-                                var pos = 0;
-                                foreach (Dictionary<string, object> item in itens)
-                                {
-                                    montacontrole("lbl", pos, linha, 50, 70, 0, Color.Blue, 0, item["nome"].ToString() + ":");
-                                    montacontrole("txt", pos, linha, 150, 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6), 0, Color.Blue, Convert.ToInt32(item["tamanho"].ToString()), "");
-                                    linha = linha + 30;
-                                    pos = pos + 1;
-                                }
-                            }
+                            montacontrole("grb", 0, linha, 50, 1250, 0, Color.FromArgb(255, 255, 192), 0, "");
+                            montacontrole("pan", 0, 0, 0, 1250, 0, Color.FromArgb(255, 255, 192), 0, "");
+                            achou = true;
                         }
-                        finally
-                        {
-                            myReader.Close();
-                        }
+                        montacontrole("lblpsq", cntpsq, linpsq, 10, 70, 0, Color.Blue, 0, item["nome"].ToString() + ":");
+                        montacontrole("txtpsq", cntpsq, linpsq, 110, 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6), 70, Color.Blue, Convert.ToInt32(item["tamanho"].ToString()), "");
+                        linpsq = linpsq + 30;
+                        grbArray[0].Height = linpsq;
+                        panArray[0].Height = linpsq;
+                        cntpsq = cntpsq + 1;
                     }
                 }
-                catch
+                if (linpsq > 20)
                 {
+                    linha = linha + linpsq + 10;
+                }
+                else
+                {
+                    linha = linha + 10;
+                }
+                var pos = 0;
+                foreach (Dictionary<string, object> item in itens)
+                {
+                    montacontrole("lbl", pos, linha, 50, 70, 0, Color.Blue, 0, item["nome"].ToString() + ":");
+                    montacontrole("txt", pos, linha, 150, 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6), 0, Color.Blue, Convert.ToInt32(item["tamanho"].ToString()), "");
+                    linha = linha + 30;
+                    pos = pos + 1;
                 }
             }
 

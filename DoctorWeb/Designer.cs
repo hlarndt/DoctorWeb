@@ -51,6 +51,7 @@ namespace DoctorWeb
         private System.Windows.Forms.DataGrid[] dtvArray;
         private System.Windows.Forms.GroupBox[] grbArray;
         public List<controles> controle = new List<controles>();
+        public dynamic resultado;
 
         public Designer()
         {
@@ -59,6 +60,11 @@ namespace DoctorWeb
 
         private void button1_Click(object sender, EventArgs e)
         {
+            JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            resultado = serializer.Serialize(controle);
+            controlesTableAdapter1.DeleteQuery(comboBox1.Text.ToString());
+            controlesTableAdapter1.InsertQuery(comboBox1.Text.ToString(), "M", resultado);
+            MessageBox.Show("Arquivo salvo.","ATENÇÃO");
         }
 
         private void button2_Click(object sender, EventArgs e)

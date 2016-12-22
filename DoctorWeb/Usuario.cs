@@ -57,7 +57,6 @@ namespace DoctorWeb
 
         private void Usuario_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'd12rnams4f6a7nDataSet.usuario' table. You can move, or remove it, as needed.
             this.usuarioTableAdapter.Fill(this.d12rnams4f6a7nDataSet.usuario);
         }
 

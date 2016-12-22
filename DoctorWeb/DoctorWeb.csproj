@@ -123,6 +123,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="d12rnams4f6a7nDataSet.xsc">
       <DependentUpon>d12rnams4f6a7nDataSet.xsd</DependentUpon>
     </None>

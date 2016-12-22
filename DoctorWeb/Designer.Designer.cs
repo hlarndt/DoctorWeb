@@ -33,6 +33,9 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.d12rnams4f6a7nDataSet1 = new DoctorWeb.d12rnams4f6a7nDataSet();
+            this.controlesTableAdapter1 = new DoctorWeb.d12rnams4f6a7nDataSetTableAdapters.controlesTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.d12rnams4f6a7nDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -82,6 +85,16 @@
             this.panel1.Size = new System.Drawing.Size(1338, 706);
             this.panel1.TabIndex = 4;
             // 
+            // d12rnams4f6a7nDataSet1
+            // 
+            this.d12rnams4f6a7nDataSet1.DataSetName = "d12rnams4f6a7nDataSet";
+            this.d12rnams4f6a7nDataSet1.EnforceConstraints = false;
+            this.d12rnams4f6a7nDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // controlesTableAdapter1
+            // 
+            this.controlesTableAdapter1.ClearBeforeFill = true;
+            // 
             // Designer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -98,6 +111,7 @@
             this.Text = "Designer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Designer_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.d12rnams4f6a7nDataSet1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -109,5 +123,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel panel1;
+        private d12rnams4f6a7nDataSet d12rnams4f6a7nDataSet1;
+        private d12rnams4f6a7nDataSetTableAdapters.controlesTableAdapter controlesTableAdapter1;
     }
 }

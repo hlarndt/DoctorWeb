@@ -3347,11 +3347,84 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::Devart.Data.PostgreSql.PgSqlCommand[1];
+            this._commandCollection = new global::Devart.Data.PostgreSql.PgSqlCommand[4];
             this._commandCollection[0] = new global::Devart.Data.PostgreSql.PgSqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT id, controle, tipo, dados FROM \"public\".controles";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::Devart.Data.PostgreSql.PgSqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "DELETE FROM controles\r\nWHERE        (controle = :Original_Controles)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            global::Devart.Data.PostgreSql.PgSqlParameter param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "Original_Controles";
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.VarChar;
+            param.Size = 2147483647;
+            param.IsNullable = true;
+            param.SourceColumn = "controle";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._commandCollection[1].Parameters.Add(param);
+            this._commandCollection[2] = new global::Devart.Data.PostgreSql.PgSqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "INSERT INTO controles\r\n                         (controle, tipo, dados)\r\nVALUES  " +
+                "      (:controle, :tipo, :dados)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "controle";
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.VarChar;
+            param.Size = 2147483647;
+            param.IsNullable = true;
+            param.SourceColumn = "controle";
+            this._commandCollection[2].Parameters.Add(param);
+            param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "tipo";
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.VarChar;
+            param.Size = 1;
+            param.IsNullable = true;
+            param.SourceColumn = "tipo";
+            this._commandCollection[2].Parameters.Add(param);
+            param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "dados";
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.Text;
+            param.Size = 2147483647;
+            param.IsNullable = true;
+            param.SourceColumn = "dados";
+            this._commandCollection[2].Parameters.Add(param);
+            this._commandCollection[3] = new global::Devart.Data.PostgreSql.PgSqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "UPDATE       controles\r\nSET                controle = :controle, tipo = :tipo, da" +
+                "dos = :dados\r\nWHERE        (id = :Original_id)";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "controle";
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.VarChar;
+            param.Size = 2147483647;
+            param.IsNullable = true;
+            param.SourceColumn = "controle";
+            this._commandCollection[3].Parameters.Add(param);
+            param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "tipo";
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.VarChar;
+            param.Size = 1;
+            param.IsNullable = true;
+            param.SourceColumn = "tipo";
+            this._commandCollection[3].Parameters.Add(param);
+            param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "dados";
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.Text;
+            param.Size = 2147483647;
+            param.IsNullable = true;
+            param.SourceColumn = "dados";
+            this._commandCollection[3].Parameters.Add(param);
+            param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "Original_id";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.BigInt;
+            param.Size = 2147483647;
+            param.IsNullable = true;
+            param.SourceColumn = "id";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._commandCollection[3].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3558,6 +3631,118 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(string controle, string tipo, string dados, long Original_id, string Original_controle, string Original_tipo, string Original_dados) {
             return this.Update(Original_id, controle, tipo, dados, Original_id, Original_controle, Original_tipo, Original_dados);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteQuery(string Original_Controles) {
+            global::Devart.Data.PostgreSql.PgSqlCommand command = this.CommandCollection[1];
+            if ((Original_Controles == null)) {
+                throw new global::System.ArgumentNullException("Original_Controles");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(Original_Controles));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(string controle, string tipo, string dados) {
+            global::Devart.Data.PostgreSql.PgSqlCommand command = this.CommandCollection[2];
+            if ((controle == null)) {
+                throw new global::System.ArgumentNullException("controle");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(controle));
+            }
+            if ((tipo == null)) {
+                throw new global::System.ArgumentNullException("tipo");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(tipo));
+            }
+            if ((dados == null)) {
+                throw new global::System.ArgumentNullException("dados");
+            }
+            else {
+                command.Parameters[2].Value = ((string)(dados));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateQuery(string controle, string tipo, string dados, long Original_id) {
+            global::Devart.Data.PostgreSql.PgSqlCommand command = this.CommandCollection[3];
+            if ((controle == null)) {
+                throw new global::System.ArgumentNullException("controle");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(controle));
+            }
+            if ((tipo == null)) {
+                throw new global::System.ArgumentNullException("tipo");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(tipo));
+            }
+            if ((dados == null)) {
+                throw new global::System.ArgumentNullException("dados");
+            }
+            else {
+                command.Parameters[2].Value = ((string)(dados));
+            }
+            command.Parameters[3].Value = ((long)(Original_id));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     

@@ -94,7 +94,14 @@
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1338, 706);
+            if (tp == 0)
+            {
+                this.panel1.Size = new System.Drawing.Size(1338, 706);
+            }
+            else
+            {
+                this.panel1.Size = new System.Drawing.Size(420, 600);
+            }
             this.panel1.TabIndex = 4;
             // 
             // d12rnams4f6a7nDataSet1

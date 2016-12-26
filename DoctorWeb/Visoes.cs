@@ -376,14 +376,20 @@ namespace DoctorWeb
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            Designer Designer = new Designer();
+            Designer Designer = new Designer(0,1);
             Designer.Show();
         }
 
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            Designer Designer = new Designer(1, 1);
+            Designer.Show();
+        }
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Usuario Usuario = new Usuario();
             Usuario.Show();
         }
+
     }
 }

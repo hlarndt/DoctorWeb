@@ -3354,7 +3354,8 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::Devart.Data.PostgreSql.PgSqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "DELETE FROM controles\r\nWHERE        (controle = :Original_Controles)";
+            this._commandCollection[1].CommandText = "DELETE FROM controles\r\nWHERE        (controle = :Original_Controles) AND (tipo = " +
+                ":Original_tipo)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             global::Devart.Data.PostgreSql.PgSqlParameter param = new global::Devart.Data.PostgreSql.PgSqlParameter();
             param.ParameterName = "Original_Controles";
@@ -3362,6 +3363,14 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
             param.Size = 2147483647;
             param.IsNullable = true;
             param.SourceColumn = "controle";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._commandCollection[1].Parameters.Add(param);
+            param = new global::Devart.Data.PostgreSql.PgSqlParameter();
+            param.ParameterName = "Original_tipo";
+            param.PgSqlType = global::Devart.Data.PostgreSql.PgSqlType.VarChar;
+            param.Size = 1;
+            param.IsNullable = true;
+            param.SourceColumn = "tipo";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._commandCollection[1].Parameters.Add(param);
             this._commandCollection[2] = new global::Devart.Data.PostgreSql.PgSqlCommand();
@@ -3637,13 +3646,19 @@ namespace DoctorWeb.d12rnams4f6a7nDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
-        public virtual int DeleteQuery(string Original_Controles) {
+        public virtual int DeleteQuery(string Original_Controles, string Original_tipo) {
             global::Devart.Data.PostgreSql.PgSqlCommand command = this.CommandCollection[1];
             if ((Original_Controles == null)) {
                 throw new global::System.ArgumentNullException("Original_Controles");
             }
             else {
                 command.Parameters[0].Value = ((string)(Original_Controles));
+            }
+            if ((Original_tipo == null)) {
+                throw new global::System.ArgumentNullException("Original_tipo");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(Original_tipo));
             }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 

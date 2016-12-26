@@ -1,15 +1,10 @@
-﻿using System;
+﻿using ControlManager;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.Odbc;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ControlManager;
 using System.Web.Script.Serialization;
+using System.Windows.Forms;
 
 namespace DoctorWeb
 {
@@ -38,8 +33,8 @@ namespace DoctorWeb
             text = h;
             maxlength = i;
         }
-
     }
+
     public partial class Designer : Form
     {
         private System.Windows.Forms.Panel[] panArray;
@@ -52,121 +47,23 @@ namespace DoctorWeb
         private System.Windows.Forms.GroupBox[] grbArray;
         public List<controles> controle = new List<controles>();
         public dynamic resultado;
+        public Int32 tp;
+        public Int32 op;
 
-        public Designer()
+        public Designer(Int32 tipo, Int32 operacao)
         {
+            tp = tipo;
+            op = operacao;
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            foreach (controles item in controle)
-            {
-                switch (item.nome.ToString())
-                {
-                    case "pan": // anyControl = btn to Add Button
-                        {
-                            item.left   = panArray[Convert.ToInt32(item.indice)].Left;
-                            item.top    = panArray[Convert.ToInt32(item.indice)].Top;
-                            item.width  = panArray[Convert.ToInt32(item.indice)].Width;
-                            item.height = panArray[Convert.ToInt32(item.indice)].Height;
-                            break;
-                        }
-                    case "btn": // anyControl = btn to Add Button
-                        {
-                            item.left   = btnArray[Convert.ToInt32(item.indice)].Left;
-                            item.top    = btnArray[Convert.ToInt32(item.indice)].Top;
-                            item.width  = btnArray[Convert.ToInt32(item.indice)].Width;
-                            item.height = btnArray[Convert.ToInt32(item.indice)].Height;
-                            break;
-                        }
-                    case "lbl": // anyControl = lbl to Add Label
-                        {
-                            item.left = lblArray[Convert.ToInt32(item.indice)].Left;
-                            item.top = lblArray[Convert.ToInt32(item.indice)].Top;
-                            item.width = lblArray[Convert.ToInt32(item.indice)].Width;
-                            item.height = lblArray[Convert.ToInt32(item.indice)].Height;
-                            break;
-                        }
-                    case "txt": // anyControl = txt to Add TextBox
-                        {
-                            item.left = txtArray[Convert.ToInt32(item.indice)].Left;
-                            item.top = txtArray[Convert.ToInt32(item.indice)].Top;
-                            item.width = txtArray[Convert.ToInt32(item.indice)].Width;
-                            item.height = txtArray[Convert.ToInt32(item.indice)].Height;
-                            break;
-                        }
-                    case "lblpsq": // anyControl = lbl to Add Label
-                        {
-                            item.left = lblpsqArray[Convert.ToInt32(item.indice)].Left;
-                            item.top = lblpsqArray[Convert.ToInt32(item.indice)].Top;
-                            item.width = lblpsqArray[Convert.ToInt32(item.indice)].Width;
-                            item.height = lblpsqArray[Convert.ToInt32(item.indice)].Height;
-                            break;
-                        }
-                    case "txtpsq": // anyControl = txt to Add TextBox
-                        {
-                            item.left = txtpsqArray[Convert.ToInt32(item.indice)].Left;
-                            item.top = txtpsqArray[Convert.ToInt32(item.indice)].Top;
-                            item.width = txtpsqArray[Convert.ToInt32(item.indice)].Width;
-                            item.height = txtpsqArray[Convert.ToInt32(item.indice)].Height;
-                            break;
-                        }
-                    case "dtv": // anyControl = txt to Add TextBox
-                        {
-                            item.left = dtvArray[Convert.ToInt32(item.indice)].Left;
-                            item.top = dtvArray[Convert.ToInt32(item.indice)].Top;
-                            item.width = dtvArray[Convert.ToInt32(item.indice)].Width;
-                            item.height = dtvArray[Convert.ToInt32(item.indice)].Height;
-                            break;
-                        }
-                    case "grb": // anyControl = txt to Add TextBox
-                        {
-                            item.left = grbArray[Convert.ToInt32(item.indice)].Left;
-                            item.top = grbArray[Convert.ToInt32(item.indice)].Top;
-                            item.width = grbArray[Convert.ToInt32(item.indice)].Width;
-                            item.height = grbArray[Convert.ToInt32(item.indice)].Height;
-                            break;
-                        }
-                }
-            }
-            resultado = serializer.Serialize(controle);
-            controlesTableAdapter1.DeleteQuery(comboBox1.Text.ToString());
-            controlesTableAdapter1.InsertQuery(comboBox1.Text.ToString(), "M", resultado);
-            MessageBox.Show("Arquivo salvo.","ATENÇÃO");
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Designer.ActiveForm.Close();
-        }
-        private void button4_Click(object sender, EventArgs e)
-        {
-            controlesTableAdapter1.DeleteQuery(comboBox1.Text.ToString());
-            button3_Click(sender, e);
-        }
-        private void Designer_Load(object sender, EventArgs e)
-        {
-            OdbcDataReader myReader = funcoesdb.executasql("SELECT tablename FROM pg_catalog.pg_tables where schemaname='public' and tablename not in ('layout','usuario','controles') order by tablename");
-            var achou = false;
-            while (myReader.Read())
-            {
-                comboBox1.Items.Add(myReader.GetString(0));
-                if (achou == false)
-                {
-                    achou = true;
-                    comboBox1.Text = myReader.GetString(0);
-                }
-            }
-        }
         private void AddControls(string anyControl, int cNumber)
         {
             switch (anyControl)
             {
                 case "pan": // anyControl = btn to Add Button
                     {
-                        // assign number of controls 
+                        // assign number of controls
                         panArray = new System.Windows.Forms.Panel[cNumber + 1];
                         for (int i = 0; i < cNumber + 1; i++)
                         {
@@ -177,7 +74,7 @@ namespace DoctorWeb
                     }
                 case "btn": // anyControl = btn to Add Button
                     {
-                        // assign number of controls 
+                        // assign number of controls
                         btnArray = new System.Windows.Forms.Button[cNumber + 1];
                         for (int i = 0; i < cNumber + 1; i++)
                         {
@@ -188,7 +85,7 @@ namespace DoctorWeb
                     }
                 case "lbl": // anyControl = lbl to Add Label
                     {
-                        // assign number of controls 
+                        // assign number of controls
                         lblArray = new System.Windows.Forms.Label[cNumber + 1];
                         for (int i = 0; i < cNumber + 1; i++)
                         {
@@ -199,7 +96,7 @@ namespace DoctorWeb
                     }
                 case "txt": // anyControl = txt to Add TextBox
                     {
-                        // assign number of controls 
+                        // assign number of controls
                         txtArray = new System.Windows.Forms.TextBox[cNumber + 1];
                         for (int i = 0; i < cNumber + 1; i++)
                         {
@@ -210,7 +107,7 @@ namespace DoctorWeb
                     }
                 case "lblpsq": // anyControl = lbl to Add Label
                     {
-                        // assign number of controls 
+                        // assign number of controls
                         lblpsqArray = new System.Windows.Forms.Label[cNumber + 1];
                         for (int i = 0; i < cNumber + 1; i++)
                         {
@@ -221,7 +118,7 @@ namespace DoctorWeb
                     }
                 case "txtpsq": // anyControl = txt to Add TextBox
                     {
-                        // assign number of controls 
+                        // assign number of controls
                         txtpsqArray = new System.Windows.Forms.TextBox[cNumber + 1];
                         for (int i = 0; i < cNumber + 1; i++)
                         {
@@ -232,7 +129,7 @@ namespace DoctorWeb
                     }
                 case "dtv": // anyControl = txt to Add TextBox
                     {
-                        // assign number of controls 
+                        // assign number of controls
                         dtvArray = new System.Windows.Forms.DataGrid[cNumber + 1];
                         for (int i = 0; i < cNumber + 1; i++)
                         {
@@ -243,7 +140,7 @@ namespace DoctorWeb
                     }
                 case "grb": // anyControl = txt to Add TextBox
                     {
-                        // assign number of controls 
+                        // assign number of controls
                         grbArray = new System.Windows.Forms.GroupBox[cNumber + 1];
                         for (int i = 0; i < cNumber + 1; i++)
                         {
@@ -255,9 +152,9 @@ namespace DoctorWeb
             }
         }
 
-        private void montacontrole(string control,int indice,int top,int left,int width, int height,Color backcolor,int maxlength, string texto)
+        private void montacontrole(string control, int indice, int top, int left, int width, int height, Color backcolor, int maxlength, string texto)
         {
-            controles elemento = new controles(control, indice, height, width, left, top, backcolor, texto,maxlength);
+            controles elemento = new controles(control, indice, height, width, left, top, backcolor, texto, maxlength);
             controle.Add(elemento);
             switch (control)
             {
@@ -347,12 +244,117 @@ namespace DoctorWeb
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            foreach (controles item in controle)
+            {
+                switch (item.nome.ToString())
+                {
+                    case "pan": // anyControl = btn to Add Button
+                        {
+                            item.left = panArray[Convert.ToInt32(item.indice)].Left;
+                            item.top = panArray[Convert.ToInt32(item.indice)].Top;
+                            item.width = panArray[Convert.ToInt32(item.indice)].Width;
+                            item.height = panArray[Convert.ToInt32(item.indice)].Height;
+                            break;
+                        }
+                    case "btn": // anyControl = btn to Add Button
+                        {
+                            item.left = btnArray[Convert.ToInt32(item.indice)].Left;
+                            item.top = btnArray[Convert.ToInt32(item.indice)].Top;
+                            item.width = btnArray[Convert.ToInt32(item.indice)].Width;
+                            item.height = btnArray[Convert.ToInt32(item.indice)].Height;
+                            break;
+                        }
+                    case "lbl": // anyControl = lbl to Add Label
+                        {
+                            item.left = lblArray[Convert.ToInt32(item.indice)].Left;
+                            item.top = lblArray[Convert.ToInt32(item.indice)].Top;
+                            item.width = lblArray[Convert.ToInt32(item.indice)].Width;
+                            item.height = lblArray[Convert.ToInt32(item.indice)].Height;
+                            break;
+                        }
+                    case "txt": // anyControl = txt to Add TextBox
+                        {
+                            item.left = txtArray[Convert.ToInt32(item.indice)].Left;
+                            item.top = txtArray[Convert.ToInt32(item.indice)].Top;
+                            item.width = txtArray[Convert.ToInt32(item.indice)].Width;
+                            item.height = txtArray[Convert.ToInt32(item.indice)].Height;
+                            break;
+                        }
+                    case "lblpsq": // anyControl = lbl to Add Label
+                        {
+                            item.left = lblpsqArray[Convert.ToInt32(item.indice)].Left;
+                            item.top = lblpsqArray[Convert.ToInt32(item.indice)].Top;
+                            item.width = lblpsqArray[Convert.ToInt32(item.indice)].Width;
+                            item.height = lblpsqArray[Convert.ToInt32(item.indice)].Height;
+                            break;
+                        }
+                    case "txtpsq": // anyControl = txt to Add TextBox
+                        {
+                            item.left = txtpsqArray[Convert.ToInt32(item.indice)].Left;
+                            item.top = txtpsqArray[Convert.ToInt32(item.indice)].Top;
+                            item.width = txtpsqArray[Convert.ToInt32(item.indice)].Width;
+                            item.height = txtpsqArray[Convert.ToInt32(item.indice)].Height;
+                            break;
+                        }
+                    case "dtv": // anyControl = txt to Add TextBox
+                        {
+                            item.left = dtvArray[Convert.ToInt32(item.indice)].Left;
+                            item.top = dtvArray[Convert.ToInt32(item.indice)].Top;
+                            item.width = dtvArray[Convert.ToInt32(item.indice)].Width;
+                            item.height = dtvArray[Convert.ToInt32(item.indice)].Height;
+                            break;
+                        }
+                    case "grb": // anyControl = txt to Add TextBox
+                        {
+                            item.left = grbArray[Convert.ToInt32(item.indice)].Left;
+                            item.top = grbArray[Convert.ToInt32(item.indice)].Top;
+                            item.width = grbArray[Convert.ToInt32(item.indice)].Width;
+                            item.height = grbArray[Convert.ToInt32(item.indice)].Height;
+                            break;
+                        }
+                }
+            }
+            resultado = serializer.Serialize(controle);
+            controlesTableAdapter1.DeleteQuery(comboBox1.Text.ToString(), (tp + op).ToString());
+            controlesTableAdapter1.InsertQuery(comboBox1.Text.ToString(), (tp + op).ToString(), resultado);
+            MessageBox.Show("Arquivo salvo.", "ATENÇÃO");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Designer.ActiveForm.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            controlesTableAdapter1.DeleteQuery(comboBox1.Text.ToString(), (tp + op).ToString());
+            button3_Click(sender, e);
+        }
+
+        private void Designer_Load(object sender, EventArgs e)
+        {
+            OdbcDataReader myReader = funcoesdb.executasql("SELECT tablename FROM pg_catalog.pg_tables where schemaname='public' and tablename not in ('layout','usuario','controles') order by tablename");
+            var achou = false;
+            while (myReader.Read())
+            {
+                comboBox1.Items.Add(myReader.GetString(0));
+                if (achou == false)
+                {
+                    achou = true;
+                    comboBox1.Text = myReader.GetString(0);
+                }
+            }
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             var linha = 20;
             var cntPsq = 0;
             var cntDad = 0;
-            OdbcDataReader myReader = funcoesdb.executasql("SELECT dados FROM controles where lower(trim(controle))='" + comboBox1.Text + "'");
+            OdbcDataReader myReader = funcoesdb.executasql("SELECT dados FROM controles where lower(trim(controle))='" + comboBox1.Text + "' and trim(tipo)='" + (tp + op).ToString()+"'");
             while (myReader.Read())
             {
                 var serializer = new JavaScriptSerializer();
@@ -370,21 +372,31 @@ namespace DoctorWeb
                     }
                 }
             }
-            if (cntPsq > 0)
+            if (tp == 0)
             {
-                AddControls("grb", 0);
-                AddControls("pan", 0);
-                AddControls("lblpsq", cntPsq - 1);
-                AddControls("txtpsq", cntPsq - 1);
+                if (cntPsq > 0)
+                {
+                    AddControls("grb", 0);
+                    AddControls("pan", 0);
+                    AddControls("lblpsq", cntPsq - 1);
+                    AddControls("txtpsq", cntPsq - 1);
+                }
             }
             if (cntDad > 0)
             {
                 AddControls("dtv", 0);
                 AddControls("lbl", cntDad - 1);
                 AddControls("txt", cntDad - 1);
-                AddControls("btn", 2);
+                if (tp == 0)
+                {
+                    AddControls("btn", 2);
+                }
+                else
+                {
+                    AddControls("btn", 1);
+                }
             }
-            OdbcDataReader myReader1 = funcoesdb.executasql("SELECT dados FROM controles where lower(trim(controle))='" + comboBox1.Text + "'");
+            OdbcDataReader myReader1 = funcoesdb.executasql("SELECT dados FROM controles where lower(trim(controle))='" + comboBox1.Text + "' and trim(tipo)='" + (tp + op).ToString() + "'");
             while (myReader1.Read())
             {
                 panel1.Controls.Clear();
@@ -396,10 +408,13 @@ namespace DoctorWeb
                     montacontrole(item["nome"].ToString(), Convert.ToInt32(item["indice"]), Convert.ToInt32(item["top"]), Convert.ToInt32(item["left"]),
                         Convert.ToInt32(item["width"]), Convert.ToInt32(item["height"]), Color.FromName(item["backcolor"].ToString()), Convert.ToInt32(item["maxlength"]), item["text"].ToString());
                 }
-                if (cntPsq>0)
+                if (tp == 0)
                 {
-                    grbArray[0].BackColor = Color.FromArgb(255, 255, 192);
-                    panArray[0].BackColor = Color.FromArgb(255, 255, 192);
+                    if (cntPsq > 0)
+                    {
+                        grbArray[0].BackColor = Color.FromArgb(255, 255, 192);
+                        panArray[0].BackColor = Color.FromArgb(255, 255, 192);
+                    }
                 }
                 return;
             }
@@ -420,25 +435,44 @@ namespace DoctorWeb
                     cntDad += 1;
                 }
             }
-            if (cntPsq>0)
+            if (tp == 0)
             {
-                AddControls("grb", 0);
-                AddControls("pan", 0);
-                AddControls("lblpsq", cntPsq-1);
-                AddControls("txtpsq", cntPsq-1);
+                if (cntPsq > 0)
+                {
+                    AddControls("grb", 0);
+                    AddControls("pan", 0);
+                    AddControls("lblpsq", cntPsq - 1);
+                    AddControls("txtpsq", cntPsq - 1);
+                }
             }
             if (cntDad > 0)
             {
-                AddControls("dtv", 0);
-                AddControls("lbl", cntDad-1);
-                AddControls("txt", cntDad-1);
-                AddControls("btn", 2);
+                if (tp == 0)
+                {
+                    AddControls("dtv", 0);
+                }
+                AddControls("lbl", cntDad - 1);
+                AddControls("txt", cntDad - 1);
+                if (tp == 0)
+                {
+                    AddControls("btn", 2);
+                }
+                else
+                {
+                    AddControls("btn", 1);
+                }
             }
             OdbcDataReader myReader3 = funcoesdb.executasql("SELECT dados FROM layout where lower(trim(tabela))='" + comboBox1.Text + "'");
             panel1.Controls.Clear();
             ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
-            montacontrole("dtv", 0, linha, 50, 1250, 300, Color.Blue, 0, "");
-            linha = linha + 310;
+            if (tp == 0)
+            {
+                montacontrole("dtv", 0, linha, 50, 1250, 300, Color.Blue, 0, "");
+            }
+            if (tp == 0)
+            {
+                linha = linha + 310;
+            }
             var linpsq = 20;
             while (myReader3.Read())
             {
@@ -446,23 +480,26 @@ namespace DoctorWeb
                 dynamic itens = serializer.Deserialize(myReader3.GetString(0), typeof(object));
                 Dictionary<int, string> items = new Dictionary<int, string>();
                 var achou = false;
-                var cntpsq = 0;
-                foreach (Dictionary<string, object> item in itens)
+                if (tp == 0)
                 {
-                    if (item["chave"].ToString() != "0")
+                    var cntpsq = 0;
+                    foreach (Dictionary<string, object> item in itens)
                     {
-                        if (achou == false)
+                        if (item["chave"].ToString() != "0")
                         {
-                            montacontrole("grb", 0, linha, 50, 1250, 0, Color.FromArgb(255, 255, 192), 0, "");
-                            montacontrole("pan", 0, 0, 0, 1250, 0, Color.FromArgb(255, 255, 192), 0, "");
-                            achou = true;
+                            if (achou == false)
+                            {
+                                montacontrole("grb", 0, linha, 50, 1250, 0, Color.FromArgb(255, 255, 192), 0, "");
+                                montacontrole("pan", 0, 0, 0, 1250, 0, Color.FromArgb(255, 255, 192), 0, "");
+                                achou = true;
+                            }
+                            montacontrole("lblpsq", cntpsq, linpsq, 10, 70, 0, Color.Blue, 0, item["nome"].ToString() + ":");
+                            montacontrole("txtpsq", cntpsq, linpsq, 110, 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6), 70, Color.Blue, Convert.ToInt32(item["tamanho"].ToString()), "");
+                            linpsq = linpsq + 30;
+                            grbArray[0].Height = linpsq;
+                            panArray[0].Height = linpsq;
+                            cntpsq = cntpsq + 1;
                         }
-                        montacontrole("lblpsq", cntpsq, linpsq, 10, 70, 0, Color.Blue, 0, item["nome"].ToString() + ":");
-                        montacontrole("txtpsq", cntpsq, linpsq, 110, 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6), 70, Color.Blue, Convert.ToInt32(item["tamanho"].ToString()), "");
-                        linpsq = linpsq + 30;
-                        grbArray[0].Height = linpsq;
-                        panArray[0].Height = linpsq;
-                        cntpsq = cntpsq + 1;
                     }
                 }
                 if (linpsq > 20)
@@ -476,16 +513,41 @@ namespace DoctorWeb
                 var pos = 0;
                 foreach (Dictionary<string, object> item in itens)
                 {
-                    montacontrole("lbl", pos, linha, 50, 70, 0, Color.Blue, 0, item["nome"].ToString() + ":");
-                    montacontrole("txt", pos, linha, 150, 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6), 0, Color.Blue, Convert.ToInt32(item["tamanho"].ToString()), "");
-                    linha = linha + 30;
+                    if (tp == 0)
+                    {
+                        montacontrole("lbl", pos, linha, 50, 70, 0, Color.Blue, 0, item["nome"].ToString() + ":");
+                        montacontrole("txt", pos, linha, 150, 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6), 0, Color.Blue, Convert.ToInt32(item["tamanho"].ToString()), "");
+                        linha = linha + 30;
+                    }
+                    else
+                    {
+                        montacontrole("lbl", pos, linha, 50, 70, 0, Color.Blue, 0, item["nome"].ToString() + ":");
+                        linha = linha + 23;
+                        if ((10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6)) > 320)
+                        {
+                            montacontrole("txt", pos, linha, 50, 320, 0, Color.Blue, Convert.ToInt32(item["tamanho"].ToString()), "");
+                        }
+                        else
+                        {
+                            montacontrole("txt", pos, linha, 50, 10 + (Convert.ToInt32(item["tamanho"].ToString()) * 6), 0, Color.Blue, Convert.ToInt32(item["tamanho"].ToString()), "");
+                        }
+                        linha = linha + 30;
+                    }
                     pos = pos + 1;
                 }
             }
-
-            montacontrole("btn", 0, linha, 100, 72, 24, Color.Blue, 0, "Incluir");
-            montacontrole("btn", 1, linha, 200, 72, 24, Color.Blue, 0, "Salvar");
-            montacontrole("btn", 2, linha, 300, 72, 24, Color.Blue, 0, "Sair");
+            linha = linha + 20;
+            if (tp == 0)
+            {
+                montacontrole("btn", 0, linha, 100, 72, 24, Color.Blue, 0, "Incluir");
+                montacontrole("btn", 1, linha, 200, 72, 24, Color.Blue, 0, "Salvar");
+                montacontrole("btn", 2, linha, 300, 72, 24, Color.Blue, 0, "Sair");
+            }
+            else
+            {
+                montacontrole("btn", 0, linha, 200, 72, 24, Color.Blue, 0, "Salvar");
+                montacontrole("btn", 1, linha, 300, 72, 24, Color.Blue, 0, "Sair");
+            }
         }
     }
 }

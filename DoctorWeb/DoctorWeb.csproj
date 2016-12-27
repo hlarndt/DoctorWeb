@@ -68,6 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Designer1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Designer1.Designer.cs">
+      <DependentUpon>Designer1.cs</DependentUpon>
+    </Compile>
     <Compile Include="funcoesdb.cs" />
     <Compile Include="ControlMoverOrResizer.cs" />
     <Compile Include="d12rnams4f6a7nDataSet.cs">
@@ -104,6 +110,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Designer.resx">
       <DependentUpon>Designer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Designer1.resx">
+      <DependentUpon>Designer1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Usuario.resx">
       <DependentUpon>Usuario.cs</DependentUpon>

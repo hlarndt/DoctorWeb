@@ -22,10 +22,15 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="~/usuarios.aspx">Usuários</a></li>
-                    <li><a href="~/pacientes.aspx">Pacientes</a></li>
-                    <li><a href="~/convenios.aspx">Convênios</a></li>
-                    <li><a href="~/graficos.aspx">Gráficos</a></li>
+                    @if (Session["usuarioLogadoID"] != null)
+                    {
+                        <li><a href="/usuarios.aspx">Usuários</a></li>
+                        <li><a href="/pacientes.aspx">Pacientes</a></li>
+                        <li><a href="/convenios.aspx">Convênios</a></li>
+                        <li><a href="/movimentos.aspx">Movimentos</a></li>
+                        <li><a href="/relatorios.aspx">Relatórios</a></li>
+                        <li><a href="/graficos.aspx">Gráficos</a></li>
+                    }
                 </ul>
             </div>
         </div>

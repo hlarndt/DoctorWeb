@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CrudInterface.Models;
 
 namespace CrudInterface.Controllers
 {
@@ -10,21 +11,34 @@ namespace CrudInterface.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (Session["usuarioLogadoID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
 
-        public ActionResult About()
+        public ActionResult Login()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(Usuario u)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            // esta action trata o post (login)
+            if (ModelState.IsValid) //verifica se é válido
+            {
+                Session["usuarioLogadoID"] = u.NomeUsuario;
+                Session["nomeUsuarioLogado"] = u.Senha;
+                return RedirectToAction("Index");
+            }
+            return View(u);
         }
+
     }
 }

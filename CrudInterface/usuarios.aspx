@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Doctor WEB - Cadastro de Usuários</title>
     <link href="/Content/bootstrap.css" rel="stylesheet"/>
     <link href="/Content/site.css" rel="stylesheet"/>
     <script src="/Scripts/modernizr-2.6.2.js"></script>
@@ -16,34 +16,7 @@
     </script>
 </head>
 <body style="background-color: #FFFFCC;">
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">Doctor WEB</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/usuarios.aspx">Usuários</a></li>
-                    <li><a href="/pacientes.aspx">Pacientes</a></li>
-                    <li><a href="/convenios.aspx">Convênios</a></li>
-                    <li><a href="/movimentos.aspx">Movimentos</a></li>
-                    <li><a href="/relatorios.aspx">Relatórios</a></li>
-                    <li><a href="/graficos.aspx">Gráficos</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        
-
-
-
-    </div>
+    <!--#include virtual="/menubar.aspx"-->
     <form id="form1" runat="server">
     <div style="background-color: #FFFFCC;text-align:center;position:absolute;left:50%;top:50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
         <div>
@@ -86,7 +59,7 @@
             <p>&nbsp;</p>
         </div>
         <div>
-            <asp:DetailsView ID="DetailsView1" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource2" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load">
+            <asp:DetailsView ID="DetailsView1" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource2" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <EditRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                 <Fields>
@@ -141,7 +114,7 @@
         <div>
             <p>&nbsp;</p>
         </div>
-        <asp:GridView ID="GridView2" runat="server" DataSourceID="SqlDataSource3" Width="68px" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView2_RowDataBound">
+        <asp:GridView ID="GridView2" runat="server" DataSourceID="SqlDataSource3" Width="68px" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView2_RowDataBound" OnDataBinding="GridView2_DataBinding">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:CommandField ButtonType="Image" CancelImageUrl="~/erro.jpg" EditImageUrl="~/editar.jpg" ShowEditButton="True" UpdateImageUrl="~/aceitar.jpg" />

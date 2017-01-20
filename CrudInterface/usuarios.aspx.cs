@@ -38,9 +38,12 @@ namespace CrudInterface
 
         protected void DetailsView1_Load(object sender, EventArgs e)
         {
-            if (DetailsView1.DataItemCount == 0& DetailsView1.CurrentMode == DetailsViewMode.ReadOnly)
+            if (Session["acessos"].ToString().Substring(0, 1) == "1")
             {
-                this.DetailsView1.ChangeMode(DetailsViewMode.Insert);
+                if (DetailsView1.DataItemCount == 0 & DetailsView1.CurrentMode == DetailsViewMode.ReadOnly)
+                {
+                    this.DetailsView1.ChangeMode(DetailsViewMode.Insert);
+                }
             }
         }
 
@@ -96,6 +99,47 @@ namespace CrudInterface
                         e.Row.Cells[i].ToolTip = "Gráficos";
                         break;
                 }
+            }
+        }
+
+        protected void GridView2_DataBinding(object sender, EventArgs e)
+        {
+            if (Session["acessos"].ToString().Substring(1, 1) == "0")
+            {
+                GridView2.Columns[0].Visible = false;
+            }
+            else
+            {
+                GridView2.Columns[0].Visible = true;
+            }
+        }
+
+        protected void DetailsView1_DataBinding(object sender, EventArgs e)
+        {
+            CommandField lbtn = DetailsView1.Fields[3] as CommandField;
+            if (Session["acessos"].ToString().Substring(1, 1) == "0")
+            {
+                lbtn.ShowEditButton = false;
+            }
+            else
+            {
+                lbtn.ShowEditButton = true;
+            }
+            if (Session["acessos"].ToString().Substring(1, 0) == "0")
+            {
+                lbtn.ShowInsertButton = false;
+            }
+            else
+            {
+                lbtn.ShowInsertButton = true;
+            }
+            if (Session["acessos"].ToString().Substring(1, 2) == "0")
+            {
+                lbtn.ShowDeleteButton = false;
+            }
+            else
+            {
+                lbtn.ShowDeleteButton = true;
             }
         }
     }

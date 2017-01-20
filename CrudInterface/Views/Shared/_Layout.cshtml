@@ -24,12 +24,31 @@
                 <ul class="nav navbar-nav">
                     @if (Session["usuarioLogadoID"] != null)
                     {
-                        <li><a href="/usuarios.aspx">Usuários</a></li>
-                        <li><a href="/pacientes.aspx">Pacientes</a></li>
-                        <li><a href="/convenios.aspx">Convênios</a></li>
-                        <li><a href="/movimentos.aspx">Movimentos</a></li>
-                        <li><a href="/relatorios.aspx">Relatórios</a></li>
-                        <li><a href="/graficos.aspx">Gráficos</a></li>
+                        if (Session["acessos"].ToString().Substring(0,3).IndexOf("1") != -1)
+                        {
+                            <li><a href="/usuarios.aspx">Usuários</a></li>
+                        }
+                        if (Session["acessos"].ToString().Substring(3,3).IndexOf("1") != -1)
+                        {
+                            <li><a href="/pacientes.aspx">Pacientes</a></li>
+                        }
+                        if (Session["acessos"].ToString().Substring(6,3).IndexOf("1") != -1)
+                        {
+                            <li><a href="/convenios.aspx">Convênios</a></li>
+                        }
+                        if (Session["acessos"].ToString().Substring(9,3).IndexOf("1") != -1)
+                        {
+                            <li><a href="/movimentos.aspx">Movimentos</a></li>
+                        }
+                        if (Session["acessos"].ToString().Substring(12,1).IndexOf("1") != -1)
+                        {
+                            <li><a href="/relatorios.aspx">Relatórios</a></li>
+                        }
+                        if (Session["acessos"].ToString().Substring(13,1).IndexOf("1") != -1)
+                        {
+                            <li><a href="/graficos.aspx">Gráficos</a></li>
+                        }
+                        <li><a href="/Logoff.aspx">Logoff</a></li>
                     }
                 </ul>
             </div>
@@ -38,7 +57,6 @@
     <div class="container body-content">
         @RenderBody()
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

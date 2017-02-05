@@ -5,6 +5,7 @@ using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Mvc;
 
 namespace CrudInterface
 {
@@ -38,6 +39,11 @@ namespace CrudInterface
 
         protected void DetailsView1_Load(object sender, EventArgs e)
         {
+            if (Session.Count==0)
+            {
+                Server.Transfer("logoff.aspx", true);
+            }
+
             if (Session["acessos"].ToString().Substring(0, 1) == "1")
             {
                 if (DetailsView1.DataItemCount == 0 & DetailsView1.CurrentMode == DetailsViewMode.ReadOnly)
@@ -93,9 +99,45 @@ namespace CrudInterface
                         e.Row.Cells[i].ToolTip = "Exclusão - Movimento";
                         break;
                     case 13:
-                        e.Row.Cells[i].ToolTip = "Relatórios";
+                        e.Row.Cells[i].ToolTip = "Inclusão - Ficha do Paciente";
                         break;
                     case 14:
+                        e.Row.Cells[i].ToolTip = "Alteração - Ficha do Paciente";
+                        break;
+                    case 15:
+                        e.Row.Cells[i].ToolTip = "Exclusão - Ficha do Paciente";
+                        break;
+                    case 16:
+                        e.Row.Cells[i].ToolTip = "Inclusão - Médico";
+                        break;
+                    case 17:
+                        e.Row.Cells[i].ToolTip = "Alteração - Médico";
+                        break;
+                    case 18:
+                        e.Row.Cells[i].ToolTip = "Exclusão - Médico";
+                        break;
+                    case 19:
+                        e.Row.Cells[i].ToolTip = "Inclusão - Enfermeiro";
+                        break;
+                    case 20:
+                        e.Row.Cells[i].ToolTip = "Alteração - Enfermeiro";
+                        break;
+                    case 21:
+                        e.Row.Cells[i].ToolTip = "Exclusão - Enfermeiro";
+                        break;
+                    case 22:
+                        e.Row.Cells[i].ToolTip = "Inclusão - Procedimento";
+                        break;
+                    case 23:
+                        e.Row.Cells[i].ToolTip = "Alteração - Procedimento";
+                        break;
+                    case 24:
+                        e.Row.Cells[i].ToolTip = "Exclusão - Procedimento";
+                        break;
+                    case 25:
+                        e.Row.Cells[i].ToolTip = "Relatórios";
+                        break;
+                    case 26:
                         e.Row.Cells[i].ToolTip = "Gráficos";
                         break;
                 }

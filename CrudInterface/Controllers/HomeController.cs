@@ -39,7 +39,7 @@ namespace CrudInterface.Controllers
                 {
                     using (OdbcCommand cmdAcesso = new OdbcCommand("select id,usuario,tipo,usuarioinc,usuarioman,usuariodel," +
                         "pacienteinc,pacienteman,pacientedel,convenioinc,convenioman,conveniodel," +
-                        "movimentoinc,movimentoman,movimentodel,relatorio,grafico " +
+                        "movimentoinc,movimentoman,movimentodel,relatorio,grafico,medicoinc,medicoman,medicodel,procedimentoinc,procedimentoman,procedimentodel,enfermeiroinc,enfermeiroman,enfermeirodel,fichainc,fichadel,fichaman " +
                         " from usuario where usuario='" +u.NomeUsuario+"' and senha='"+u.Senha+"'", con))
                     {
                         con.Open();
@@ -59,7 +59,10 @@ namespace CrudInterface.Controllers
                             Session["usuarioLogadoID"] = u.NomeUsuario;
                             Session["acessos"] = drsretorno.GetString(3) + drsretorno.GetString(4) + drsretorno.GetString(5) + drsretorno.GetString(6) + drsretorno.GetString(7) +
                                                  drsretorno.GetString(8) + drsretorno.GetString(9) + drsretorno.GetString(10)+ drsretorno.GetString(11)+ drsretorno.GetString(12)+
-                                                 drsretorno.GetString(13)+ drsretorno.GetString(14)+ drsretorno.GetString(15)+ drsretorno.GetString(16);
+                                                 drsretorno.GetString(13)+ drsretorno.GetString(14)+ drsretorno.GetString(15)+ drsretorno.GetString(16) + drsretorno.GetString(17) +
+                                                 drsretorno.GetString(18) + drsretorno.GetString(19) + drsretorno.GetString(20) + drsretorno.GetString(21) + drsretorno.GetString(22) +
+                                                 drsretorno.GetString(23) + drsretorno.GetString(24) + drsretorno.GetString(25) + drsretorno.GetString(26) + drsretorno.GetString(27) +
+                                                 drsretorno.GetString(28);
                             return RedirectToAction("Index");
                         }
                         else

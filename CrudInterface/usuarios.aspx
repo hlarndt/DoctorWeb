@@ -19,8 +19,9 @@
     <!--#include virtual="/menubar.aspx"-->
     <form id="form1" runat="server">
     <div style="background-color: #FFFFCC;text-align:center;position:absolute;left:50%;top:50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+        <center>
         <div>
-            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" DataKeyNames="id" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1" ForeColor="Black" PageSize="4" HorizontalAlign="Left" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" DataKeyNames="id" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1" ForeColor="Black" PageSize="4" HorizontalAlign="Center" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
                     <asp:TemplateField HeaderText="Codigo">
@@ -41,7 +42,7 @@
                             <asp:TextBox ID="TextBox3" Width="20" Enabled="false" runat="server" MaxLength="1" Text='<%# Bind("tipo") %>'></asp:TextBox>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:CommandField ShowSelectButton="true" ButtonType ="Image" SelectImageUrl="aceitar.jpg" ItemStyle-HorizontalAlign="center" HeaderText="Selec." >
+                    <asp:CommandField ShowSelectButton="true" ButtonType ="Image" SelectImageUrl="aceitar.jpg" ItemStyle-HorizontalAlign="center" HeaderText="Selec.">
                         <ItemStyle HorizontalAlign="Center"></ItemStyle>
                     </asp:CommandField>
                 </Columns>
@@ -54,9 +55,6 @@
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
-        </div>
-        <div>
-            <p>&nbsp;</p>
         </div>
         <div>
             <asp:DetailsView ID="DetailsView1" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource2" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding">
@@ -96,7 +94,7 @@
                             <asp:TextBox ID="tipo" Width="20" enabled="false" runat="server" MaxLength="1" Text='<%# Bind("tipo") %>'></asp:TextBox>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:CommandField ButtonType="Button" CancelText="Cancela" DeleteText="Apaga" EditText="Edita" InsertText="Insere" NewText="Novo" SelectText="Seleciona" ShowDeleteButton="True" ShowEditButton="True" ShowInsertButton="True" UpdateText="Grava" />
+                    <asp:CommandField ButtonType="Button" CancelText="Cancela" DeleteText="Apaga" EditText="Edita" InsertText="Insere" NewText="Novo" SelectText="Seleciona" ShowDeleteButton="True" ShowEditButton="True" ShowInsertButton="True" UpdateText="Grava" ItemStyle-HorizontalAlign="center" />
                 </Fields>
                 <FooterStyle BackColor="#CCCCCC" />
                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -114,7 +112,8 @@
         <div>
             <p>&nbsp;</p>
         </div>
-        <asp:GridView ID="GridView2" runat="server" DataSourceID="SqlDataSource3" Width="68px" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView2_RowDataBound" OnDataBinding="GridView2_DataBinding">
+        <div>
+            <asp:GridView ID="GridView2" runat="server" DataSourceID="SqlDataSource3" Width="68px" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView2_RowDataBound" OnDataBinding="GridView2_DataBinding" Font-Size="Smaller">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:CommandField ButtonType="Image" CancelImageUrl="~/erro.jpg" EditImageUrl="~/editar.jpg" ShowEditButton="True" UpdateImageUrl="~/aceitar.jpg" />
@@ -130,8 +129,20 @@
                 <asp:CheckBoxField DataField="movimentoinc" HeaderText="10" SortExpression="movimentoinc" />
                 <asp:CheckBoxField DataField="movimentoman" HeaderText="11" SortExpression="movimentoman" />
                 <asp:CheckBoxField DataField="movimentodel" HeaderText="12" SortExpression="movimentodel" />
-                <asp:CheckBoxField DataField="relatorio" HeaderText="13" SortExpression="relatorio" />
-                <asp:CheckBoxField DataField="grafico" HeaderText="14" SortExpression="grafico" />
+                <asp:CheckBoxField DataField="fichainc" HeaderText="12" SortExpression="fichainc" />
+                <asp:CheckBoxField DataField="fichaman" HeaderText="13" SortExpression="fichaman" />
+                <asp:CheckBoxField DataField="fichadel" HeaderText="14" SortExpression="fichadel" />
+                <asp:CheckBoxField DataField="medicoinc" HeaderText="15" SortExpression="medicoinc" />
+                <asp:CheckBoxField DataField="medicoman" HeaderText="16" SortExpression="medicoman" />
+                <asp:CheckBoxField DataField="medicodel" HeaderText="17" SortExpression="medicodel" />
+                <asp:CheckBoxField DataField="enfermeiroinc" HeaderText="18" SortExpression="enfermeiroinc" />
+                <asp:CheckBoxField DataField="enfermeiroman" HeaderText="19" SortExpression="enfermeiroman" />
+                <asp:CheckBoxField DataField="enfermeirodel" HeaderText="20" SortExpression="enfermeirodel" />
+                <asp:CheckBoxField DataField="procedimentoinc" HeaderText="21" SortExpression="procedimentoinc" />
+                <asp:CheckBoxField DataField="procedimentoman" HeaderText="22" SortExpression="procedimentoman" />
+                <asp:CheckBoxField DataField="procedimentodel" HeaderText="23" SortExpression="procedimentodel" />
+                <asp:CheckBoxField DataField="relatorio" HeaderText="24" SortExpression="relatorio" />
+                <asp:CheckBoxField DataField="grafico" HeaderText="25" SortExpression="grafico" />
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />
             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -142,14 +153,15 @@
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
             <SortedDescendingHeaderStyle BackColor="#383838" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="SELECT usuarioinc, usuarioman, usuariodel, pacienteinc, pacienteman, pacientedel, convenioinc, convenioman, conveniodel, movimentoinc, movimentoman, movimentodel, relatorio, grafico FROM usuario WHERE (id = :id)" UpdateCommand="update usuario set usuarioinc=:usuarioinc, usuarioman=:usuarioman, usuariodel=:usuariodel, pacienteinc=:pacienteinc, pacienteman=:pacienteman, pacientedel=:pacientedel, convenioinc=:convenioinc, convenioman=:convenioman, conveniodel=:conveniodel, movimentoinc=:movimentoinc, movimentoman=:movimentoman, movimentodel=:movimentodel, relatorio=:relatorio, grafico=:grafico  where id=:id">
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="SELECT usuarioinc, usuarioman, usuariodel, pacienteinc, pacienteman, pacientedel, convenioinc, convenioman, conveniodel, movimentoinc, movimentoman, movimentodel, relatorio, grafico,medicoinc,medicoman,medicodel,procedimentoinc,procedimentoman,procedimentodel,enfermeiroinc,enfermeiroman,enfermeirodel,fichainc,fichaman,fichadel FROM usuario WHERE (id = :id)" UpdateCommand="update usuario set usuarioinc=:usuarioinc, usuarioman=:usuarioman, usuariodel=:usuariodel, pacienteinc=:pacienteinc, pacienteman=:pacienteman, pacientedel=:pacientedel, convenioinc=:convenioinc, convenioman=:convenioman, conveniodel=:conveniodel, movimentoinc=:movimentoinc, movimentoman=:movimentoman, movimentodel=:movimentodel, relatorio=:relatorio, grafico=:grafico,medicoinc=:medicoinc,medicoman=:medicoman,medicodel=:medicodel,procedimentoinc=:procedimentoinc,procedimentoman=:procedimentoman,procedimentodel=:procedimentodel,enfermeiroinc=:enfermeiroinc,enfermeiroman=:enfermeiroman,enfermeirodel=:enfermeirodel,fichainc=:fichainc,fichaman=:fichaman,fichadel=:fichadel  where id=:id">
             <SelectParameters><asp:ControlParameter Name="id" ControlId="GridView1" /></SelectParameters>
             <UpdateParameters><asp:ControlParameter Name="id" ControlId="GridView1" /></UpdateParameters>
             </asp:SqlDataSource>
+        </div>
         <div>
             <p>&nbsp;</p>
         </div>
-        
+    </center>    
     </div>
     </form>
 </body>

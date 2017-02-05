@@ -9,7 +9,7 @@
                 <a class="navbar-brand" href="/">Doctor WEB</a>
             </div>
             <% if (Session["usuarioLogadoID"] != null) { %>
-           <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <% if (Session["acessos"].ToString().Substring(0,3).IndexOf("1") != -1) %>
                     <% { %>
@@ -17,15 +17,31 @@
                     <% } %>
                     <% if (Session["acessos"].ToString().Substring(3,3).IndexOf("1") != -1) %>
                     <% { %>
-                        <li><a href="/pacientes.aspx">Pacientes</a></li>
+                        <li><a href="/telapadrao.aspx?menu=1">Pacientes</a></li>
                     <% } %>
                     <% if (Session["acessos"].ToString().Substring(6,3).IndexOf("1") != -1) %>
                     <% { %>
-                        <li><a href="/convenios.aspx">Convênios</a></li>
+                        <li><a href="/telapadrao.aspx?menu=2">Convênios</a></li>
+                    <% } %>
+                    <% if (Session["acessos"].ToString().Substring(14,3).IndexOf("1") != -1) %>
+                    <% { %>
+                        <li><a href="/telapadrao.aspx?menu=4">Médicos</a></li>
+                    <% } %>
+                    <% if (Session["acessos"].ToString().Substring(20,3).IndexOf("1") != -1) %>
+                    <% { %>
+                        <li><a href="/telapadrao.aspx?menu=3">Enfermeiros</a></li>
+                    <% } %>
+                    <% if (Session["acessos"].ToString().Substring(17,3).IndexOf("1") != -1) %>
+                    <% { %>
+                        <li><a href="/telapadrao.aspx?menu=5">Procedimentos</a></li>
                     <% } %>
                     <% if (Session["acessos"].ToString().Substring(9,3).IndexOf("1") != -1) %>
                     <% { %>
                         <li><a href="/movimentos.aspx">Movimentos</a></li>
+                    <% } %>
+                    <% if (Session["acessos"].ToString().Substring(23,3).IndexOf("1") != -1) %>
+                    <% { %>
+                        <li><a href="/ficha.aspx">Ficha Paciente</a></li>
                     <% } %>
                     <% if (Session["acessos"].ToString().Substring(12,1).IndexOf("1") != -1) %>
                     <% { %>

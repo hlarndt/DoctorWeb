@@ -316,6 +316,17 @@
                             <asp:DropDownList ID="id_enfermeiro" Width="250" runat="server" enabled="false" DataSourceID="SqlDataSource9" DataTextField="nome" DataValueField="id" Text='<%# Bind("id_enfermeiro") %>'></asp:DropDownList>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Médico">
+                        <EditItemTemplate>
+                            <asp:DropDownList ID="id_medico" Width="250" runat="server" enabled="true" DataSourceID="SqlDataSource12" DataTextField="nome" DataValueField="id" Text='<%# Bind("id_medico") %>'></asp:DropDownList>
+                        </EditItemTemplate>
+                        <InsertItemTemplate>
+                            <asp:DropDownList ID="id_medico" Width="250" runat="server" enabled="true" DataSourceID="SqlDataSource12" DataTextField="nome" DataValueField="id" Text='<%# Bind("id_medico") %>'></asp:DropDownList>
+                        </InsertItemTemplate>
+                        <ItemTemplate>
+                            <asp:DropDownList ID="id_medico" Width="250" runat="server" enabled="false" DataSourceID="SqlDataSource12" DataTextField="nome" DataValueField="id" Text='<%# Bind("id_medico") %>'></asp:DropDownList>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:CommandField ButtonType="Button" CancelText="Cancela" DeleteText="Apaga" EditText="Edita" InsertText="Insere" NewText="Novo" SelectText="Seleciona" ShowDeleteButton="True" ShowEditButton="True" ShowInsertButton="True" UpdateText="Grava" ItemStyle-HorizontalAlign="center" />
                 </Fields>
                 <FooterStyle BackColor="#CCCCCC" />
@@ -326,7 +337,7 @@
         </div>
         <% if  (Request.QueryString["menu"] == "5")  %>
         <% { %>
-        <asp:SqlDataSource ID="SqlDataSource10" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,descricao,preco from procedimento where id=:id" DeleteCommand="delete from procedimento where id=:id" InsertCommand="insert into procedimento(descricao,preco) values(:descricao,:preco)" UpdateCommand="update procedimento set descricao=:descricao,preco=:preco where id=:id">
+        <asp:SqlDataSource ID="SqlDataSource10" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,descricao,preco from procedimento where id=:id" DeleteCommand="delete from procedimento where id=:id" InsertCommand="insert into procedimento(descricao,preco,dt_cadastro) values(:descricao,:preco,now())" UpdateCommand="update procedimento set descricao=:descricao,preco=:preco,dt_alteracao=now() where id=:id">
             <SelectParameters><asp:ControlParameter Name="id" ControlId="GridView5" /></SelectParameters>
             <UpdateParameters><asp:ControlParameter Name="descricao" ControlID="DetailsView5" PropertyName="SelectedValue" /><asp:ControlParameter Name="preco" ControlID="DetailsView5" PropertyName="SelectedValue" />
             </UpdateParameters>
@@ -336,7 +347,7 @@
         <% } %>
         <% if  (Request.QueryString["menu"] == "4")  %>
         <% { %>
-        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from medico where id=:id" DeleteCommand="delete from medico where id=:id" InsertCommand="insert into medico(nome) values(:nome)" UpdateCommand="update medico set nome=:nome where id=:id">
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from medico where id=:id" DeleteCommand="delete from medico where id=:id" InsertCommand="insert into medico(nome,dt_cadastro) values(:nome,now())" UpdateCommand="update medico set nome=:nome,dt_alteracao=now() where id=:id">
             <SelectParameters><asp:ControlParameter Name="id" ControlId="GridView2" /></SelectParameters>
             <UpdateParameters><asp:ControlParameter Name="nome" ControlID="DetailsView2" PropertyName="SelectedValue" />
             </UpdateParameters>
@@ -346,7 +357,7 @@
         <% } %>
         <% if  (Request.QueryString["menu"] == "3")  %>
         <% { %>
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from enfermeiro where id=:id" DeleteCommand="delete from enfermeiro where id=:id" InsertCommand="insert into enfermeiro(nome) values(:nome)" UpdateCommand="update enfermeiro set nome=:nome where id=:id">
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from enfermeiro where id=:id" DeleteCommand="delete from enfermeiro where id=:id" InsertCommand="insert into enfermeiro(nome,dt_cadastro) values(:nome,now())" UpdateCommand="update enfermeiro set nome=:nome,dt_alteracao=now() where id=:id">
             <SelectParameters><asp:ControlParameter Name="id" ControlId="GridView1" /></SelectParameters>
             <UpdateParameters><asp:ControlParameter Name="nome" ControlID="DetailsView1" PropertyName="SelectedValue" />
             </UpdateParameters>
@@ -356,7 +367,7 @@
         <% } %>
         <% if  (Request.QueryString["menu"] == "2")  %>
         <% { %>
-        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from convenio where id=:id" DeleteCommand="delete from convenio where id=:id" InsertCommand="insert into convenio(nome) values(:nome)" UpdateCommand="update convenio set nome=:nome where id=:id">
+        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from convenio where id=:id" DeleteCommand="delete from convenio where id=:id" InsertCommand="insert into convenio(nome,dt_cadastro) values(:nome,now())" UpdateCommand="update convenio set nome=:nome,dt_alteracao=now() where id=:id">
             <SelectParameters><asp:ControlParameter Name="id" ControlId="GridView3" /></SelectParameters>
             <UpdateParameters><asp:ControlParameter Name="nome" ControlID="DetailsView3" PropertyName="SelectedValue" />
             </UpdateParameters>
@@ -366,14 +377,15 @@
         <% } %>
         <% if  (Request.QueryString["menu"] == "1")  %>
         <% { %>
-        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome,id_enfermeiro from paciente where id=:id" DeleteCommand="delete from paciente where id=:id" InsertCommand="insert into paciente(nome,id_enfermeiro) values(:nome,:id_enfermeiro)" UpdateCommand="update paciente set nome=:nome,id_enfermeiro=:id_enfermeiro where id=:id">
+        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome,id_enfermeiro,id_medico from paciente where id=:id" DeleteCommand="delete from paciente where id=:id" InsertCommand="insert into paciente(nome,id_enfermeiro,id_medico,dt_cadastro) values(:nome,:id_enfermeiro,:id_medico,now())" UpdateCommand="update paciente set nome=:nome,id_enfermeiro=:id_enfermeiro,id_medico=:id_medico,dt_alteracao=now() where id=:id">
             <SelectParameters><asp:ControlParameter Name="id" ControlId="GridView4" /></SelectParameters>
-            <UpdateParameters><asp:ControlParameter Name="nome" ControlID="DetailsView4" PropertyName="SelectedValue" /><asp:ControlParameter Name="id_enfermeiro" ControlID="DetailsView4" PropertyName="SelectedValue" />
+            <UpdateParameters><asp:ControlParameter Name="nome" ControlID="DetailsView4" PropertyName="SelectedValue" /><asp:ControlParameter Name="id_enfermeiro" ControlID="DetailsView4" PropertyName="SelectedValue" /><asp:ControlParameter Name="id_medico" ControlID="DetailsView4" PropertyName="SelectedValue" />
             </UpdateParameters>
             <DeleteParameters><asp:ControlParameter Name="id" ControlId="GridView4" /></DeleteParameters>
-            <InsertParameters><asp:ControlParameter Name="nome" ControlID="DetailsView4$nome" /><asp:ControlParameter Name="id_enfermeiro" ControlID="DetailsView4$id_enfermeiro" /></InsertParameters></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource8" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome,id_enfermeiro from paciente"></asp:SqlDataSource>
+            <InsertParameters><asp:ControlParameter Name="nome" ControlID="DetailsView4$nome" /><asp:ControlParameter Name="id_enfermeiro" ControlID="DetailsView4$id_enfermeiro" /><asp:ControlParameter Name="id_medico" ControlID="DetailsView4$id_medico" /></InsertParameters></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource8" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome,id_enfermeiro,id_medico from paciente"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource9" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from enfermeiro"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource12" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from medico"></asp:SqlDataSource>
         <% } %>
     </center>    
     </div>

@@ -101,7 +101,7 @@
                 <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
             </asp:DetailsView>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,usuario,senha,tipo from usuario where id=:id" DeleteCommand="delete from usuario where id=:id" InsertCommand="insert into usuario(usuario,senha,tipo) values(:usuario,:senha,:tipo)" UpdateCommand="update usuario set usuario=:usuario,senha=:senha,tipo=:tipo where id=:id">
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,usuario,senha,tipo from usuario where id=:id" DeleteCommand="delete from usuario where id=:id" InsertCommand="insert into usuario(usuario,senha,tipo,dt_cadastro) values(:usuario,:senha,:tipo,now())" UpdateCommand="update usuario set usuario=:usuario,senha=:senha,tipo=:tipo,dt_alteracao=now() where id=:id">
             <SelectParameters><asp:ControlParameter Name="id" ControlId="GridView1" /></SelectParameters>
             <UpdateParameters><asp:ControlParameter Name="usuario" ControlID="DetailsView1" PropertyName="SelectedValue" />
                 <asp:FormParameter FormField="DetailsView1$senha" Name="senha" />

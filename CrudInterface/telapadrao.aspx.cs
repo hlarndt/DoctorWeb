@@ -322,7 +322,7 @@ namespace CrudInterface
 
             if (Request.QueryString["menu"] == "1")
             {
-                CommandField lbtn = DetailsView4.Fields[2] as CommandField;
+                CommandField lbtn = DetailsView4.Fields[3] as CommandField;
                 if (Session["acessos"].ToString().Substring(1, 4) == "0")
                 {
                     lbtn.ShowEditButton = false;

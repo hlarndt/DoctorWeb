@@ -16,8 +16,6 @@
     @using (Html.BeginForm("Login", "Home", FormMethod.Post))
     {
         //cria a tag do formulário
-        @Html.AntiForgeryToken() // previne o ataque CSRF
-        @Html.ValidationSummary(true)
         <table>
             <tr>
                 <td>@Html.LabelFor(a => a.NomeUsuario)</td>

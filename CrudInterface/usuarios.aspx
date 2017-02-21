@@ -4,19 +4,20 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <title>Doctor WEB - Cadastro de Usuários</title>
     <link href="/Content/bootstrap.css" rel="stylesheet"/>
     <link href="/Content/site.css" rel="stylesheet"/>
-    <script src="/Scripts/modernizr-2.6.2.js"></script>
-    <script src="/Scripts/jquery-1.10.2.js"></script>
-    <script src="/Scripts/bootstrap.js"></script>
-    <script src="/Scripts/respond.js"></script>
     <script type="application/json" id="__browserLink_initializationData">
         {"appName":"Firefox","requestId":"4d3c0c2834044ad18dc5f24ea407818b"}
     </script>
 </head>
 <body style="background-color: #FFFFCC;">
     <!--#include virtual="/menubar.aspx"-->
+    <script src="/bundles/jquery?v=FVs3ACwOLIVInrAl5sdzR2jrCDmVOWFbZMY6g6Q0ulE1"></script>
+    <script src="/bundles/jqueryval?v=hEGG8cMxk9p0ncdRUOJ-CnKN7NezhnPnWIvn6REucZo1"></script>
+    <script src="/bundles/bootstrap?v=2Fz3B0iizV2NnnamQFrx-NbYJNTFeBJ2GM05SilbtQU1"></script>
     <form id="form1" runat="server">
     <div style="background-color: #FFFFCC;text-align:center;position:absolute;left:50%;top:50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
         <center>
@@ -101,14 +102,14 @@
                 <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
             </asp:DetailsView>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,usuario,senha,tipo from usuario where id=:id" DeleteCommand="delete from usuario where id=:id" InsertCommand="insert into usuario(usuario,senha,tipo,dt_cadastro) values(:usuario,:senha,:tipo,now())" UpdateCommand="update usuario set usuario=:usuario,senha=:senha,tipo=:tipo,dt_alteracao=now() where id=:id">
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,usuario,senha,tipo from dbo.usuario where id=@id" DeleteCommand="delete from dbo.usuario where id=@id" InsertCommand="insert into dbo.usuario(usuario,senha,tipo,dt_cadastro) values(@usuario,@senha,@tipo,getdate())" UpdateCommand="update dbo.usuario set usuario=@usuario,senha=@senha,tipo=@tipo,dt_alteracao=getdate() where id=@id">
             <SelectParameters><asp:ControlParameter Name="id" ControlId="GridView1" /></SelectParameters>
             <UpdateParameters><asp:ControlParameter Name="usuario" ControlID="DetailsView1" PropertyName="SelectedValue" />
                 <asp:FormParameter FormField="DetailsView1$senha" Name="senha" />
                 <asp:ControlParameter Name="tipo" ControlId="DetailsView1" PropertyName="SelectedValue" /><asp:ControlParameter Name="id" ControlId="GridView1" /></UpdateParameters>
             <DeleteParameters><asp:ControlParameter Name="id" ControlId="GridView1" /></DeleteParameters>
             <InsertParameters><asp:ControlParameter Name="usuario" ControlID="DetailsView1$usuario" /><asp:ControlParameter Name="senha" ControlId="DetailsView1$senha" /><asp:ControlParameter Name="tipo" ControlId="DetailsView1$tipo" /></InsertParameters></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,usuario,senha,tipo from usuario"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,usuario,senha,tipo from dbo.usuario"></asp:SqlDataSource>
         <div>
             <p>&nbsp;</p>
         </div>
@@ -153,7 +154,7 @@
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
             <SortedDescendingHeaderStyle BackColor="#383838" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="SELECT usuarioinc, usuarioman, usuariodel, pacienteinc, pacienteman, pacientedel, convenioinc, convenioman, conveniodel, movimentoinc, movimentoman, movimentodel, relatorio, grafico,medicoinc,medicoman,medicodel,procedimentoinc,procedimentoman,procedimentodel,enfermeiroinc,enfermeiroman,enfermeirodel,fichainc,fichaman,fichadel FROM usuario WHERE (id = :id)" UpdateCommand="update usuario set usuarioinc=:usuarioinc, usuarioman=:usuarioman, usuariodel=:usuariodel, pacienteinc=:pacienteinc, pacienteman=:pacienteman, pacientedel=:pacientedel, convenioinc=:convenioinc, convenioman=:convenioman, conveniodel=:conveniodel, movimentoinc=:movimentoinc, movimentoman=:movimentoman, movimentodel=:movimentodel, relatorio=:relatorio, grafico=:grafico,medicoinc=:medicoinc,medicoman=:medicoman,medicodel=:medicodel,procedimentoinc=:procedimentoinc,procedimentoman=:procedimentoman,procedimentodel=:procedimentodel,enfermeiroinc=:enfermeiroinc,enfermeiroman=:enfermeiroman,enfermeirodel=:enfermeirodel,fichainc=:fichainc,fichaman=:fichaman,fichadel=:fichadel  where id=:id">
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="SELECT usuarioinc, usuarioman, usuariodel, pacienteinc, pacienteman, pacientedel, convenioinc, convenioman, conveniodel, movimentoinc, movimentoman, movimentodel, relatorio, grafico,medicoinc,medicoman,medicodel,procedimentoinc,procedimentoman,procedimentodel,enfermeiroinc,enfermeiroman,enfermeirodel,fichainc,fichaman,fichadel FROM dbo.usuario WHERE (id = @id)" UpdateCommand="update dbo.usuario set usuarioinc=@usuarioinc, usuarioman=@usuarioman, usuariodel=@usuariodel, pacienteinc=@pacienteinc, pacienteman=@pacienteman, pacientedel=@pacientedel, convenioinc=@convenioinc, convenioman=@convenioman, conveniodel=@conveniodel, movimentoinc=@movimentoinc, movimentoman=@movimentoman, movimentodel=@movimentodel, relatorio=@relatorio, grafico=@grafico,medicoinc=@medicoinc,medicoman=@medicoman,medicodel=@medicodel,procedimentoinc=@procedimentoinc,procedimentoman=@procedimentoman,procedimentodel=@procedimentodel,enfermeiroinc=@enfermeiroinc,enfermeiroman=@enfermeiroman,enfermeirodel=@enfermeirodel,fichainc=@fichainc,fichaman=@fichaman,fichadel=@fichadel  where id=@id">
             <SelectParameters><asp:ControlParameter Name="id" ControlId="GridView1" /></SelectParameters>
             <UpdateParameters><asp:ControlParameter Name="id" ControlId="GridView1" /></UpdateParameters>
             </asp:SqlDataSource>

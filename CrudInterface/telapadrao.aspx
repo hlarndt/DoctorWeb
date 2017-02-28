@@ -184,7 +184,7 @@
         <div>
             <% if (Request.QueryString["menu"] == "5")  %>
             <% { %>
-            <asp:DetailsView ID="DetailsView5" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource10" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding">
+            <asp:DetailsView ID="DetailsView5" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource10" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding" OnItemInserting="DetailsView1_ItemInserting">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <EditRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                 <Fields>
@@ -219,7 +219,7 @@
             <% } %>
             <% if (Request.QueryString["menu"] == "4")  %>
             <% { %>
-            <asp:DetailsView ID="DetailsView2" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource3" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding">
+            <asp:DetailsView ID="DetailsView2" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource3" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding" OnItemInserting="DetailsView1_ItemInserting">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <EditRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                 <Fields>
@@ -243,7 +243,7 @@
             <% } %>
             <% if (Request.QueryString["menu"] == "3")  %>
             <% { %>
-            <asp:DetailsView ID="DetailsView1" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource2" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding">
+            <asp:DetailsView ID="DetailsView1" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource2" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding" OnItemInserting="DetailsView1_ItemInserting">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <EditRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                 <Fields>
@@ -267,7 +267,7 @@
             <% } %>
             <% if (Request.QueryString["menu"] == "2")  %>
             <% { %>
-            <asp:DetailsView ID="DetailsView3" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource5" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding">
+            <asp:DetailsView ID="DetailsView3" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource5" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding" OnItemInserting="DetailsView1_ItemInserting">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <EditRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                 <Fields>
@@ -291,7 +291,7 @@
             <% } %>
             <% if (Request.QueryString["menu"] == "1")  %>
             <% { %>
-            <asp:DetailsView ID="DetailsView4" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource7" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding">
+            <asp:DetailsView ID="DetailsView4" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource7" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding" OnItemInserting="DetailsView1_ItemInserting">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <EditRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                 <Fields>

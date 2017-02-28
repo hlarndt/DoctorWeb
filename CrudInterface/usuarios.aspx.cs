@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
 using System.Web;
 using System.Web.UI;
+using System.Data.SqlClient;
 using System.Web.UI.WebControls;
 using System.Web.Mvc;
 
@@ -182,6 +184,37 @@ namespace CrudInterface
             else
             {
                 lbtn.ShowDeleteButton = true;
+            }
+        }
+
+        protected void DetailsView1_ItemInserting(object sender, DetailsViewInsertEventArgs e)
+        {
+            if (ModelState.IsValid) //verifica se é válido
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings[3].ToString();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmdAcesso = new SqlCommand("select * " +
+                        " from dbo.usuario where usuario='" + e.Values[0].ToString() + "'", con))
+                    {
+                        con.Open();
+                        try
+                        {
+                            cmdAcesso.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+                            Response.Write("<script>alert('Erro na conexão do banco de dados.');</script>");
+                        }
+                        SqlDataReader drsretorno = cmdAcesso.ExecuteReader();
+                        // esta action trata o post (login)
+                        if (drsretorno.HasRows)
+                        {
+                            Response.Write("<script>alert('Usuário já cadastrado.');</script>");
+                            e.Cancel = true;
+                        }
+                    }
+                }
             }
         }
     }

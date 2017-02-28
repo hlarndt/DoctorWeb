@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -33,7 +34,7 @@ namespace CrudInterface.Controllers
         {
             if (ModelState.IsValid) //verifica se é válido
             {
-                string connectionString = "Data Source=NOTEBOOK-HLA-PC\\HLADEVELOPER;Initial Catalog=DoctorWeb;User ID=heinrich;Password=hla060174";
+                string connectionString = ConfigurationManager.ConnectionStrings[3].ToString();
                 using ( SqlConnection con = new SqlConnection(connectionString))
                 {
                     using (SqlCommand cmdAcesso = new SqlCommand("select id,usuario,tipo,usuarioinc,usuarioman,usuariodel," +

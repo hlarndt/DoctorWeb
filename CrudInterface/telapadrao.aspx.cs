@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Data.SqlClient;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -52,7 +54,7 @@ namespace CrudInterface
             }
             if (Request.QueryString["menu"] == "3")
             {
-                DetailsView1.Focus();
+                    DetailsView1.Focus();
             }
             if (Request.QueryString["menu"] == "2")
             {
@@ -193,14 +195,6 @@ namespace CrudInterface
                     }
                 }
             }
-        }
-
-        protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-        }
-
-        protected void GridView2_DataBinding(object sender, EventArgs e)
-        {
         }
 
         protected void DetailsView1_DataBinding(object sender, EventArgs e)
@@ -350,5 +344,65 @@ namespace CrudInterface
             }
 
         }
+
+        protected void DetailsView1_ItemInserting(object sender, DetailsViewInsertEventArgs e)
+        {
+            if (ModelState.IsValid) //verifica se é válido
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings[3].ToString();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    String strSql = "";
+                    String strMsg = "";
+                    if (Request.QueryString["menu"] == "5")
+                    {
+                        strSql = "select * from dbo.procedimento where descricao='" + e.Values[0].ToString() + "'";
+                        strMsg = "Procedimento";
+                    }
+                    if (Request.QueryString["menu"] == "4")
+                    {
+                        strSql = "select * from dbo.medico where nome='" + e.Values[0].ToString() + "'";
+                        strMsg = "Usuario";
+                    }
+                    if (Request.QueryString["menu"] == "3")
+                    {
+                        strSql = "select * from dbo.enfermeiro where nome='" + e.Values[0].ToString() + "'";
+                        strMsg = "Enfermeiro";
+                    }
+                    if (Request.QueryString["menu"] == "2")
+                    {
+                        strSql = "select * from dbo.convenio where nome='" + e.Values[0].ToString() + "'";
+                        strMsg = "Convênio";
+                    }
+                    if (Request.QueryString["menu"] == "1")
+                    {
+                        strSql = "select * from dbo.paciente where nome='" + e.Values[0].ToString() + "'";
+                        strMsg = "Paciente";
+                    }
+                    using (SqlCommand cmdAcesso = new SqlCommand(strSql, con))
+                    {
+                        con.Open();
+                        try
+                        {
+                            cmdAcesso.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+                            Response.Write("<script>alert('Erro na conexão do banco de dados.');</script>");
+                        }
+                        SqlDataReader drsretorno = cmdAcesso.ExecuteReader();
+                        // esta action trata o post (login)
+                        if (drsretorno.HasRows)
+                        {
+                            Response.Write("<script>alert('" + strMsg + " já cadastrado.');</script>");
+                            e.Cancel = true;
+                        }
+                    }
+
+                }
+            }
+
+        }
+
     }
 }

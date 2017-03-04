@@ -220,6 +220,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
+    <Content Include="graficos.aspx" />
+    <Content Include="ficha.aspx" />
+    <Content Include="relatorios.aspx" />
+    <Content Include="movimentos.aspx" />
     <Content Include="menubar.aspx" />
     <Content Include="logoff.aspx" />
     <Content Include="Scripts\angular-animate.js" />

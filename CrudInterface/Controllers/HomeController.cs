@@ -34,7 +34,7 @@ namespace CrudInterface.Controllers
         {
             if (ModelState.IsValid) //verifica se é válido
             {
-                string connectionString = ConfigurationManager.ConnectionStrings[3].ToString();
+                string connectionString = ConfigurationManager.ConnectionStrings["DoctorWebConnectionString"].ToString();
                 using ( SqlConnection con = new SqlConnection(connectionString))
                 {
                     using (SqlCommand cmdAcesso = new SqlCommand("select id,usuario,tipo,usuarioinc,usuarioman,usuariodel," +

@@ -33,7 +33,7 @@ namespace CrudInterface.Controllers
         {
             if (ModelState.IsValid) //verifica se é válido
             {
-                string connectionString = "Data Source=NOTEBOOK-HLA-PC\\HLADEVELOPER;Initial Catalog=DoctorWeb;User ID=heinrich;Password=hla060174";
+                string connectionString = "Data Source=DESKTOP-UISGS37\\SQLEXPRESS;Initial Catalog=DoctorWeb;User ID=heinrich;Password=hla060174";
                 using ( SqlConnection con = new SqlConnection(connectionString))
                 {
                     using (SqlCommand cmdAcesso = new SqlCommand("select id,usuario,tipo,usuarioinc,usuarioman,usuariodel," +

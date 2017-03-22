@@ -13,5 +13,12 @@ namespace CrudInterface
 {
     public partial class ficha : System.Web.UI.Page
     {
+        protected void form1_Load(object sender, EventArgs e)
+        {
+            if (Session.Count == 0)
+            {
+                Server.Transfer("logoff.aspx", true);
+            }
+        }
     }
 }

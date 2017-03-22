@@ -104,5 +104,13 @@ namespace CrudInterface
         {
 
         }
+
+        protected void form1_Load(object sender, EventArgs e)
+        {
+            if (Session.Count == 0)
+            {
+                Server.Transfer("logoff.aspx", true);
+            }
+        }
     }
 }

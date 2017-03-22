@@ -54,7 +54,7 @@ namespace CrudInterface
             }
             if (Request.QueryString["menu"] == "3")
             {
-                    DetailsView1.Focus();
+                DetailsView1.Focus();
             }
             if (Request.QueryString["menu"] == "2")
             {
@@ -604,12 +604,12 @@ namespace CrudInterface
             TextBox texto = sender as TextBox;
             if (Request.QueryString["menu"] == "5")
             {
-                SqlDataSource1.SelectCommand = "select id,descricao from dbo.procedimento where descricao like '%" + texto.Text.Trim() + "%'";
+                SqlDataSource11.SelectCommand = "select id,descricao from dbo.procedimento where descricao like '%" + texto.Text.Trim() + "%'";
                 GridView5.DataBind();
             }
             if (Request.QueryString["menu"] == "4")
             {
-                SqlDataSource1.SelectCommand = "select id,nome from dbo.medico where nome like '%" + texto.Text.Trim() + "%'";
+                SqlDataSource4.SelectCommand = "select id,nome from dbo.medico where nome like '%" + texto.Text.Trim() + "%'";
                 GridView2.DataBind();
             }
             if (Request.QueryString["menu"] == "3")
@@ -619,12 +619,12 @@ namespace CrudInterface
             }
             if (Request.QueryString["menu"] == "2")
             {
-                SqlDataSource1.SelectCommand = "select id,nome from dbo.convenio where nome like '%" + texto.Text.Trim() + "%'";
+                SqlDataSource6.SelectCommand = "select id,nome from dbo.convenio where nome like '%" + texto.Text.Trim() + "%'";
                 GridView3.DataBind();
             }
             if (Request.QueryString["menu"] == "1")
             {
-                SqlDataSource1.SelectCommand = "select id,nome,id_enfermeiro,id_medico from dbo.paciente where nome like '%" + texto.Text.Trim() + "%'";
+                SqlDataSource8.SelectCommand = "select id,nome,id_enfermeiro,id_medico from dbo.paciente where nome like '%" + texto.Text.Trim() + "%'";
                 GridView4.DataBind();
             }
         }

@@ -18,9 +18,10 @@
     <script src="/bundles/jquery?v=FVs3ACwOLIVInrAl5sdzR2jrCDmVOWFbZMY6g6Q0ulE1"></script>
     <script src="/bundles/jqueryval?v=hEGG8cMxk9p0ncdRUOJ-CnKN7NezhnPnWIvn6REucZo1"></script>
     <script src="/bundles/bootstrap?v=2Fz3B0iizV2NnnamQFrx-NbYJNTFeBJ2GM05SilbtQU1"></script>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" onload="form1_Load">
     <center>
         <div style="background-color: #FFFFCC;text-align:center;position:absolute;left:50%;top:50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+            <div runat="server" id="divtbl" style="width:100vh;height:80vh;overflow:scroll;">
             <center><asp:FileUpload ID="FileUpload1" runat="server" accept=".xls" ForeColor="White"/>
             <asp:Label ID="Label1" runat="server"></asp:Label>
             <br />
@@ -28,7 +29,6 @@
             <asp:Button ID="Button2" runat="server" Text="Validar" OnClick="Button2_Click"/>
             <asp:Button ID="Button3" runat="server" Text="Gravar" OnClick="Button3_Click"/>
             </center>
-            <div style="width:1000px;height:380px;overflow:scroll;">
             <asp:GridView ID="GridView1" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" PageSize="6">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <FooterStyle BackColor="#CCCCCC" />

@@ -192,6 +192,27 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="relatorios.aspx.cs">
+      <DependentUpon>relatorios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="relatorios.aspx.designer.cs">
+      <DependentUpon>relatorios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="graficos.aspx.cs">
+      <DependentUpon>graficos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="graficos.aspx.designer.cs">
+      <DependentUpon>graficos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ficha.aspx.cs">
+      <DependentUpon>ficha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ficha.aspx.designer.cs">
+      <DependentUpon>ficha.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="telapadrao.aspx.cs">
@@ -200,6 +221,13 @@
     </Compile>
     <Compile Include="telapadrao.aspx.designer.cs">
       <DependentUpon>telapadrao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="movimentos.aspx.cs">
+      <DependentUpon>movimentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="movimentos.aspx.designer.cs">
+      <DependentUpon>movimentos.aspx</DependentUpon>
     </Compile>
     <Compile Include="usuarios.aspx.cs">
       <DependentUpon>usuarios.aspx</DependentUpon>
@@ -222,6 +250,9 @@
     <Content Include="favicon.ico" />
     <Content Include="menubar.aspx" />
     <Content Include="logoff.aspx" />
+    <Content Include="relatorios.aspx" />
+    <Content Include="graficos.aspx" />
+    <Content Include="ficha.aspx" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -1006,6 +1037,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="telapadrao.aspx" />
+    <Content Include="movimentos.aspx" />
     <Content Include="usuarios.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

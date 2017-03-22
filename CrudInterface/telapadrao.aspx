@@ -181,10 +181,11 @@
             </asp:GridView>
             <% } %>
         </div>
+        <div><p>Pesquisa: <asp:TextBox ID="TextBox4" Text="" runat="server" Width="252px" OnTextChanged="TextBox4_TextChanged"></asp:TextBox></p></div>
         <div>
             <% if (Request.QueryString["menu"] == "5")  %>
             <% { %>
-            <asp:DetailsView ID="DetailsView5" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource10" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding">
+            <asp:DetailsView ID="DetailsView5" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource10" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding" OnItemInserting="DetailsView1_ItemInserting" OnItemUpdating="DetailsView1_ItemUpdating">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <EditRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                 <Fields>
@@ -210,7 +211,22 @@
                             <asp:TextBox ID="preco" Width="245" runat="server" enabled="false" Text='<%# Bind("preco") %>'></asp:TextBox>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:CommandField ButtonType="Button" CancelText="Cancela" DeleteText="Apaga" EditText="Edita" InsertText="Insere" NewText="Novo" SelectText="Seleciona" ShowDeleteButton="True" ShowEditButton="True" ShowInsertButton="True" UpdateText="Grava" ItemStyle-HorizontalAlign="center" />
+                    <asp:TemplateField ShowHeader="False">
+                        <EditItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="True" CommandName="Update" Text="Grava" />
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancela" />
+                        </EditItemTemplate>
+                        <InsertItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="True" CommandName="Insert" Text="Insere" OnInit="Button1_Init" />
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancela" />
+                        </InsertItemTemplate>
+                        <ItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edita" OnInit="Button1_Init1"/>
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="New" Text="Novo" OnInit="Button2_Init" />
+                            &nbsp;<asp:Button ID="Button3" runat="server" CausesValidation="False" CommandName="Delete" Text="Apaga" OnClientClick="return confirm('Confirma a exclusão?');" OnInit="Button3_Init"/>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
                 </Fields>
                 <FooterStyle BackColor="#CCCCCC" />
                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -219,7 +235,7 @@
             <% } %>
             <% if (Request.QueryString["menu"] == "4")  %>
             <% { %>
-            <asp:DetailsView ID="DetailsView2" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource3" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding">
+            <asp:DetailsView ID="DetailsView2" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource3" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding" OnItemInserting="DetailsView1_ItemInserting" OnItemUpdating="DetailsView1_ItemUpdating">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <EditRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                 <Fields>
@@ -234,7 +250,22 @@
                             <asp:TextBox ID="nome" Width="245" runat="server" enabled="false" Text='<%# Bind("nome") %>'></asp:TextBox>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:CommandField ButtonType="Button" CancelText="Cancela" DeleteText="Apaga" EditText="Edita" InsertText="Insere" NewText="Novo" SelectText="Seleciona" ShowDeleteButton="True" ShowEditButton="True" ShowInsertButton="True" UpdateText="Grava" ItemStyle-HorizontalAlign="center" />
+                    <asp:TemplateField ShowHeader="False">
+                        <EditItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="True" CommandName="Update" Text="Grava" />
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancela" />
+                        </EditItemTemplate>
+                        <InsertItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="True" CommandName="Insert" Text="Insere" OnInit="Button1_Init3"/>
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancela" />
+                        </InsertItemTemplate>
+                        <ItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edita" OnInit="Button1_Init4" />
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="New" Text="Novo" OnInit="Button2_Init1"/>
+                            &nbsp;<asp:Button ID="Button3" runat="server" CausesValidation="False" CommandName="Delete" Text="Apaga" OnClientClick="return confirm('Confirma a exclusão?');" OnInit="Button3_Init1"/>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
                 </Fields>
                 <FooterStyle BackColor="#CCCCCC" />
                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -243,7 +274,7 @@
             <% } %>
             <% if (Request.QueryString["menu"] == "3")  %>
             <% { %>
-            <asp:DetailsView ID="DetailsView1" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource2" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding">
+            <asp:DetailsView ID="DetailsView1" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource2" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding" OnItemInserting="DetailsView1_ItemInserting" OnItemUpdating="DetailsView1_ItemUpdating">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <EditRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                 <Fields>
@@ -258,7 +289,22 @@
                             <asp:TextBox ID="nome" Width="245" runat="server" enabled="false" Text='<%# Bind("nome") %>'></asp:TextBox>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:CommandField ButtonType="Button" CancelText="Cancela" DeleteText="Apaga" EditText="Edita" InsertText="Insere" NewText="Novo" SelectText="Seleciona" ShowDeleteButton="True" ShowEditButton="True" ShowInsertButton="True" UpdateText="Grava" ItemStyle-HorizontalAlign="center" />
+                    <asp:TemplateField ShowHeader="False">
+                        <EditItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="True" CommandName="Update" Text="Grava" />
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancela" />
+                        </EditItemTemplate>
+                        <InsertItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="True" CommandName="Insert" Text="Insere" OnInit="Button1_Init2"/>
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancela" />
+                        </InsertItemTemplate>
+                        <ItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edita" OnInit="Button2_Init2" />
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="New" Text="Novo" OnInit="Button1_Init2"/>
+                            &nbsp;<asp:Button ID="Button3" runat="server" CausesValidation="False" CommandName="Delete" Text="Apaga" OnClientClick="return confirm('Confirma a exclusão?');" OnInit="Button3_Init2" />
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
                 </Fields>
                 <FooterStyle BackColor="#CCCCCC" />
                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -267,7 +313,7 @@
             <% } %>
             <% if (Request.QueryString["menu"] == "2")  %>
             <% { %>
-            <asp:DetailsView ID="DetailsView3" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource5" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding">
+            <asp:DetailsView ID="DetailsView3" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource5" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding" OnItemInserting="DetailsView1_ItemInserting" OnItemUpdating="DetailsView1_ItemUpdating">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <EditRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                 <Fields>
@@ -282,7 +328,22 @@
                             <asp:TextBox ID="nome" Width="245" runat="server" enabled="false" Text='<%# Bind("nome") %>'></asp:TextBox>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:CommandField ButtonType="Button" CancelText="Cancela" DeleteText="Apaga" EditText="Edita" InsertText="Insere" NewText="Novo" SelectText="Seleciona" ShowDeleteButton="True" ShowEditButton="True" ShowInsertButton="True" UpdateText="Grava" ItemStyle-HorizontalAlign="center" />
+                    <asp:TemplateField ShowHeader="False">
+                        <EditItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="True" CommandName="Update" Text="Grava" />
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancela" />
+                        </EditItemTemplate>
+                        <InsertItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="True" CommandName="Insert" Text="Insere" OnInit="Button1_Init5"/>
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancela"/>
+                        </InsertItemTemplate>
+                        <ItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edita" OnInit="Button1_Init6"/>
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="New" Text="Novo" OnInit="Button1_Init5"/>
+                            &nbsp;<asp:Button ID="Button3" runat="server" CausesValidation="False" CommandName="Delete" Text="Apaga" OnClientClick="return confirm('Confirma a exclusão?');" OnInit="Button3_Init3"/>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
                 </Fields>
                 <FooterStyle BackColor="#CCCCCC" />
                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -291,7 +352,7 @@
             <% } %>
             <% if (Request.QueryString["menu"] == "1")  %>
             <% { %>
-            <asp:DetailsView ID="DetailsView4" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource7" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding">
+            <asp:DetailsView ID="DetailsView4" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource7" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding" OnItemInserting="DetailsView1_ItemInserting" OnItemUpdating="DetailsView1_ItemUpdating">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <EditRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                 <Fields>
@@ -328,7 +389,22 @@
                             <asp:DropDownList ID="id_medico" Width="250" runat="server" enabled="false" DataSourceID="SqlDataSource12" DataTextField="nome" DataValueField="id" Text='<%# Bind("id_medico") %>'></asp:DropDownList>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:CommandField ButtonType="Button" CancelText="Cancela" DeleteText="Apaga" EditText="Edita" InsertText="Insere" NewText="Novo" SelectText="Seleciona" ShowDeleteButton="True" ShowEditButton="True" ShowInsertButton="True" UpdateText="Grava" ItemStyle-HorizontalAlign="center" />
+                    <asp:TemplateField ShowHeader="False">
+                        <EditItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="True" CommandName="Update" Text="Grava" />
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancela" />
+                        </EditItemTemplate>
+                        <InsertItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="True" CommandName="Insert" Text="Insere" OnInit="Button1_Init7"/>
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancela" />
+                        </InsertItemTemplate>
+                        <ItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edita" OnInit="Button1_Init8"/>
+                            &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="New" Text="Novo" OnInit="Button1_Init7"/>
+                            &nbsp;<asp:Button ID="Button3" runat="server" CausesValidation="False" CommandName="Delete" Text="Apaga"  OnClientClick="return confirm('Confirma a exclusão?');" OnInit="Button3_Init4"/>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
                 </Fields>
                 <FooterStyle BackColor="#CCCCCC" />
                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />

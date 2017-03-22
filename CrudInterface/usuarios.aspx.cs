@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
 using System.Web;
 using System.Web.UI;
+using System.Data.SqlClient;
 using System.Web.UI.WebControls;
 using System.Web.Mvc;
 
@@ -158,31 +160,124 @@ namespace CrudInterface
 
         protected void DetailsView1_DataBinding(object sender, EventArgs e)
         {
-            CommandField lbtn = DetailsView1.Fields[3] as CommandField;
+            TemplateField lbtn = DetailsView1.Fields[3] as TemplateField;
+            if (Session["acessos"].ToString().Substring(0, 1) == "0")
+            {
+                lbtn.InsertVisible = false;
+            }
+            else
+            {
+                lbtn.InsertVisible = true;
+            }
+        }
+
+        protected void DetailsView1_ItemInserting(object sender, DetailsViewInsertEventArgs e)
+        {
+            if (ModelState.IsValid) //verifica se é válido
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings[3].ToString();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmdAcesso = new SqlCommand("select * " +
+                        " from dbo.usuario where usuario='" + e.Values[0].ToString() + "'", con))
+                    {
+                        con.Open();
+                        try
+                        {
+                            cmdAcesso.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+                            this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Alerta", "<script>alert('Erro na conexão do banco de dados.')</script>");
+                        }
+                        SqlDataReader drsretorno = cmdAcesso.ExecuteReader();
+                        // esta action trata o post (login)
+                        if (drsretorno.HasRows)
+                        {
+                            this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Alerta", "<script>alert('Usuário já cadastrado.')</script>");
+                            e.Cancel = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void DetailsView1_ItemUpdating(object sender, DetailsViewUpdateEventArgs e)
+        {
+            if (ModelState.IsValid) //verifica se é válido
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings[3].ToString();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmdAcesso = new SqlCommand("select * " +
+                        " from dbo.usuario where id<>" + e.Keys[0].ToString() + " and usuario='" + e.NewValues[0].ToString() + "'", con))
+                    {
+                        con.Open();
+                        try
+                        {
+                            cmdAcesso.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+                            this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Alerta", "<script>alert('Erro na conexão do banco de dados.')</script>");
+                        }
+                        SqlDataReader drsretorno = cmdAcesso.ExecuteReader();
+                        // esta action trata o post (login)
+                        if (drsretorno.HasRows)
+                        {
+                            this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Alerta", "<script>alert('Usuário já cadastrado com esse nome.')</script>");
+                            e.Cancel = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void Button1_Init(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
             if (Session["acessos"].ToString().Substring(1, 1) == "0")
             {
-                lbtn.ShowEditButton = false;
+                acao.Visible = false;
             }
             else
             {
-                lbtn.ShowEditButton = true;
+                acao.Visible = true;
             }
-            if (Session["acessos"].ToString().Substring(1, 0) == "0")
+
+        }
+
+        protected void Button1_Init1(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(0, 1) == "0")
             {
-                lbtn.ShowInsertButton = false;
+                acao.Visible = false;
             }
             else
             {
-                lbtn.ShowInsertButton = true;
+                acao.Visible = true;
             }
-            if (Session["acessos"].ToString().Substring(1, 2) == "0")
+        }
+
+        protected void Button3_Init(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(2, 1) == "0")
             {
-                lbtn.ShowDeleteButton = false;
+                acao.Visible = false;
             }
             else
             {
-                lbtn.ShowDeleteButton = true;
+                acao.Visible = true;
             }
+        }
+
+        protected void TextBox4_TextChanged(object sender, EventArgs e)
+        {
+            TextBox texto = sender as TextBox;
+            SqlDataSource1.SelectCommand = "select id,usuario,senha,tipo from dbo.usuario where usuario like '%" + texto.Text.Trim() + "%'";
+            GridView1.DataBind();
         }
     }
 }

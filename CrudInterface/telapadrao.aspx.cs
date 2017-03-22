@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Data.SqlClient;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -52,7 +54,7 @@ namespace CrudInterface
             }
             if (Request.QueryString["menu"] == "3")
             {
-                DetailsView1.Focus();
+                    DetailsView1.Focus();
             }
             if (Request.QueryString["menu"] == "2")
             {
@@ -195,160 +197,436 @@ namespace CrudInterface
             }
         }
 
-        protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-        }
-
-        protected void GridView2_DataBinding(object sender, EventArgs e)
-        {
-        }
-
         protected void DetailsView1_DataBinding(object sender, EventArgs e)
         {
             if (Request.QueryString["menu"] == "5")
             {
-                CommandField lbtn = DetailsView5.Fields[2] as CommandField;
-                if (Session["acessos"].ToString().Substring(1, 18) == "0")
+                TemplateField lbtn = DetailsView5.Fields[2] as TemplateField;
+                if (Session["acessos"].ToString().Substring(17, 1) == "0")
                 {
-                    lbtn.ShowEditButton = false;
+                    lbtn.InsertVisible = false;
                 }
                 else
                 {
-                    lbtn.ShowEditButton = true;
-                }
-                if (Session["acessos"].ToString().Substring(1, 17) == "0")
-                {
-                    lbtn.ShowInsertButton = false;
-                }
-                else
-                {
-                    lbtn.ShowInsertButton = true;
-                }
-                if (Session["acessos"].ToString().Substring(1, 19) == "0")
-                {
-                    lbtn.ShowDeleteButton = false;
-                }
-                else
-                {
-                    lbtn.ShowDeleteButton = true;
+                    lbtn.InsertVisible = true;
                 }
             }
 
             if (Request.QueryString["menu"] == "4")
             {
-                CommandField lbtn = DetailsView2.Fields[1] as CommandField;
-                if (Session["acessos"].ToString().Substring(1, 15) == "0")
+                TemplateField lbtn = DetailsView2.Fields[1] as TemplateField;
+                if (Session["acessos"].ToString().Substring(14, 1) == "0")
                 {
-                    lbtn.ShowEditButton = false;
+                    lbtn.InsertVisible = false;
                 }
                 else
                 {
-                    lbtn.ShowEditButton = true;
-                }
-                if (Session["acessos"].ToString().Substring(1, 14) == "0")
-                {
-                    lbtn.ShowInsertButton = false;
-                }
-                else
-                {
-                    lbtn.ShowInsertButton = true;
-                }
-                if (Session["acessos"].ToString().Substring(1, 16) == "0")
-                {
-                    lbtn.ShowDeleteButton = false;
-                }
-                else
-                {
-                    lbtn.ShowDeleteButton = true;
+                    lbtn.InsertVisible = true;
                 }
             }
 
             if (Request.QueryString["menu"] == "3")
             {
-                CommandField lbtn = DetailsView1.Fields[1] as CommandField;
-                if (Session["acessos"].ToString().Substring(1, 21) == "0")
+                TemplateField lbtn = DetailsView1.Fields[1] as TemplateField;
+                if (Session["acessos"].ToString().Substring(20, 1) == "0")
                 {
-                    lbtn.ShowEditButton = false;
+                    lbtn.InsertVisible = false;
                 }
                 else
                 {
-                    lbtn.ShowEditButton = true;
-                }
-                if (Session["acessos"].ToString().Substring(1, 20) == "0")
-                {
-                    lbtn.ShowInsertButton = false;
-                }
-                else
-                {
-                    lbtn.ShowInsertButton = true;
-                }
-                if (Session["acessos"].ToString().Substring(1, 22) == "0")
-                {
-                    lbtn.ShowDeleteButton = false;
-                }
-                else
-                {
-                    lbtn.ShowDeleteButton = true;
+                    lbtn.InsertVisible = true;
                 }
             }
             if (Request.QueryString["menu"] == "2")
             {
-                CommandField lbtn = DetailsView3.Fields[1] as CommandField;
-                if (Session["acessos"].ToString().Substring(1, 7) == "0")
+                TemplateField lbtn = DetailsView3.Fields[1] as TemplateField;
+                if (Session["acessos"].ToString().Substring(6, 1) == "0")
                 {
-                    lbtn.ShowEditButton = false;
+                    lbtn.InsertVisible = false;
                 }
                 else
                 {
-                    lbtn.ShowEditButton = true;
-                }
-                if (Session["acessos"].ToString().Substring(1, 6) == "0")
-                {
-                    lbtn.ShowInsertButton = false;
-                }
-                else
-                {
-                    lbtn.ShowInsertButton = true;
-                }
-                if (Session["acessos"].ToString().Substring(1, 8) == "0")
-                {
-                    lbtn.ShowDeleteButton = false;
-                }
-                else
-                {
-                    lbtn.ShowDeleteButton = true;
+                    lbtn.InsertVisible = true;
                 }
             }
-
             if (Request.QueryString["menu"] == "1")
             {
-                CommandField lbtn = DetailsView4.Fields[3] as CommandField;
-                if (Session["acessos"].ToString().Substring(1, 4) == "0")
+                TemplateField lbtn = DetailsView4.Fields[3] as TemplateField;
+                if (Session["acessos"].ToString().Substring(3, 1) == "0")
                 {
-                    lbtn.ShowEditButton = false;
+                    lbtn.InsertVisible = false;
                 }
                 else
                 {
-                    lbtn.ShowEditButton = true;
-                }
-                if (Session["acessos"].ToString().Substring(1, 3) == "0")
-                {
-                    lbtn.ShowInsertButton = false;
-                }
-                else
-                {
-                    lbtn.ShowInsertButton = true;
-                }
-                if (Session["acessos"].ToString().Substring(1, 5) == "0")
-                {
-                    lbtn.ShowDeleteButton = false;
-                }
-                else
-                {
-                    lbtn.ShowDeleteButton = true;
+                    lbtn.InsertVisible = true;
                 }
             }
+        }
 
+        protected void DetailsView1_ItemInserting(object sender, DetailsViewInsertEventArgs e)
+        {
+            if (ModelState.IsValid) //verifica se é válido
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["DoctorWebConnectionString"].ToString();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    String strSql = "";
+                    String strMsg = "";
+                    if (Request.QueryString["menu"] == "5")
+                    {
+                        strSql = "select * from dbo.procedimento where descricao='" + e.Values[0].ToString() + "'";
+                        strMsg = "Procedimento";
+                    }
+                    if (Request.QueryString["menu"] == "4")
+                    {
+                        strSql = "select * from dbo.medico where nome='" + e.Values[0].ToString() + "'";
+                        strMsg = "Médico";
+                    }
+                    if (Request.QueryString["menu"] == "3")
+                    {
+                        strSql = "select * from dbo.enfermeiro where nome='" + e.Values[0].ToString() + "'";
+                        strMsg = "Enfermeiro";
+                    }
+                    if (Request.QueryString["menu"] == "2")
+                    {
+                        strSql = "select * from dbo.convenio where nome='" + e.Values[0].ToString() + "'";
+                        strMsg = "Convênio";
+                    }
+                    if (Request.QueryString["menu"] == "1")
+                    {
+                        strSql = "select * from dbo.paciente where nome='" + e.Values[0].ToString() + "'";
+                        strMsg = "Paciente";
+                    }
+                    using (SqlCommand cmdAcesso = new SqlCommand(strSql, con))
+                    {
+                        con.Open();
+                        try
+                        {
+                            cmdAcesso.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+                            this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Alerta", "<script>alert('Erro na conexão do banco de dados.')</script>");
+                        }
+                        SqlDataReader drsretorno = cmdAcesso.ExecuteReader();
+                        // esta action trata o post (login)
+                        if (drsretorno.HasRows)
+                        {
+                            this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Alerta", "<script>alert('" + strMsg + " já cadastrado.')</script>");
+                            e.Cancel = true;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        protected void DetailsView1_ItemUpdating(object sender, DetailsViewUpdateEventArgs e)
+        {
+            if (ModelState.IsValid) //verifica se é válido
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["DoctorWebConnectionString"].ToString();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    String strSql = "";
+                    String strMsg = "";
+                    if (Request.QueryString["menu"] == "5")
+                    {
+                        strSql = "select * from dbo.procedimento where id<>" + e.Keys[0].ToString() + " and descricao='" + e.NewValues[0].ToString() + "'";
+                        strMsg = "Procedimento";
+                    }
+                    if (Request.QueryString["menu"] == "4")
+                    {
+                        strSql = "select * from dbo.medico where id<>" + e.Keys[0].ToString() + " and nome='" + e.NewValues[0].ToString() + "'";
+                        strMsg = "Médico";
+                    }
+                    if (Request.QueryString["menu"] == "3")
+                    {
+                        strSql = "select * from dbo.enfermeiro where id<>" + e.Keys[0].ToString() + " and nome='" + e.NewValues[0].ToString() + "'";
+                        strMsg = "Enfermeiro";
+                    }
+                    if (Request.QueryString["menu"] == "2")
+                    {
+                        strSql = "select * from dbo.convenio where id<>" + e.Keys[0].ToString() + " and nome='" + e.NewValues[0].ToString() + "'";
+                        strMsg = "Convênio";
+                    }
+                    if (Request.QueryString["menu"] == "1")
+                    {
+                        strSql = "select * from dbo.paciente where id<>" + e.Keys[0].ToString() + " and nome='" + e.NewValues[0].ToString() + "'";
+                        strMsg = "Paciente";
+                    }
+                    using (SqlCommand cmdAcesso = new SqlCommand(strSql, con))
+                    {
+                        con.Open();
+                        try
+                        {
+                            cmdAcesso.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+                            this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Alerta", "<script>alert('Erro na conexão do banco de dados.')</script>");
+                        }
+                        SqlDataReader drsretorno = cmdAcesso.ExecuteReader();
+                        // esta action trata o post (login)
+                        if (drsretorno.HasRows)
+                        {
+                            this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Alerta", "<script>alert('" + strMsg + " já cadastrado.')</script>");
+                            e.Cancel = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void Button1_Init(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(17, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button1_Init1(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(18, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button2_Init(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(17, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button3_Init(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(19, 1) == "0")
+            { 
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button1_Init3(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(14, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button1_Init4(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(15, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button2_Init1(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(14, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button3_Init1(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(16, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button1_Init2(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(20, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button2_Init2(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(21, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button3_Init2(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(22, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button1_Init5(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(6, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button1_Init6(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(7, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button3_Init3(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(8, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button1_Init7(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(3, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button1_Init8(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(4, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void Button3_Init4(object sender, EventArgs e)
+        {
+            Button acao = sender as Button;
+            if (Session["acessos"].ToString().Substring(5, 1) == "0")
+            {
+                acao.Visible = false;
+            }
+            else
+            {
+                acao.Visible = true;
+            }
+        }
+
+        protected void TextBox4_TextChanged(object sender, EventArgs e)
+        {
+            TextBox texto = sender as TextBox;
+            if (Request.QueryString["menu"] == "5")
+            {
+                SqlDataSource1.SelectCommand = "select id,descricao from dbo.procedimento where descricao like '%" + texto.Text.Trim() + "%'";
+                GridView5.DataBind();
+            }
+            if (Request.QueryString["menu"] == "4")
+            {
+                SqlDataSource1.SelectCommand = "select id,nome from dbo.medico where nome like '%" + texto.Text.Trim() + "%'";
+                GridView2.DataBind();
+            }
+            if (Request.QueryString["menu"] == "3")
+            {
+                SqlDataSource1.SelectCommand = "select id,nome from dbo.enfermeiro where nome like '%" + texto.Text.Trim() + "%'";
+                GridView1.DataBind();
+            }
+            if (Request.QueryString["menu"] == "2")
+            {
+                SqlDataSource1.SelectCommand = "select id,nome from dbo.convenio where nome like '%" + texto.Text.Trim() + "%'";
+                GridView3.DataBind();
+            }
+            if (Request.QueryString["menu"] == "1")
+            {
+                SqlDataSource1.SelectCommand = "select id,nome,id_enfermeiro,id_medico from dbo.paciente where nome like '%" + texto.Text.Trim() + "%'";
+                GridView4.DataBind();
+            }
         }
     }
 }

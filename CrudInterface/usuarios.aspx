@@ -19,7 +19,7 @@
     <script src="/bundles/jqueryval?v=hEGG8cMxk9p0ncdRUOJ-CnKN7NezhnPnWIvn6REucZo1"></script>
     <script src="/bundles/bootstrap?v=2Fz3B0iizV2NnnamQFrx-NbYJNTFeBJ2GM05SilbtQU1"></script>
     <form id="form1" runat="server">
-    <div style="background-color: #FFFFCC;text-align:center;position:absolute;left:50%;top:50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+    <div style="background-color: #FFFFCC;text-align:center;position:absolute;left:50%;top:50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%); margin-right: 0px;">
         <center>
         <div>
             <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" DataKeyNames="id" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1" ForeColor="Black" PageSize="4" HorizontalAlign="Center" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
@@ -50,18 +50,20 @@
                 <FooterStyle BackColor="#CCCCCC" />
                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
                 <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                <SelectedRowStyle BackColor="#0000CC" Font-Bold="True" ForeColor="White" />
                 <SortedAscendingCellStyle BackColor="#F1F1F1" />
                 <SortedAscendingHeaderStyle BackColor="Gray" />
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
         </div>
-        <div><p>Pesquisa: <asp:TextBox ID="TextBox4" Text="" runat="server" Width="252px" OnTextChanged="TextBox4_TextChanged"></asp:TextBox></p></div>
         <div>
-            <asp:DetailsView ID="DetailsView1" runat="server" BackColor="#FFFFCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource2" DataKeyNames="id" ForeColor="Black" Height="50px" Width="355px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding" OnItemInserting="DetailsView1_ItemInserting" OnItemUpdating="DetailsView1_ItemUpdating">
-                <AlternatingRowStyle BackColor="#CCCCCC" />
-                <EditRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+            <p>Pesquisa: <asp:TextBox ID="TextBox4" Text="" runat="server" Width="268px" OnTextChanged="TextBox4_TextChanged"></asp:TextBox></p>
+            </div>
+        <div>
+            <asp:DetailsView ID="DetailsView1" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource2" DataKeyNames="id" ForeColor="Black" Height="50px" Width="369px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding" OnItemInserting="DetailsView1_ItemInserting" OnItemUpdating="DetailsView1_ItemUpdating">
+                <AlternatingRowStyle BackColor="White" BorderColor="Black" BorderStyle="Solid" BorderWidth="1px" />
+                <EditRowStyle BackColor="#CCCCCC" Font-Bold="True" ForeColor="Black" BorderColor="Black" BorderStyle="Solid" BorderWidth="1px" />
                 <Fields>
                     <asp:TemplateField HeaderText="Usuário">
                         <InsertItemTemplate>
@@ -130,7 +132,7 @@
             <p>&nbsp;</p>
         </div>
         <div>
-            <asp:GridView ID="GridView2" runat="server" DataSourceID="SqlDataSource3" Width="68px" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView2_RowDataBound" OnDataBinding="GridView2_DataBinding" Font-Size="Smaller">
+            <asp:GridView ID="GridView2" runat="server" DataSourceID="SqlDataSource3" Width="68px" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="2" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView2_RowDataBound" OnDataBinding="GridView2_DataBinding" Font-Size="Smaller">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:CommandField ButtonType="Image" CancelImageUrl="~/erro.jpg" EditImageUrl="~/editar.jpg" ShowEditButton="True" UpdateImageUrl="~/aceitar.jpg" />

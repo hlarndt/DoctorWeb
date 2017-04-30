@@ -598,35 +598,5 @@ namespace CrudInterface
                 acao.Visible = true;
             }
         }
-
-        protected void TextBox4_TextChanged(object sender, EventArgs e)
-        {
-            TextBox texto = sender as TextBox;
-            if (Request.QueryString["menu"] == "5")
-            {
-                SqlDataSource11.SelectCommand = "select id,descricao from dbo.procedimento where descricao like '%" + texto.Text.Trim() + "%'";
-                GridView5.DataBind();
-            }
-            if (Request.QueryString["menu"] == "4")
-            {
-                SqlDataSource4.SelectCommand = "select id,nome from dbo.medico where nome like '%" + texto.Text.Trim() + "%'";
-                GridView2.DataBind();
-            }
-            if (Request.QueryString["menu"] == "3")
-            {
-                SqlDataSource1.SelectCommand = "select id,nome from dbo.enfermeiro where nome like '%" + texto.Text.Trim() + "%'";
-                GridView1.DataBind();
-            }
-            if (Request.QueryString["menu"] == "2")
-            {
-                SqlDataSource6.SelectCommand = "select id,nome from dbo.convenio where nome like '%" + texto.Text.Trim() + "%'";
-                GridView3.DataBind();
-            }
-            if (Request.QueryString["menu"] == "1")
-            {
-                SqlDataSource8.SelectCommand = "select id,nome,id_enfermeiro,id_medico from dbo.paciente where nome like '%" + texto.Text.Trim() + "%'";
-                GridView4.DataBind();
-            }
-        }
     }
 }

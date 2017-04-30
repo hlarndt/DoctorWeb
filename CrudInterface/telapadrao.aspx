@@ -181,7 +181,7 @@
             </asp:GridView>
             <% } %>
         </div>
-        <div><p>Pesquisa: <asp:TextBox ID="TextBox4" Text="" runat="server" Width="266px" OnTextChanged="TextBox4_TextChanged"></asp:TextBox></p></div>
+        <div><p>Pesquisa: <asp:TextBox ID="TextBox4" Text="" runat="server" Width="266px"></asp:TextBox></p></div>
         <div>
             <% if (Request.QueryString["menu"] == "5")  %>
             <% { %>
@@ -369,24 +369,24 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Enfermeiro">
                         <EditItemTemplate>
-                            <asp:DropDownList ID="id_enfermeiro" Width="250" runat="server" enabled="true" DataSourceID="SqlDataSource9" DataTextField="nome" DataValueField="id" Text='<%# Bind("id_enfermeiro") %>'></asp:DropDownList>
+                            <asp:DropDownList ID="id_enfermeiro" Width="250" runat="server" enabled="true" DataSourceID="SqlDataSource9" DataTextField="nome" DataValueField="id" AppendDataBoundItems="true" Text='<%# Bind("id_enfermeiro") %>'><asp:ListItem Text="Selecione o enfermeiro" Value="0" /></asp:DropDownList>
                         </EditItemTemplate>
                         <InsertItemTemplate>
-                            <asp:DropDownList ID="id_enfermeiro" Width="250" runat="server" enabled="true" DataSourceID="SqlDataSource9" DataTextField="nome" DataValueField="id" Text='<%# Bind("id_enfermeiro") %>'></asp:DropDownList>
+                            <asp:DropDownList ID="id_enfermeiro" Width="250" runat="server" enabled="true" DataSourceID="SqlDataSource9" DataTextField="nome" DataValueField="id" AppendDataBoundItems="true" Text='<%# Bind("id_enfermeiro") %>'><asp:ListItem Text="Selecione o enfermeiro" Value="0" /></asp:DropDownList>
                         </InsertItemTemplate>
                         <ItemTemplate>
-                            <asp:DropDownList ID="id_enfermeiro" Width="250" runat="server" enabled="false" DataSourceID="SqlDataSource9" DataTextField="nome" DataValueField="id" Text='<%# Bind("id_enfermeiro") %>'></asp:DropDownList>
+                            <asp:DropDownList ID="id_enfermeiro" Width="250" runat="server" enabled="false" DataSourceID="SqlDataSource9" DataTextField="nome" DataValueField="id" AppendDataBoundItems="true" Text='<%# Bind("id_enfermeiro") %>'><asp:ListItem Text="Selecione o enfermeiro" Value="0" /></asp:DropDownList>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Médico">
                         <EditItemTemplate>
-                            <asp:DropDownList ID="id_medico" Width="250" runat="server" enabled="true" DataSourceID="SqlDataSource12" DataTextField="nome" DataValueField="id" Text='<%# Bind("id_medico") %>'></asp:DropDownList>
+                            <asp:DropDownList ID="id_medico" Width="250" runat="server" enabled="true" DataSourceID="SqlDataSource12" DataTextField="nome" DataValueField="id" AppendDataBoundItems="true" Text='<%# Bind("id_medico") %>'><asp:ListItem Text="Selecione o médico" Value="0" /></asp:DropDownList>
                         </EditItemTemplate>
                         <InsertItemTemplate>
-                            <asp:DropDownList ID="id_medico" Width="250" runat="server" enabled="true" DataSourceID="SqlDataSource12" DataTextField="nome" DataValueField="id" Text='<%# Bind("id_medico") %>'></asp:DropDownList>
+                            <asp:DropDownList ID="id_medico" Width="250" runat="server" enabled="true" DataSourceID="SqlDataSource12" DataTextField="nome" DataValueField="id" AppendDataBoundItems="true" Text='<%# Bind("id_medico") %>'><asp:ListItem Text="Selecione o médico" Value="0" /></asp:DropDownList>
                         </InsertItemTemplate>
                         <ItemTemplate>
-                            <asp:DropDownList ID="id_medico" Width="250" runat="server" enabled="false" DataSourceID="SqlDataSource12" DataTextField="nome" DataValueField="id" Text='<%# Bind("id_medico") %>'></asp:DropDownList>
+                            <asp:DropDownList ID="id_medico" Width="250" runat="server" enabled="false" DataSourceID="SqlDataSource12" DataTextField="nome" DataValueField="id"  AppendDataBoundItems="true" Text='<%# Bind("id_medico") %>'><asp:ListItem Text="Selecione o médico" Value="0" /></asp:DropDownList>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField ShowHeader="False">
@@ -420,7 +420,7 @@
             </UpdateParameters>
             <DeleteParameters><asp:ControlParameter Name="id" ControlId="GridView5" /></DeleteParameters>
             <InsertParameters><asp:ControlParameter Name="descricao" ControlID="DetailsView5$descricao" /><asp:ControlParameter Name="preco" ControlID="DetailsView5$preco" /></InsertParameters></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource11" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,descricao from dbo.procedimento"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource11" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,descricao from dbo.procedimento" FilterExpression="descricao LIKE '{0}%'"> <FilterParameters><asp:ControlParameter Name="nome" ControlID="TextBox4" PropertyName="Text" /></FilterParameters></asp:SqlDataSource>
         <% } %>
         <% if  (Request.QueryString["menu"] == "4")  %>
         <% { %>
@@ -430,7 +430,7 @@
             </UpdateParameters>
             <DeleteParameters><asp:ControlParameter Name="id" ControlId="GridView2" /></DeleteParameters>
             <InsertParameters><asp:ControlParameter Name="nome" ControlID="DetailsView2$nome" /></InsertParameters></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from dbo.medico"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from dbo.medico" FilterExpression="nome LIKE '{0}%'"> <FilterParameters><asp:ControlParameter Name="nome" ControlID="TextBox4" PropertyName="Text" /></FilterParameters></asp:SqlDataSource>
         <% } %>
         <% if  (Request.QueryString["menu"] == "3")  %>
         <% { %>
@@ -440,7 +440,7 @@
             </UpdateParameters>
             <DeleteParameters><asp:ControlParameter Name="id" ControlId="GridView1" /></DeleteParameters>
             <InsertParameters><asp:ControlParameter Name="nome" ControlID="DetailsView1$nome" /></InsertParameters></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from dbo.enfermeiro"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from dbo.enfermeiro" FilterExpression="nome LIKE '{0}%'"> <FilterParameters><asp:ControlParameter Name="nome" ControlID="TextBox4" PropertyName="Text" /></FilterParameters></asp:SqlDataSource>
         <% } %>
         <% if  (Request.QueryString["menu"] == "2")  %>
         <% { %>
@@ -450,7 +450,7 @@
             </UpdateParameters>
             <DeleteParameters><asp:ControlParameter Name="id" ControlId="GridView3" /></DeleteParameters>
             <InsertParameters><asp:ControlParameter Name="nome" ControlID="DetailsView3$nome" /></InsertParameters></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from dbo.convenio"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from dbo.convenio" FilterExpression="nome LIKE '{0}%'"> <FilterParameters><asp:ControlParameter Name="nome" ControlID="TextBox4" PropertyName="Text" /></FilterParameters></asp:SqlDataSource>
         <% } %>
         <% if  (Request.QueryString["menu"] == "1")  %>
         <% { %>
@@ -460,7 +460,7 @@
             </UpdateParameters>
             <DeleteParameters><asp:ControlParameter Name="id" ControlId="GridView4" /></DeleteParameters>
             <InsertParameters><asp:ControlParameter Name="nome" ControlID="DetailsView4$nome" /><asp:ControlParameter Name="id_enfermeiro" ControlID="DetailsView4$id_enfermeiro" /><asp:ControlParameter Name="id_medico" ControlID="DetailsView4$id_medico" /></InsertParameters></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource8" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome,id_enfermeiro,id_medico from dbo.paciente"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource8" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome,id_enfermeiro,id_medico from dbo.paciente" FilterExpression="nome LIKE '{0}%'"> <FilterParameters><asp:ControlParameter Name="nome" ControlID="TextBox4" PropertyName="Text" /></FilterParameters></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource9" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from dbo.enfermeiro"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource12" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,nome from dbo.medico"></asp:SqlDataSource>
         <% } %>

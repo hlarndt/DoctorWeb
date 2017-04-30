@@ -175,7 +175,7 @@ namespace CrudInterface
         {
             if (ModelState.IsValid) //verifica se é válido
             {
-                string connectionString = ConfigurationManager.ConnectionStrings[3].ToString();
+                string connectionString = ConfigurationManager.ConnectionStrings["DoctorWebConnectionString"].ToString();
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     using (SqlCommand cmdAcesso = new SqlCommand("select * " +
@@ -206,7 +206,7 @@ namespace CrudInterface
         {
             if (ModelState.IsValid) //verifica se é válido
             {
-                string connectionString = ConfigurationManager.ConnectionStrings[3].ToString();
+                string connectionString = ConfigurationManager.ConnectionStrings["DoctorWebConnectionString"].ToString();
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     using (SqlCommand cmdAcesso = new SqlCommand("select * " +

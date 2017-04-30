@@ -196,7 +196,7 @@ namespace CrudInterface
                 foreach (TableCell coluna in linha.Cells)
                 {
                     string nome = HttpUtility.HtmlDecode(GridView1.HeaderRow.Cells[cnt].Text.ToString().Trim());
-                    if (procedimento.ToString().Contains("Total"))
+                    if (procedimento.ToString().ToUpper().Contains("TOTAL"))
                     {
                         break;
                     }
@@ -210,7 +210,7 @@ namespace CrudInterface
                     }
                     if (nome == "Paciente")
                     {
-                        if (procedimento.ToString().Trim().Length>0 && paciente.ToString().Trim().Length ==0)
+                        if (procedimento.ToString().Trim().Length > 0 && paciente.ToString().Trim().Length == 0)
                         {
                             cnterros++;
                             coluna.BackColor = System.Drawing.Color.Red;
@@ -271,9 +271,285 @@ namespace CrudInterface
                     }
                     cnt++;
                 }
-                if (cnterros>0)
+                if (cnterros > 0)
                 {
                     Label1.Text = "O arquivo possui " + cnterros.ToString() + " erros.";
+                }
+                // Gravar Medico
+                if (medicoatend.Length > 0 || medicoproced.Length > 0)
+                {
+                    string connectionString = ConfigurationManager.ConnectionStrings["DoctorWebConnectionString"].ToString(); ;
+                    using (SqlConnection con = new SqlConnection(connectionString))
+                    {
+                        try
+                        {
+                            con.Open();
+                        }
+                        catch
+                        {
+                            Label1.Text = "Erro na conexão do Banco de Dados.";
+                            return;
+                        }
+                        Boolean grava = false;
+                        using (SqlCommand cmdMedico = new SqlCommand("select * " +
+                            " from dbo.medico where rtrim(ltrim(nome))='" + medicoatend.ToString().Trim().ToUpper() + "' or rtrim(ltrim(nome))='" + medicoproced.ToString().Trim().ToUpper() + "'", con))
+                        {
+                            cmdMedico.ExecuteNonQuery();
+                            SqlDataReader drsretorno = cmdMedico.ExecuteReader();
+                            if (!drsretorno.HasRows)
+                            {
+                                grava = true;
+                            }
+                        }
+                        con.Close();
+                        if (grava == true)
+                        {
+                            string medicograv = "";
+                            if (medicoproced.Length > 0)
+                            {
+                                medicograv = medicoproced.ToString().Trim().ToUpper();
+                            }
+                            else
+                            {
+                                medicograv = medicoatend.ToString().Trim().ToUpper();
+                            }
+                            if (medicograv.Length > 0)
+                            {
+                                try
+                                {
+                                    con.Open();
+                                }
+                                catch
+                                {
+                                    Label1.Text = "Erro na conexão do Banco de Dados.";
+                                    return;
+                                }
+                                using (SqlCommand updMedico = new SqlCommand("insert into medico(nome,dt_cadastro)  " +
+                                    " values('" + medicograv.ToString() + "',getdate())", con))
+                                {
+                                    updMedico.ExecuteNonQuery();
+                                }
+                                con.Close();
+                            }
+                        }
+                    }
+                }
+                // Gravar Convenio
+                if (convenio.Trim().Length > 0)
+                {
+                    string connectionString = ConfigurationManager.ConnectionStrings["DoctorWebConnectionString"].ToString(); ;
+                    using (SqlConnection con = new SqlConnection(connectionString))
+                    {
+                        try
+                        {
+                            con.Open();
+                        }
+                        catch
+                        {
+                            Label1.Text = "Erro na conexão do Banco de Dados.";
+                            return;
+                        }
+                        Boolean grava = false;
+                        using (SqlCommand cmdConvenio = new SqlCommand("select * " +
+                            " from dbo.convenio where rtrim(ltrim(nome))='" + convenio.ToString().Trim().ToUpper() + "'", con))
+                        {
+                            cmdConvenio.ExecuteNonQuery();
+                            SqlDataReader drsretorno = cmdConvenio.ExecuteReader();
+                            if (!drsretorno.HasRows)
+                            {
+                                grava = true;
+                            }
+                        }
+                        con.Close();
+                        if (grava == true)
+                        {
+                            if (convenio.Trim().Length > 0)
+                            {
+                                try
+                                {
+                                    con.Open();
+                                }
+                                catch
+                                {
+                                    Label1.Text = "Erro na conexão do Banco de Dados.";
+                                    return;
+                                }
+                                using (SqlCommand updConvenio = new SqlCommand("insert into convenio(nome,dt_cadastro)  " +
+                                    " values('" + convenio.ToString().Trim().ToUpper() + "',getdate())", con))
+                                {
+                                    updConvenio.ExecuteNonQuery();
+                                }
+                                con.Close();
+                            }
+                        }
+                    }
+                }
+                // Gravar Procedimento
+                if (procedimento.Trim().Length > 0)
+                {
+                    string connectionString = ConfigurationManager.ConnectionStrings["DoctorWebConnectionString"].ToString(); ;
+                    using (SqlConnection con = new SqlConnection(connectionString))
+                    {
+                        try
+                        {
+                            con.Open();
+                        }
+                        catch
+                        {
+                            Label1.Text = "Erro na conexão do Banco de Dados.";
+                            return;
+                        }
+                        Boolean grava = false;
+                        using (SqlCommand cmdProcedimento = new SqlCommand("select * " +
+                            " from dbo.procedimento where rtrim(ltrim(descricao))='" + procedimento.ToString().Trim().ToUpper() + "'", con))
+                        {
+                            cmdProcedimento.ExecuteNonQuery();
+                            SqlDataReader drsretorno = cmdProcedimento.ExecuteReader();
+                            if (!drsretorno.HasRows)
+                            {
+                                grava = true;
+                            }
+                        }
+                        con.Close();
+                        if (grava == true)
+                        {
+                            if (procedimento.Trim().Length > 0&&!procedimento.Trim().ToUpper().Contains("TOTAL"))
+                            {
+                                double valor = 0;
+                                if (vlproced>0)
+                                {
+                                    valor = vlproced;
+                                }
+                                else
+                                {
+                                    valor = vlmed;
+                                }
+                                try
+                                {
+                                    con.Open();
+                                }
+                                catch
+                                {
+                                    Label1.Text = "Erro na conexão do Banco de Dados.";
+                                    return;
+                                }
+                                using (SqlCommand updProcedimento = new SqlCommand("insert into procedimento(descricao,preco,dt_cadastro)  " +
+                                    " values('" + procedimento.ToString().Trim().ToUpper() + "',"+ valor.ToString().Replace(".","").Replace(",",".") +",getdate())", con))
+                                {
+                                    updProcedimento.ExecuteNonQuery();
+                                }
+                                con.Close();
+                            }
+                        }
+                    }
+                }
+                // Gravar Enfermeiro
+                if (equipemulti.Trim().Length > 0)
+                {
+                    string connectionString = ConfigurationManager.ConnectionStrings["DoctorWebConnectionString"].ToString(); ;
+                    using (SqlConnection con = new SqlConnection(connectionString))
+                    {
+                        try
+                        {
+                            con.Open();
+                        }
+                        catch
+                        {
+                            Label1.Text = "Erro na conexão do Banco de Dados.";
+                            return;
+                        }
+                        Boolean grava = false;
+                        using (SqlCommand cmdEnfermeiro = new SqlCommand("select * " +
+                            " from dbo.enfermeiro where rtrim(ltrim(nome))='" + equipemulti.ToString().Trim().ToUpper() + "'", con))
+                        {
+                            cmdEnfermeiro.ExecuteNonQuery();
+                            SqlDataReader drsretorno = cmdEnfermeiro.ExecuteReader();
+                            if (!drsretorno.HasRows)
+                            {
+                                grava = true;
+                            }
+                        }
+                        con.Close();
+                        if (grava == true)
+                        {
+                            if (equipemulti.Trim().Length > 0)
+                            {
+                                try
+                                {
+                                    con.Open();
+                                }
+                                catch
+                                {
+                                    Label1.Text = "Erro na conexão do Banco de Dados.";
+                                    return;
+                                }
+                                using (SqlCommand updEnfermeiro = new SqlCommand("insert into enfermeiro(nome,dt_cadastro)  " +
+                                    " values('" + equipemulti.ToString().Trim().ToUpper() + "',getdate())", con))
+                                {
+                                    updEnfermeiro.ExecuteNonQuery();
+                                }
+                                con.Close();
+                            }
+                        }
+                    }
+                }
+                // Gravar Paciente
+                if (paciente.Trim().Length > 0)
+                {
+                    string connectionString = ConfigurationManager.ConnectionStrings["DoctorWebConnectionString"].ToString(); ;
+                    using (SqlConnection con = new SqlConnection(connectionString))
+                    {
+                        try
+                        {
+                            con.Open();
+                        }
+                        catch
+                        {
+                            Label1.Text = "Erro na conexão do Banco de Dados.";
+                            return;
+                        }
+                        Boolean grava = false;
+                        using (SqlCommand cmdPaciente = new SqlCommand("select * " +
+                            " from dbo.paciente where rtrim(ltrim(nome))='" + paciente.ToString().Trim().ToUpper() + "'", con))
+                        {
+                            cmdPaciente.ExecuteNonQuery();
+                            SqlDataReader drsretorno = cmdPaciente.ExecuteReader();
+                            if (!drsretorno.HasRows)
+                            {
+                                grava = true;
+                            }
+                        }
+                        con.Close();
+                        if (grava == true)
+                        {
+                            if (paciente.Trim().Length > 0)
+                            {
+                                string medicograv = "";
+                                if (medicoproced.Length > 0)
+                                {
+                                    medicograv = medicoproced.ToString().Trim().ToUpper();
+                                }
+                                else
+                                {
+                                    medicograv = medicoatend.ToString().Trim().ToUpper();
+                                }                                try
+                                {
+                                    con.Open();
+                                }
+                                catch
+                                {
+                                    Label1.Text = "Erro na conexão do Banco de Dados.";
+                                    return;
+                                }
+                                using (SqlCommand updPaciente = new SqlCommand("insert into paciente(nome,id_medico,id_enfermeiro,dt_cadastro)  " +
+                                    " values('" + paciente.ToString().Trim().ToUpper() + "',coalesce((select id from dbo.medico where nome='" + medicograv.ToString() + "'),0),coalesce((select id from dbo.enfermeiro where nome='" + equipemulti.ToString().Trim().ToUpper() + "'),0),getdate())", con))
+                                {
+                                    updPaciente.ExecuteNonQuery();
+                                }
+                                con.Close();
+                            }
+                        }
+                    }
                 }
             }
         }

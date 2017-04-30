@@ -58,7 +58,7 @@
             </asp:GridView>
         </div>
         <div>
-            <p>Pesquisa: <asp:TextBox ID="TextBox4" Text="" runat="server" Width="268px" OnTextChanged="TextBox4_TextChanged"></asp:TextBox></p>
+            <p>Pesquisa: <asp:TextBox ID="TextBox4" Text="" runat="server" Width="268px"></asp:TextBox></p>
             </div>
         <div>
             <asp:DetailsView ID="DetailsView1" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource2" DataKeyNames="id" ForeColor="Black" Height="50px" Width="369px" AutoGenerateRows="False" GridLines="Vertical" OnItemDeleted="DetailsView1_ItemDeleted" OnItemInserted="DetailsView1_ItemInserted" OnItemUpdated="DetailsView1_ItemUpdated" OnModeChanged="DetailsView1_ModeChanged" OnLoad="DetailsView1_Load" OnDataBinding="DetailsView1_DataBinding" OnItemInserting="DetailsView1_ItemInserting" OnItemUpdating="DetailsView1_ItemUpdating">
@@ -127,7 +127,7 @@
                 <asp:ControlParameter Name="tipo" ControlId="DetailsView1" PropertyName="SelectedValue" /><asp:ControlParameter Name="id" ControlId="GridView1" /></UpdateParameters>
             <DeleteParameters><asp:ControlParameter Name="id" ControlId="GridView1" /></DeleteParameters>
             <InsertParameters><asp:ControlParameter Name="usuario" ControlID="DetailsView1$usuario" /><asp:ControlParameter Name="senha" ControlId="DetailsView1$senha" /><asp:ControlParameter Name="tipo" ControlId="DetailsView1$tipo" /></InsertParameters></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,usuario,senha,tipo from dbo.usuario"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DoctorWebConnectionString %>" ProviderName="<%$ ConnectionStrings:DoctorWebConnectionString.ProviderName %>" SelectCommand="select id,usuario,senha,tipo from dbo.usuario" FilterExpression="usuario LIKE '{0}%'"> <FilterParameters><asp:ControlParameter Name="nome" ControlID="TextBox4" PropertyName="Text" /></FilterParameters></asp:SqlDataSource>
         <div>
             <p>&nbsp;</p>
         </div>
